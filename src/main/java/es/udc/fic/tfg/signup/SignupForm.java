@@ -1,6 +1,7 @@
 package es.udc.fic.tfg.signup;
 
-import org.hibernate.validator.constraints.*;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import es.udc.fic.tfg.account.Account;
 
@@ -18,7 +19,17 @@ public class SignupForm {
     @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
 	private String password;
 
-    public String getEmail() {
+	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+	private String firstName;
+
+	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+	private String lastName;
+
+	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+	private String phoneNumber;
+
+
+	public String getEmail() {
 		return email;
 	}
 
@@ -34,7 +45,31 @@ public class SignupForm {
 		this.password = password;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	public Account createAccount() {
-        return new Account(getEmail(), getPassword(), "ROLE_USER");
+        return new Account(getEmail(), getFirstName(), getLastName(), getPassword(), "ROLE_USER", getPhoneNumber());
 	}
 }

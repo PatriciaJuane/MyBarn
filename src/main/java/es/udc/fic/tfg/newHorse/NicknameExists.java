@@ -1,6 +1,6 @@
-package es.udc.fic.tfg.signup;
+package es.udc.fic.tfg.newHorse;
 
-import es.udc.fic.tfg.account.AccountRepository;
+import es.udc.fic.tfg.horse.HorseRepository;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Constraint;
@@ -17,9 +17,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = es.udc.fic.tfg.signup.EmailExistsValidator.class)
+@Constraint(validatedBy = NicknameExistsValidator.class)
 @Documented
-public @interface EmailExists {
+public @interface NicknameExists {
 
     String message() default "";
 
@@ -29,22 +29,22 @@ public @interface EmailExists {
 }
 
 @Component
-class EmailExistsValidator implements ConstraintValidator<es.udc.fic.tfg.signup.EmailExists, String> {
+class NicknameExistsValidator implements ConstraintValidator<NicknameExists, String> {
 
-    private final AccountRepository accountRepository;
+    private final HorseRepository horseRepository;
 
-    public EmailExistsValidator(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public NicknameExistsValidator(HorseRepository horseRepository) {
+        this.horseRepository = horseRepository;
     }
 
 
     @Override
-    public void initialize(es.udc.fic.tfg.signup.EmailExists constraintAnnotation) {
+    public void initialize(NicknameExists constraintAnnotation) {
 
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return !accountRepository.exists(value);
+        return !horseRepository.exists(value);
     }
 }

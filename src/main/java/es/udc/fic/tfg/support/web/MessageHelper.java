@@ -1,9 +1,9 @@
 package es.udc.fic.tfg.support.web;
 
-import static es.udc.fic.tfg.support.web.Message.MESSAGE_ATTRIBUTE;
-
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import static es.udc.fic.tfg.support.web.Message.MESSAGE_ATTRIBUTE;
 
 public final class MessageHelper {
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Horse Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <link href="../../../resources/css/theme.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/theme.css}"/>
+    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body style="background-image: url('../../../resources/images/hipica.jpg');background-size:fit;background-position:center center;">
+<div th:replace="fragments/layout :: header"></div>
+<div class="container">
+    <div class="col-md-2">
+        <img class="img-fluid d-block float-right rounded-circle"
+             src="../../../resources/images/noun_765845_cc.png">
+    </div>
+    <div class="col-md-10">
+        <form class="form-narrow form-horizontal" th:object="${horse}">
+            <div class="row">
+            <fieldset>
+                <legend>Horse Details</legend>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nickname" class="col-lg-4 control-label">Nickname</label>
+                    <div class="col-lg-8">
+                        <a class="form-control" id="nickname" th:text="${horse.nickname}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label">Name</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="name" th:text="${horse.name}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="breed" class="col-lg-3 control-label">Breed</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="breed" th:text="${horse.breed}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate" class="col-lg-4 control-label">BirthDate</label>
+                    <div class="col-lg-8">
+                        <a class="form-control" id="birthDate" th:text="${#dates.format(horse.birthDate,'dd-MM-yyyy')}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="col-lg-3 control-label">Gender</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="gender" th:text="${horse.gender}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fur" class="col-lg-3 control-label">Fur</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="fur" th:text="${horse.fur}"/>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="markings" class="col-lg-3 control-label">Markings</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="markings" th:text="${horse.markings}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sire" class="col-lg-3 control-label">Sire</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="sire" th:text="${horse.sire}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="damnSire" class="col-lg-3 control-label">Damn Sire</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="damnSire" th:text="${horse.damnSire}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="licenseNumber" class="col-lg-3 control-label">License Number</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="licenseNumber" th:text="${horse.licenseNumber}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="chipNumber" class="col-lg-3 control-label">Chip Number</label>
+                    <div class="col-lg-9">
+                        <a class="form-control" id="chipNumber" th:text="${horse.chipNumber}"/>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="@{/newHorse}">Edit</button>
+                <button class="btn btn-danger">Delete Account</button>
+                </div>
+            </fieldset>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<div th:replace="fragments/layout :: footer"></div>
+</html>

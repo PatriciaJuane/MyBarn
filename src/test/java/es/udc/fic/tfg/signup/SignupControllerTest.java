@@ -1,13 +1,12 @@
 package es.udc.fic.tfg.signup;
 
+import es.udc.fic.tfg.config.WebSecurityConfigurationAware;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import es.udc.fic.tfg.config.WebSecurityConfigurationAware;
 
 public class SignupControllerTest extends WebSecurityConfigurationAware {
     @Test

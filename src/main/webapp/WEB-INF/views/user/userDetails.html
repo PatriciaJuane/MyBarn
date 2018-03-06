@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <link href="../../../resources/css/theme.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/theme.css}"/>
+    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body style="background-image: url('../../../resources/images/hipica.jpg');background-size:fit;background-position:center center;">
+<div th:replace="fragments/layout :: header"></div>
+<div class="container">
+    <div class="col-md-2">
+        <img class="img-fluid d-block float-right rounded-circle"
+             src="../../../resources/images/icono-de-perfil-de-usuario_318-33925.jpg">
+    </div>
+    <div class="col-md-8">
+        <form class="form-narrow form-horizontal" th:object="${account}">
+            <fieldset>
+                <legend>User Details</legend>
+                <div class="form-group">
+                    <label for="email" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <a class="form-control" id="email" th:text="${account.email}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName" class="col-lg-2 control-label">First Name</label>
+                    <div class="col-lg-10">
+                        <a class="form-control" id="firstName" th:text="${account.firstName}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="col-lg-2 control-label">Last Name</label>
+                    <div class="col-lg-10">
+                        <a class="form-control" id="lastName" th:text="${account.lastName}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber" class="col-lg-2 control-label">Phone Number</label>
+                    <div class="col-lg-10">
+                        <a class="form-control" id="phoneNumber" th:text="${account.phoneNumber}"/>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="@{/signup}">Edit</button>
+                <button class="btn btn-danger">Delete Account</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+<div th:replace="fragments/layout :: footer"></div>
+</html>

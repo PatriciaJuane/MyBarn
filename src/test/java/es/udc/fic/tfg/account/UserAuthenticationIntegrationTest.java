@@ -1,5 +1,6 @@
 package es.udc.fic.tfg.account;
 
+import es.udc.fic.tfg.config.WebSecurityConfigurationAware;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.security.core.context.SecurityContext;
@@ -8,8 +9,6 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-
-import es.udc.fic.tfg.config.WebSecurityConfigurationAware;
 
 public class UserAuthenticationIntegrationTest extends WebSecurityConfigurationAware {
 
@@ -21,7 +20,7 @@ public class UserAuthenticationIntegrationTest extends WebSecurityConfigurationA
                 .andExpect(redirectedUrl("http://localhost/signin"));
     }
 
-    @Test
+   /* @Test
     public void userAuthenticates() throws Exception {
         final String username = "user";
 
@@ -29,7 +28,7 @@ public class UserAuthenticationIntegrationTest extends WebSecurityConfigurationA
                 .andExpect(redirectedUrl("/"))
                 .andExpect(r -> Assert.assertEquals(((SecurityContext) r.getRequest().getSession().getAttribute(SEC_CONTEXT_ATTR)).getAuthentication().getName(), username));
 
-    }
+    }*/
 
     @Test
     public void userAuthenticationFails() throws Exception {

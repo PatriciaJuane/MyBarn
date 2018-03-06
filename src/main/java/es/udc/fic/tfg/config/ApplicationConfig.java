@@ -1,12 +1,11 @@
 package es.udc.fic.tfg.config;
 
+import es.udc.fic.tfg.Application;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-
-import es.udc.fic.tfg.Application;
 
 @Configuration
 @PropertySource("classpath:persistence.properties")

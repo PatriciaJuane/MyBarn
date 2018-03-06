@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/theme.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/css/theme.css}"/>
+</head>
+<body>
+<!-- Header -->
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="container">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <b class="navbar-brand" href="#">MyBarnAPP</b>
+        </div>
+        <div class="navbar-collapse collapse text-center justify-content-end" id="navbar2SupportedContent">
+            <ul class="nav navbar-nav">
+                <li th:classappend="${module == 'home' ? 'active' : ''}">
+                    <a href="#" th:href="@{/}">
+                        <i class="glyphicon glyphicon-home"></i>
+                        <b id="textHome" style="display: inline-block"> My Barn</b>
+                    </a>
+                </li>
+                <li th:classappend="${module == 'about' ? 'active' : ''}">
+                    <a href="#about" th:href="@{/about}">
+                        <i class="fa d-inline fa-lg fa-male"></i>
+                        <b id="textAbout"> About</b>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a href="/signin" th:href="@{/signin}">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        &nbsp;<b> Sign in</b>
+                    </a>
+                </li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        &nbsp;<b> Logout</b>
+                    </a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+<!-- Footer -->
+<div  class="bg-dark text-white h-25 py-5" th:fragment="footer" th:align="center">
+    <div class="container">
+        <div class="col-md-12 mt-3 text-center">
+            &copy;&nbsp;<span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2018</span>
+            MyBarnAPP
+            <span th:text="${@environment.getProperty('app.version')}"></span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
