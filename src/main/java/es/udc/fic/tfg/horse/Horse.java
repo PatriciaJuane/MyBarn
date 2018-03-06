@@ -37,15 +37,27 @@ public class Horse implements java.io.Serializable {
 
 	private String markings; //Enumerado
 
+/*	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "fur_id")
+	private Fur fur;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "gender_id")
+	private Gender gender;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "markings_id")
+	private Markings markings;
+	*/
+
 	//private bitmap profilePicture;
 
 	private String sire;
 
 	private String damnSire;
 
-	/*@OneToOne(fetch = FetchType.LAZY, mappedBy = "account")
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="owner_id")
+	/*@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "account_id") //name = "id" ???
 	private Account owner;
 	*/
 	private String licenseNumber;

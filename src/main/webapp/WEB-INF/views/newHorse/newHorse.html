@@ -10,7 +10,23 @@
           th:href="@{/resources/css/theme.css}"/>
     <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
     <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet"
+          href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
+
+<script>
+    $(function() {
+        $("#datepicker").datepicker();
+    });
+
+    $(function() {
+        $("#datepickerFin").datepicker();
+    });
+</script>
+
 <body style="background-image: url('../../../resources/images/hipica.jpg');background-size:fit;background-position:center center;">
 <div th:replace="fragments/layout :: header"></div>
 <div class="py-5">
@@ -57,12 +73,20 @@
                                     <span class="help-block" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">Incorrect Breed</span>
                                 </div>
                             </div>
-                            <div class="form-group" th:classappend="${#fields.hasErrors('birthDate')}? 'has-error'">
-                                <label for="birthDate" class="col-lg-4 control-label">BirthDate: Format
-                                    dd/MM/yyyy</label>
+                          <!--  <div class="form-group" th:classappend="${#fields.hasErrors('birthDate')}? 'has-error'">
+                                <label for="birthDate" class="col-lg-4 control-label">BirthDate: Format dd/MM/yyyy</label>
                                 <div class="col-lg-8">
                                     <input type="text" class="form-control" id="birthDate" placeholder="BirthDate"
                                            th:field="*{birthDate}"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('birthDate')}"
+                                          th:errors="*{birthDate}">Incorrect BirthDate</span>
+                                </div>
+                            </div> -->
+                            <div class="form-group" th:classappend="${#fields.hasErrors('birthDate')}? 'has-error'">
+                                <label class="col-lg-4 control-label" for="birthDate">BirthDate</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" placeholder="dd/MM/yyyy"
+                                           id="datepickerFin" size="" th:field="*{birthDate}">
                                     <span class="help-block" th:if="${#fields.hasErrors('birthDate')}"
                                           th:errors="*{birthDate}">Incorrect BirthDate</span>
                                 </div>
@@ -84,6 +108,18 @@
                                     <span class="help-block" th:if="${#fields.hasErrors('fur')}" th:errors="*{fur}">Incorrect Fur</span>
                                 </div>
                             </div>
+                            <!--
+                             <div class="form-group">
+                             <label class="sr-only" for="fur">fur</label>
+                             <div class="input-group">
+                                  <div class="input-group-addon">Fur</div>
+                                 <select class="form-control" id="fur" th:field="*{fur}">
+                                   <option th:each="fur : ${furList}"
+                                        th:value="${fur.fur_id}" th:text="${fur.name}"></option>
+                                 </select>
+                             </div>
+                           </div>
+                           -->
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" th:classappend="${#fields.hasErrors('markings')}? 'has-error'">

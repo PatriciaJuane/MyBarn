@@ -47,6 +47,11 @@ class NewHorseController {
         return NEWHORSE_VIEW_NAME;
     }
 
+    /*HABRÍA QUE AÑADIR MANUALMENTE FUR, GENDER Y MARKINGS, mediante script de insercion en BD
+      y después añadir cada una de esas listas al model, para poder verlas en el Selector
+         y poder escoger una de ellas finalmente.
+     */
+
     @PostMapping("newHorse")
     String newHorse(@Valid @ModelAttribute NewHorseForm newhorseForm, Errors errors, RedirectAttributes ra)
     throws ParseException{
