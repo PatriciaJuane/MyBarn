@@ -1,9 +1,13 @@
 package es.udc.fic.tfg.signup;
 
+import es.udc.fic.tfg.horse.Horse;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import es.udc.fic.tfg.account.Account;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignupForm {
 
@@ -27,6 +31,8 @@ public class SignupForm {
 
 	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
 	private String phoneNumber;
+
+	private List<Horse> horses = new ArrayList<Horse>();
 
 
 	public String getEmail() {
@@ -69,7 +75,15 @@ public class SignupForm {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public List<Horse> getHorses() {
+		return horses;
+	}
+
+	public void setHorses(List<Horse> horses) {
+		this.horses = horses;
+	}
+
 	public Account createAccount() {
-        return new Account(getEmail(), getFirstName(), getLastName(), getPassword(), "ROLE_USER", getPhoneNumber());
+        return new Account(getEmail(), getFirstName(), getLastName(), getPassword(), "ROLE_USER", getPhoneNumber(), getHorses());
 	}
 }

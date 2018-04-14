@@ -5,13 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
 
-import javax.persistence.Id;
 import javax.persistence.*;
 import es.udc.fic.tfg.account.Account;
+
 
 @SuppressWarnings("serial")
 @Entity
@@ -20,7 +18,7 @@ public class Horse implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long horseId;
 
 	@Column(unique = true)
 	private String nickname;
@@ -29,7 +27,7 @@ public class Horse implements java.io.Serializable {
 
 	private String breed;
 
-	private Date birthDate;
+	private Date birthdate;
 
 	private String gender; //Enumerado
 
@@ -37,32 +35,23 @@ public class Horse implements java.io.Serializable {
 
 	private String markings; //Enumerado
 
-/*	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "fur_id")
-	private Fur fur;
-
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "gender_id")
-	private Gender gender;
-
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "markings_id")
-	private Markings markings;
-	*/
-
 	//private bitmap profilePicture;
 
 	private String sire;
 
-	private String damnSire;
+	private String damnsire;
 
-	/*@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "account_id") //name = "id" ???
-	private Account owner;
-	*/
-	private String licenseNumber;
+   /*
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "horse_account",
+			joinColumns = { @JoinColumn(name = "horseId") },
+			inverseJoinColumns = { @JoinColumn(name = "accountId") }
+	)
+	private List<Account> owners;*/
 
-	private String chipNumber;
+	private String licensenumber;
+
+	private String chipnumber;
 
 	private Instant created;
 
@@ -70,25 +59,25 @@ public class Horse implements java.io.Serializable {
 
 	}
 	
-	public Horse(String nickname, String name, String breed, Date birthDate, String gender, String fur,
-				 String markings, String sire, String damnSire, String licenseNumber, String chipNumber) {
+	public Horse(String nickname, String name, String breed, Date birthdate, String gender, String fur,
+				 String markings, String sire, String damnsire, List<Account> owners, String licensenumber, String chipnumber) {
 		this.nickname = nickname;
 		this.name = name;
 		this.breed = breed;
-		this.birthDate=birthDate;
+		this.birthdate=birthdate;
 		this.gender = gender;
 		this.fur = fur;
 		this.markings = markings;
 		this.sire = sire;
-		this.damnSire = damnSire;
-		//this.owner = owner;
-		this.licenseNumber = licenseNumber;
-		this.chipNumber = chipNumber;
+		this.damnsire = damnsire;
+		//this.owners = owners;
+		this.licensenumber = licensenumber;
+		this.chipnumber = chipnumber;
 		this.created = Instant.now();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getHorseId() {
+		return horseId;
 	}
 
     public String getNickname() {
@@ -115,20 +104,64 @@ public class Horse implements java.io.Serializable {
 		this.breed = breed;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
+	public Date getBirthdate() {
+		return birthdate;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthDate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public String getSire() {
+		return sire;
+	}
+
+	public void setSire(String sire) {
+		this.sire = sire;
+	}
+
+	public String getDamnsire() {
+		return damnsire;
+	}
+
+	public void setDamnsire(String damnSire) {
+		this.damnsire = damnSire;
+	}
+
+	/*public List<Account> getOwners() {
+		return owners;
+	} */
+
+	/*public void setOwners(List<Account> owner) {
+		this.owners = owners;
+	}*/
+
+	public String getLicensenumber() {
+		return licensenumber;
+	}
+
+	public void setLicensenumber(String licensenumber) {
+		this.licensenumber = licensenumber;
+	}
+
+	public String getChipnumber() {
+		return chipnumber;
+	}
+
+	public void setChipnumber(String chipnumber) {
+		this.chipnumber = chipnumber;
+	}
+
+	/*public bitmap getProfilePicture(){return profilePicture;}
+
+	public void setProfilePicture(bitmap profilePicture){ this.profilePicture = profilePicture;}
+	*/
+	public Instant getCreated() {
+		return created;
 	}
 
 	public String getGender() {
 		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 
 	public String getFur() {
@@ -145,53 +178,5 @@ public class Horse implements java.io.Serializable {
 
 	public void setMarkings(String markings) {
 		this.markings = markings;
-	}
-
-	public String getSire() {
-		return sire;
-	}
-
-	public void setSire(String sire) {
-		this.sire = sire;
-	}
-
-	public String getDamnSire() {
-		return damnSire;
-	}
-
-	public void setDamnSire(String damnSire) {
-		this.damnSire = damnSire;
-	}
-
-	/*public Account getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Account owner) {
-		this.owner = owner;
-	}*/
-
-	public String getLicenseNumber() {
-		return licenseNumber;
-	}
-
-	public void setLicenseNumber(String licenseNumber) {
-		this.licenseNumber = licenseNumber;
-	}
-
-	public String getChipNumber() {
-		return chipNumber;
-	}
-
-	public void setChipNumber(String chipNumber) {
-		this.chipNumber = chipNumber;
-	}
-
-	/*public bitmap getProfilePicture(){return profilePicture;}
-
-	public void setProfilePicture(bitmap profilePicture){ this.profilePicture = profilePicture;}
-	*/
-	public Instant getCreated() {
-		return created;
 	}
 }

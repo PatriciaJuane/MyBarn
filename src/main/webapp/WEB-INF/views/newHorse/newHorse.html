@@ -17,16 +17,6 @@
 
 </head>
 
-<script>
-    $(function() {
-        $("#datepicker").datepicker();
-    });
-
-    $(function() {
-        $("#datepickerFin").datepicker();
-    });
-</script>
-
 <body style="background-image: url('../../../resources/images/hipica.jpg');background-size:fit;background-position:center center;">
 <div th:replace="fragments/layout :: header"></div>
 <div class="py-5">
@@ -73,62 +63,52 @@
                                     <span class="help-block" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">Incorrect Breed</span>
                                 </div>
                             </div>
-                          <!--  <div class="form-group" th:classappend="${#fields.hasErrors('birthDate')}? 'has-error'">
-                                <label for="birthDate" class="col-lg-4 control-label">BirthDate: Format dd/MM/yyyy</label>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="birthDate" placeholder="BirthDate"
-                                           th:field="*{birthDate}"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('birthDate')}"
-                                          th:errors="*{birthDate}">Incorrect BirthDate</span>
-                                </div>
-                            </div> -->
                             <div class="form-group" th:classappend="${#fields.hasErrors('birthDate')}? 'has-error'">
-                                <label class="col-lg-4 control-label" for="birthDate">BirthDate</label>
+                                <label for="birthDate" class="col-lg-4 control-label">BirthDate</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" placeholder="dd/MM/yyyy"
-                                           id="datepickerFin" size="" th:field="*{birthDate}">
-                                    <span class="help-block" th:if="${#fields.hasErrors('birthDate')}"
-                                          th:errors="*{birthDate}">Incorrect BirthDate</span>
+                                    <input type="date" class="form-control" id="birthDate" placeholder="BirthDate" th:field="*{birthDate}"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Incorrect Birth Date</span>
                                 </div>
                             </div>
                             <div class="form-group" th:classappend="${#fields.hasErrors('gender')}? 'has-error'">
-                                <label for="gender" class="col-lg-3 control-label">Gender</label>
+                                <label for="gender" class="col-lg-3 control-label">gender</label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control" id="gender" placeholder="gender"
-                                           th:field="*{gender}"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('gender')}"
-                                          th:errors="*{gender}">Incorrect Gender</span>
+                                    <select class="form-control" id="gender" placeholder="gender" th:field="*{gender}">
+                                        <option th:each="gender : ${T(es.udc.fic.tfg.horse.GenderType).values()}"
+                                                th:value="${gender}"
+                                                th:text="${gender}">
+                                        </option>
+                                    </select>
+                                    <span class="help-block" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Incorrect gender</span>
                                 </div>
                             </div>
+
+
                             <div class="form-group" th:classappend="${#fields.hasErrors('fur')}? 'has-error'">
-                                <label for="fur" class="col-lg-3 control-label">Fur</label>
+                                <label for="fur" class="col-lg-3 control-label">fur</label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control" id="fur" placeholder="fur"
-                                           th:field="*{fur}"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('fur')}" th:errors="*{fur}">Incorrect Fur</span>
+                                    <select class="form-control" id="fur" placeholder="fur" th:field="*{fur}">
+                                        <option th:each="fur : ${T(es.udc.fic.tfg.horse.FurType).values()}"
+                                                th:value="${fur}"
+                                                th:text="${fur}">
+                                        </option>
+                                    </select>
+                                    <span class="help-block" th:if="${#fields.hasErrors('fur')}" th:errors="*{fur}">Incorrect fur</span>
                                 </div>
                             </div>
-                            <!--
-                             <div class="form-group">
-                             <label class="sr-only" for="fur">fur</label>
-                             <div class="input-group">
-                                  <div class="input-group-addon">Fur</div>
-                                 <select class="form-control" id="fur" th:field="*{fur}">
-                                   <option th:each="fur : ${furList}"
-                                        th:value="${fur.fur_id}" th:text="${fur.name}"></option>
-                                 </select>
-                             </div>
-                           </div>
-                           -->
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" th:classappend="${#fields.hasErrors('markings')}? 'has-error'">
-                                <label for="markings" class="col-lg-3 control-label">Markings</label>
+                                <label for="markings" class="col-lg-3 control-label">markings</label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control" id="markings" placeholder="markings"
-                                           th:field="*{markings}"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('markings')}"
-                                          th:errors="*{markings}">Incorrect Markings</span>
+                                    <select class="form-control" id="markings" placeholder="markings" th:field="*{markings}">
+                                        <option th:each="markings : ${T(es.udc.fic.tfg.horse.MarkingsType).values()}"
+                                                th:value="${markings}"
+                                                th:text="${markings}">
+                                        </option>
+                                    </select>
+                                    <span class="help-block" th:if="${#fields.hasErrors('markings')}" th:errors="*{markings}">Incorrect markings</span>
                                 </div>
                             </div>
                             <div class="form-group" th:classappend="${#fields.hasErrors('sire')}? 'has-error'">

@@ -1,5 +1,6 @@
 package es.udc.fic.tfg.account;
 
+import es.udc.fic.tfg.horse.Horse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -17,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -31,8 +34,10 @@ public class AccountService implements UserDetailsService {
 
     @PostConstruct
     protected void initialize() {
-        save(new Account("user@udc.es", "User", "User", "demo", "ROLE_USER", "666666666"));
-        save(new Account("admin@udc.es", "Admin", "Admin", "admin", "ROLE_ADMIN", "617617617"));
+        //List<Horse> horses = new ArrayList<Horse>();
+       // List<Horse> horses2 = new ArrayList<Horse>();
+       // save(new Account("user@udc.es", "User", "User", "demo", "ROLE_USER", "666666666",horses));
+        //save(new Account("admin@udc.es", "Admin", "Admin", "admin", "ROLE_ADMIN", "617617617",horses2));
     }
 
     @Transactional
@@ -71,5 +76,9 @@ public class AccountService implements UserDetailsService {
         Account account = accountRepository.findOneByEmail(email);
         return account;
     }
+/*
+    public List<Horse> findHorsesByOwner(String email){
+        return accountRepository.findOneByEmail(email).getHorses();
+    }*/
 
 }

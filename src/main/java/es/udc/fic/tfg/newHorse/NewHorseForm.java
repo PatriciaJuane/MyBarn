@@ -4,13 +4,20 @@ import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import es.udc.fic.tfg.horse.FurType;
+import es.udc.fic.tfg.horse.GenderType;
+import es.udc.fic.tfg.horse.MarkingsType;
 import org.hibernate.validator.constraints.NotBlank;
 import es.udc.fic.tfg.account.AccountRepository;
 
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.horse.Horse;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class NewHorseForm {
 
@@ -27,8 +34,9 @@ public class NewHorseForm {
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String breed;
 
-	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
-	private String birthDate;
+	//@NotNull(message = NewHorseForm.NOT_BLANK_MESSAGE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date birthDate;
 
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String gender;
@@ -45,7 +53,7 @@ public class NewHorseForm {
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String damnSire;
 
-	//private Account owner;
+	private List<Account> owners = new ArrayList<>();
 
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String licenseNumber;
@@ -78,11 +86,11 @@ public class NewHorseForm {
 		this.breed = breed;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -127,14 +135,14 @@ public class NewHorseForm {
 		this.damnSire = damnSire;
 	}
 
-	/*OBTENERLO DE PRINCIPAL!!!!*/
-	/*public Account getAccount() {
-		return account;
+	/*OBTENERLO DE PRINCIPAL!!*/
+	public List<Account> getOwners() {
+		return owners;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
-	}*/
+	public void setOwners(List<Account> owners) {
+		this.owners = owners;
+	}
 
 	public String getLicenseNumber() {
 		return licenseNumber;
@@ -153,12 +161,18 @@ public class NewHorseForm {
 	}
 
 	/*Habría que añadir el owner*/
-	public Horse createHorse() throws ParseException {
-		String string = getBirthDate();
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-		Date date = format.parse(string);
+	public Horse createHorse(Account a) throws ParseException {
 
-        return new Horse(getNickname(), getName(), getBreed(), date, getGender(),getFur(),getMarkings(),
-				getSire(),getDamnSire(),getLicenseNumber(),getChipNumber());
+		/*Date*/
+	/*	String string = getBirthDate();
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(string);*/
+
+		List<Account> ownerAdded =	this.getOwners();
+		ownerAdded.add(a);
+		setOwners(ownerAdded);
+
+        return new Horse(getNickname(), getName(), getBreed(), getBirthDate(), getGender(), getFur(), getMarkings(),
+				getSire(),getDamnSire(), getOwners(), getLicenseNumber(),getChipNumber());
 	}
 }

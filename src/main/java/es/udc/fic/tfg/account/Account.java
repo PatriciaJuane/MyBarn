@@ -1,14 +1,11 @@
 package es.udc.fic.tfg.account;
 
-import java.time.Instant;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
-
-import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import es.udc.fic.tfg.horse.Horse;
+
+import javax.persistence.*;
+import java.time.Instant;
+import java.util.List;
 
 @SuppressWarnings("serial")
 @Entity
@@ -17,7 +14,7 @@ public class Account implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long accountid;
 
 	@Column(unique = true)
 	private String email;
@@ -33,6 +30,9 @@ public class Account implements java.io.Serializable {
 
 	private String phoneNumber;
 
+	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "owners")
+	//private List<Horse> horses;
+
 	//private bitmap profilePicture;
 
 	private Instant created;
@@ -41,18 +41,19 @@ public class Account implements java.io.Serializable {
 
 	}
 	
-	public Account(String email, String firstName, String lastName, String password, String role, String phoneNumber) {
+	public Account(String email, String firstName, String lastName, String password, String role, String phoneNumber, List<Horse> horses) {
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
 		this.role = role;
 		this.phoneNumber = phoneNumber;
+		//this.horses = horses;
 		this.created = Instant.now();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getAccountId() {
+		return accountid;
 	}
 
     public String getEmail() {
@@ -98,6 +99,14 @@ public class Account implements java.io.Serializable {
 	public String getPhoneNumber(){ return phoneNumber;}
 
 	public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber;}
+
+	/*public List<Horse> getHorses() {
+		return horses;
+	}
+
+	public void setHorses(List<Horse> horses) {
+		this.horses = horses;
+	}*/
 
 	/*public bitmap getProfilePicture(){return profilePicture;}
 

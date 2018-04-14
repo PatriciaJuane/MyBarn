@@ -12,14 +12,9 @@ public interface HorseRepository extends JpaRepository<Horse, Long> {
 
 	Horse findOneByNickname(String nickname);
 
-	Horse findOneById(Long id);
+	Horse findOneByHorseId(Long horseid);
 
 	@Query("select count(a) > 0 from Horse a where a.nickname = :nickname")
 	boolean exists(@Param("nickname") String nickname);
-
-
-
-	//List<Horse> findByOwner(Account owner);
-
 
 }
