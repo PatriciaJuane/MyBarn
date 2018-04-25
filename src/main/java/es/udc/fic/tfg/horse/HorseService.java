@@ -3,10 +3,7 @@ package es.udc.fic.tfg.horse;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import javax.annotation.PostConstruct;
 
@@ -67,9 +64,29 @@ public class HorseService {
         return horse;
     }
 
+    @Transactional
+    public void update(Account account, Long id, Horse horse){
+        Horse local = horseRepository.findOneByHorseId(id);
+        local.setBirthDate(horse.getBirthdate());
+        local.setBreed(horse.getBreed());
+        local.setChipnumber(horse.getChipnumber());
+        local.setDamnsire(horse.getDamnsire());
+        local.setFur(horse.getFur());
+        local.setLicensenumber(horse.getLicensenumber());
+        local.setMarkings(horse.getMarkings());
+        local.setName(horse.getName());
+        local.setNickname(horse.getNickname());
+        local.setSire(horse.getSire());
+        horseRepository.save(local);
+    }
+
     public Horse findOneById(Long horseid) {
         Horse horse = horseRepository.findOneByHorseId(horseid);
         return horse;
+    }
+
+    public List<Horse> findAll(){
+        return horseRepository.findAll();
     }
 
 }

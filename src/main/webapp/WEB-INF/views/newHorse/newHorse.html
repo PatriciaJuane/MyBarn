@@ -63,11 +63,11 @@
                                     <span class="help-block" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">Incorrect Breed</span>
                                 </div>
                             </div>
-                            <div class="form-group" th:classappend="${#fields.hasErrors('birthDate')}? 'has-error'">
-                                <label for="birthDate" class="col-lg-4 control-label">BirthDate</label>
+                            <div class="form-group" th:classappend="${#fields.hasErrors('birthdate')}? 'has-error'">
+                                <label for="birthdate" class="col-lg-4 control-label">BirthDate</label>
                                 <div class="col-lg-8">
-                                    <input type="date" class="form-control" id="birthDate" placeholder="BirthDate" th:field="*{birthDate}"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Incorrect Birth Date</span>
+                                    <input type="date" class="form-control" id="birthdate" placeholder="Birthdate" th:field="*{birthdate}"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}">Incorrect Birth Date</span>
                                 </div>
                             </div>
                             <div class="form-group" th:classappend="${#fields.hasErrors('gender')}? 'has-error'">

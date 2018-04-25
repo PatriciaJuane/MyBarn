@@ -17,4 +17,6 @@ public interface HorseRepository extends JpaRepository<Horse, Long> {
 	@Query("select count(a) > 0 from Horse a where a.nickname = :nickname")
 	boolean exists(@Param("nickname") String nickname);
 
+	List<Horse> findAll();
+
 }

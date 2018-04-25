@@ -14,23 +14,24 @@
 <div th:replace="fragments/layout :: header"></div>
 
 <div class="py-5">
-    <div class="container">
+    <div class="container" th:each="horse : ${horses}">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-2">
-                        <img class="img-fluid d-block float-right m-1 rounded-circle" src="../../../resources/images/noun_765845_cc.png" width="225" height="225"> </div>
+                        <img class="img-fluid d-block float-right m-1 rounded-circle" src="../../../resources/images/noun_765845_cc.png" width="175" height="175"> </div>
                     <div class="col-md-6">
                         <div class="list-group">
-                            <a href="/horse/horseDetails/4" class="list-group-item list-group-item-action flex-column align-items-start active my-3" style="height=225">
+                            <a th:href="@{/horse/horseDetails/} + ${horse.horseId}" class="list-group-item list-group-item-action flex-column align-items-start active my-3" style="height=225">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Chantré</h5>
+                                    <h5 class="mb-1" th:text="${horse.nickname}"></h5>
                                 </div>
-                                <p class="mb-1">Chantré</p> <small>Mecklenburg&nbsp;</small><small>Gelding,&nbsp;</small><small>2005</small> </a>
+                                <p class="mb-1" th:text="${horse.name}"></p>
+                                <small th:text="${horse.breed}"></small>&nbsp;<small th:text="${horse.gender}"></small>&nbsp;<small th:text="${#dates.format(horse.birthdate,'dd-MM-yyyy')}"></small></a>
                         </div>
                     </div>
                 </div>
-            </div>s
+            </div>
         </div>
     </div>
 </div>

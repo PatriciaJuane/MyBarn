@@ -19,92 +19,118 @@
              src="../../../resources/images/noun_765845_cc.png">
     </div>
     <div class="col-md-10">
-        <form class="form-narrow form-horizontal" th:object="${horse}">
+    <form class="form-narrow form-horizontal" method="post" th:action="@{/horse/horseDetails/} + ${id}" th:object="${newHorseForm}" th:fragment="newHorseForm">
+
+
             <div class="row">
-            <fieldset>
-                <legend>Horse Details</legend>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="nickname" class="col-lg-4 control-label">Nickname</label>
-                    <div class="col-lg-8">
-                        <a class="form-control" id="nickname" th:text="${horse.nickname}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="name" class="col-lg-3 control-label">Name</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="name" th:text="${horse.name}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="breed" class="col-lg-3 control-label">Breed</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="breed" th:text="${horse.breed}"/>
-                    </div>
-                </div>
+                <fieldset>
+                    <legend>Horse Details</legend>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nickname" class="col-lg-4 control-label">Nickname</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="nickname" name = nickname th:value="${horse.nickname}" />
+                                <span class="help-block" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">Incorrect nickname</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-lg-3 control-label">Name</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="name" name = name th:value="${horse.name}" />
+                                <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="breed" class="col-lg-3 control-label">Breed</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="breed" value="a" name = breed th:value="${horse.breed}" />
+                                <span class="help-block" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">Incorrect breed</span>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <!-- th:classappend="${#fields.hasErrors('birthDate')}? 'has-error'"-->
+                        <div class="form-group" th:classappend="${#fields.hasErrors('birthdate')}? 'has-error'">
+                            <label for="birthdate" class="col-lg-4 control-label">Birth Date</label>
+                            <div class="col-lg-8">
+                                <input type="date" class="form-control" id="birthdate" placeholder="Birth Date" name = birthdate th:value="${#dates.format(horse.birthdate, 'yyyy-MM-dd')}"/>
+                                <span class="help-block" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}">Incorrect birth date</span>
+                            </div>
+                        </div>
 
-                        <label for="birthDate" class="col-lg-4 control-label">Birth Date</label>
-                        <div class="col-lg-8">
-                           <!-- <input type="date" class="form-control" id="birthDate" placeholder="BirthDate" name = birthDate th:value="${horse.birthdate}"/> -->
-                            <a class="form-control" id="birthDate" th:text="${horse.birthdate}"/>
-                            <!--  <span class="help-block" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Incorrect birth date</span> -->
+                        <div class="form-group">
+                            <label for="gender" class="col-lg-3 control-label">Gender</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" id="gender" placeholder="gender" name="gender" th:value="*{gender}">
+                                    <option th:each="gender : ${T(es.udc.fic.tfg.horse.GenderType).values()}"
+                                            th:value="${gender}"
+                                            th:text="${gender}"
+                                            th:selected="${gender.toString().equals(horse.gender)}">
+                                    </option>
+                                </select>
+                                <span class="help-block" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Incorrect gender</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fur" class="col-lg-3 control-label">Fur</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" id="fur" placeholder="fur" name="fur" th:value="*{fur}">
+                                    <option th:each="fur : ${T(es.udc.fic.tfg.horse.FurType).values()}"
+                                            th:value="${fur}"
+                                            th:text="${fur}"
+                                            th:selected="${fur.toString().equals(horse.fur)}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-
-                <div class="form-group">
-                    <label for="gender" class="col-lg-3 control-label">Gender</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="gender" th:text="${horse.gender}"/>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="markings" class="col-lg-3 control-label">Markings</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" id="markings" placeholder="markings" name="markings" th:value="*{markings}">
+                                    <option th:each="markings : ${T(es.udc.fic.tfg.horse.MarkingsType).values()}"
+                                            th:value="${markings}"
+                                            th:text="${markings}"
+                                            th:selected="${markings.toString().equals(horse.markings)}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sire" class="col-lg-3 control-label">Sire</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="sire" value="a" name = sire th:value="${horse.sire}" />
+                                <span class="help-block" th:if="${#fields.hasErrors('sire')}" th:errors="*{sire}">Incorrect sire</span> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="damnSire" class="col-lg-3 control-label">Damn Sire</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="damnSire" value="a" name = damnSire th:value="${horse.damnsire}" />
+                                <span class="help-block" th:if="${#fields.hasErrors('damnSire')}" th:errors="*{damnSire}">Incorrect damnSire</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="licenseNumber" class="col-lg-3 control-label">License Number</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="licenseNumber" value="a" name = licenseNumber th:value="${horse.licensenumber}" />
+                                <span class="help-block" th:if="${#fields.hasErrors('licenseNumber')}" th:errors="*{licenseNumber}">Incorrect licenseNumber</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="chipNumber" class="col-lg-3 control-label">Chip Number</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="chipNumber" value="a" name = chipNumber th:value="${horse.chipnumber}" />
+                                <span class="help-block" th:if="${#fields.hasErrors('chipNumber')}" th:errors="*{chipNumber}">Incorrect chipNumber</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="@{/horse/horseDetails/} + ${horse.horseId}">Edit</button>
+                        <button class="btn btn-danger">Delete Account</button>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="fur" class="col-lg-3 control-label">Fur</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="fur" th:text="${horse.fur}"/>
-                    </div>
-                </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="markings" class="col-lg-3 control-label">Markings</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="markings" th:text="${horse.markings}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="sire" class="col-lg-3 control-label">Sire</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="sire" th:text="${horse.sire}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="damnSire" class="col-lg-3 control-label">Damn Sire</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="damnSire" th:text="${horse.damnsire}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="licenseNumber" class="col-lg-3 control-label">License Number</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="licenseNumber" th:text="${horse.licensenumber}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="chipNumber" class="col-lg-3 control-label">Chip Number</label>
-                    <div class="col-lg-9">
-                        <a class="form-control" id="chipNumber" th:text="${horse.chipnumber}"/>
-                    </div>
-                </div>
-                <button class="btn btn-primary" onclick="@{/newHorse}">Edit</button>
-                <button class="btn btn-danger">Delete Account</button>
-                </div>
-            </fieldset>
+                </fieldset>
             </div>
-        </form>
-    </div>
+    </form>
+        </div>
+
 </div>
 </body>
 <div th:replace="fragments/layout :: footer"></div>

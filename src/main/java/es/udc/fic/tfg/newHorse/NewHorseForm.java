@@ -25,7 +25,7 @@ public class NewHorseForm {
 	private static final String NICKNAME_EXISTS_MESSAGE = "{nickname-exists.message}";
 
     @NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
-	@NicknameExists(message = NewHorseForm.NICKNAME_EXISTS_MESSAGE)
+	//@NicknameExists(message = NewHorseForm.NICKNAME_EXISTS_MESSAGE)
 	private String nickname;
 
     @NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
@@ -36,7 +36,7 @@ public class NewHorseForm {
 
 	//@NotNull(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date birthDate;
+	private Date birthdate;
 
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String gender;
@@ -86,12 +86,12 @@ public class NewHorseForm {
 		this.breed = breed;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
+	public Date getBirthdate() {
+		return birthdate;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	public String getGender() {
@@ -163,16 +163,11 @@ public class NewHorseForm {
 	/*Habría que añadir el owner*/
 	public Horse createHorse(Account a) throws ParseException {
 
-		/*Date*/
-	/*	String string = getBirthDate();
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = format.parse(string);*/
-
 		List<Account> ownerAdded =	this.getOwners();
 		ownerAdded.add(a);
 		setOwners(ownerAdded);
 
-        return new Horse(getNickname(), getName(), getBreed(), getBirthDate(), getGender(), getFur(), getMarkings(),
+        return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
 				getSire(),getDamnSire(), getOwners(), getLicenseNumber(),getChipNumber());
 	}
 }
