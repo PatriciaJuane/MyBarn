@@ -81,4 +81,17 @@ public class AccountService implements UserDetailsService {
         return accountRepository.findOneByEmail(email).getHorses();
     }*/
 
+    @Transactional
+    public void update(Account account, String email){
+        Account local = accountRepository.findOneByEmail(email);
+        local.setEmail(account.getEmail());
+        local.setFirstname(account.getFirstname());
+        local.setLastname(account.getLastname());
+        local.setPassword(account.getPassword());
+        local.setPhonenumber(account.getPhonenumber());
+        local.setRole(account.getRole());
+        local.setHorses(account.getHorses());
+        accountRepository.save(local);
+    }
+
 }

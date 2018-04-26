@@ -11,79 +11,79 @@ import java.util.List;
 
 public class SignupForm {
 
-	private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
-	private static final String EMAIL_MESSAGE = "{email.message}";
-	private static final String EMAIL_EXISTS_MESSAGE = "{email-exists.message}";
+    private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
+    private static final String EMAIL_MESSAGE = "{email.message}";
+    private static final String EMAIL_EXISTS_MESSAGE = "{email-exists.message}";
 
     @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
-	@Email(message = SignupForm.EMAIL_MESSAGE)
-	@EmailExists(message = SignupForm.EMAIL_EXISTS_MESSAGE)
-	private String email;
+    //@Email(message = SignupForm.EMAIL_MESSAGE)
+    //@EmailExists(message = SignupForm.EMAIL_EXISTS_MESSAGE)
+    private String email;
 
     @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
-	private String password;
+    private String password;
 
-	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
-	private String firstName;
+    @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+    private String firstname;
 
-	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
-	private String lastName;
+    @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+    private String lastname;
 
-	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
-	private String phoneNumber;
+    @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+    private String phonenumber;
 
-	private List<Horse> horses = new ArrayList<Horse>();
+    private List<Horse> horses = new ArrayList<Horse>();
 
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getFirstname() {
+        return firstname;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastname() {
+        return lastname;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public String getPhonenumber() {
+        return phonenumber;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
 
-	public List<Horse> getHorses() {
-		return horses;
-	}
+    public List<Horse> getHorses() {
+        return horses;
+    }
 
-	public void setHorses(List<Horse> horses) {
-		this.horses = horses;
-	}
+    public void setHorses(List<Horse> horses) {
+        this.horses = horses;
+    }
 
-	public Account createAccount() {
-        return new Account(getEmail(), getFirstName(), getLastName(), getPassword(), "ROLE_USER", getPhoneNumber(), getHorses());
-	}
+    public Account createAccount() {
+        return new Account(getEmail(), getFirstname(), getLastname(), getPassword(), "ROLE_USER", getPhonenumber(), getHorses());
+    }
 }

@@ -19,34 +19,45 @@
              src="../../../resources/images/icono-de-perfil-de-usuario_318-33925.jpg">
     </div>
     <div class="col-md-8">
-        <form class="form-narrow form-horizontal" th:object="${account}">
+        <form class="form-narrow form-horizontal" method="post" th:action="@{/user/userDetails}"
+              th:object="${signupForm}" th:fragment="signupForm">
             <fieldset>
                 <legend>User Details</legend>
                 <div class="form-group">
                     <label for="email" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
-                        <a class="form-control" id="email" th:text="${account.email}"/>
+
+                        <input type="text" class="form-control" id="email" name=email
+                               th:value="${account.email}"/>
+                        <span class="help-block" th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}">Incorrect email</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="firstName" class="col-lg-2 control-label">First Name</label>
                     <div class="col-lg-10">
-                        <a class="form-control" id="firstName" th:text="${account.firstName}"/>
+                        <input type="text" class="form-control" id="firstname" name=firstname
+                               th:value="${account.firstname}"/>
+                        <span class="help-block" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Incorrect first Name</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastName" class="col-lg-2 control-label">Last Name</label>
                     <div class="col-lg-10">
-                        <a class="form-control" id="lastName" th:text="${account.lastName}"/>
+                        <input type="text" class="form-control" id="lastname" name=lastname
+                               th:value="${account.lastname}"/>
+                        <span class="help-block" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Incorrect last name</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber" class="col-lg-2 control-label">Phone Number</label>
                     <div class="col-lg-10">
-                        <a class="form-control" id="phoneNumber" th:text="${account.phoneNumber}"/>
+                        <input type="text" class="form-control" id="phonenumber" name=phonenumber
+                               th:value="${account.phonenumber}"/>
+                        <span class="help-block" th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}">Incorrect phone number</span>
                     </div>
                 </div>
-                <button class="btn btn-primary" onclick="@{/signup}">Edit</button>
+                <button class="btn btn-primary" onclick="@{/user/userDetails}">Edit</button>
                 <button class="btn btn-danger">Delete Account</button>
             </fieldset>
         </form>

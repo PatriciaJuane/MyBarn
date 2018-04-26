@@ -42,7 +42,7 @@ public class HorseDetailsController {
     public String horse(@PathVariable("id") Long id, Model model, @RequestHeader(value = "X-Requested-With", required = false) String requestedWith) {
 
         Horse horse = horseService.findOneById(id);
-        model.addAttribute("horse",horse);
+        model.addAttribute("horse", horse);
         model.addAttribute(new NewHorseForm());
 
         if (Ajax.isAjaxRequest(requestedWith)) {
@@ -58,24 +58,15 @@ public class HorseDetailsController {
         /*if (errors.hasErrors()) {
             return HORSEDETAILS_VIEW_NAME;
         }*/
-
         Account owner = accountRepository.findOneByEmail(principal.getName());
         Horse local = newhorseForm.createHorse(owner);
-        horseService.update(owner,id,local);
+        horseService.update(owner, id, local);
 
         Horse horse = horseService.findOneById(id);
-        model.addAttribute("horse",horse);
-
-        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
-        SecurityContextHolder.getContext().setAuthentication(newAuth);*/
+        model.addAttribute("horse", horse);
         MessageHelper.addSuccessAttribute(ra, "newHorse.success");
-
         return "horse/horseDetails";
     }
-
-
 
 }
 

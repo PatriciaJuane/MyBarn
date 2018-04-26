@@ -22,10 +22,10 @@ public class MyHorsesController {
     private HorseService horseService;
 
     @GetMapping("myHorses")
-   // @ResponseStatus(value = HttpStatus.OK)
+    // @ResponseStatus(value = HttpStatus.OK)
     //@Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String myHorses(Model m) {
-      //  Account account = accountRepository.findOneByEmail(principal.getName());
+        //  Account account = accountRepository.findOneByEmail(principal.getName());
         m.addAttribute("horses", horseService.findAll());
         return MYHORSES_VIEW_NAME;
     }

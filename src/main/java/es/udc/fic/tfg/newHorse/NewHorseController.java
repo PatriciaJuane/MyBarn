@@ -64,7 +64,7 @@ class NewHorseController {
         }
         if(principal!=null) {
             Account owner = accountRepository.findOneByEmail(principal.getName());
-            horseService.save(newhorseForm.createHorse(owner));
+            horseService.save(newhorseForm.createHorse(owner), owner);
             MessageHelper.addSuccessAttribute(ra, "newHorse.success");
         }
         return "redirect:/";

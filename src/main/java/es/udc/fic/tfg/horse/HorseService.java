@@ -7,6 +7,7 @@ import java.util.*;
 
 import javax.annotation.PostConstruct;
 
+import es.udc.fic.tfg.account.AccountRepository;
 import es.udc.fic.tfg.account.AccountService;
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class HorseService {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
 //    @PostConstruct
 //    protected void initialize() throws ParseException {
@@ -59,8 +63,12 @@ public class HorseService {
 //    }
 
     @Transactional
-    public Horse save(Horse horse) {
+    public Horse save(Horse horse, Account account) {
         horseRepository.save(horse);
+        List<Horse> horses = account.getHorses();
+        horses.add(horse);
+        account.setHorses(horses);
+        accountRepository.save(account);
         return horse;
     }
 

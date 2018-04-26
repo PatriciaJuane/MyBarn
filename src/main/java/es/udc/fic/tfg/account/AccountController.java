@@ -23,7 +23,7 @@ public class AccountController {
     @ResponseStatus(value = HttpStatus.OK)
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public Account currentAccount(Principal principal) {
-        if(principal!=null) {
+        if (principal != null) {
             return accountRepository.findOneByEmail(principal.getName());
         }
         return null; //LANZAR EXCEPCION
@@ -33,6 +33,7 @@ public class AccountController {
     @ResponseStatus(value = HttpStatus.OK)
     @Secured("ROLE_ADMIN")
     public Account account(@PathVariable("id") Long id) {
+
         return accountRepository.findOne(id);
     }
 }
