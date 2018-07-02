@@ -65,9 +65,9 @@ public class HorseService {
     @Transactional
     public Horse save(Horse horse, Account account) {
         horseRepository.save(horse);
-        List<Horse> horses = account.getHorses();
-        horses.add(horse);
-        account.setHorses(horses);
+        List<Horse> horsesOwned = account.getHorsesOwned();
+        horsesOwned.add(horse);
+        account.setHorsesOwned(horsesOwned);
         accountRepository.save(account);
         return horse;
     }

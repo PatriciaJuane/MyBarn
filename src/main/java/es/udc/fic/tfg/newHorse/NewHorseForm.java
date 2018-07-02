@@ -53,7 +53,9 @@ public class NewHorseForm {
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String damnSire;
 
-	private List<Account> owners = new ArrayList<>();
+	private Account owner;
+
+	private Account rider;
 
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String licenseNumber;
@@ -135,15 +137,6 @@ public class NewHorseForm {
 		this.damnSire = damnSire;
 	}
 
-	/*OBTENERLO DE PRINCIPAL!!*/
-	public List<Account> getOwners() {
-		return owners;
-	}
-
-	public void setOwners(List<Account> owners) {
-		this.owners = owners;
-	}
-
 	public String getLicenseNumber() {
 		return licenseNumber;
 	}
@@ -160,14 +153,31 @@ public class NewHorseForm {
 		this.chipNumber = chipNumber;
 	}
 
-	/*Habría que añadir el owner*/
-	public Horse createHorse(Account a) throws ParseException {
+	public Account getOwner() {
+		return owner;
+	}
 
-		List<Account> ownerAdded =	this.getOwners();
-		ownerAdded.add(a);
-		setOwners(ownerAdded);
+	public void setOwner(Account owner) {
+		this.owner = owner;
+	}
+
+	public Account getRider() {
+		return rider;
+	}
+
+	public void setRider(Account rider) {
+		this.rider = rider;
+	}
+
+	public Horse createHorse(Account owner) throws ParseException {
+
+		//Recibes de la vista el email del rider
+		//Hacer aquí la búsqueda (findByEmail) y obtener el Account Rider
+		//y mandárselo al constructor
 
         return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
-				getSire(),getDamnSire(), getOwners(), getLicenseNumber(),getChipNumber());
+				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), owner, null);
 	}
+
+
 }

@@ -26,7 +26,7 @@ public class AccountController {
         if (principal != null) {
             return accountRepository.findOneByEmail(principal.getName());
         }
-        return null; //LANZAR EXCEPCION
+        return null;
     }
 
     @GetMapping("account/{id}")
@@ -36,4 +36,5 @@ public class AccountController {
 
         return accountRepository.findOne(id);
     }
+
 }

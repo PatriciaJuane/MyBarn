@@ -31,10 +31,14 @@ public class Account implements java.io.Serializable {
     private String role = "ROLE_USER";
 
     private String phonenumber;
+    
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //@JoinTable()
-    private List<Horse> horses = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    private List<Horse> horsesOwned = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "rider")
+    private List<Horse> horsesRidden = new ArrayList<>();
+
 
     //private bitmap profilePicture;
 
@@ -51,7 +55,8 @@ public class Account implements java.io.Serializable {
         this.password = password;
         this.role = role;
         this.phonenumber = phonenumber;
-        this.horses = horses;
+        this.horsesOwned = new ArrayList<>();
+        this.horsesRidden = new ArrayList<>();
         this.created = Instant.now();
     }
 
@@ -106,20 +111,28 @@ public class Account implements java.io.Serializable {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
-
-    public List<Horse> getHorses() {
-        return horses;
-    }
-
-    public void setHorses(List<Horse> horses) {
-        this.horses = horses;
-    }
-
+    
     /*public bitmap getProfilePicture(){return profilePicture;}
 
     public void setProfilePicture(bitmap profilePicture){ this.profilePicture = profilePicture;}
     */
     public Instant getCreated() {
         return created;
+    }
+
+    public List<Horse> getHorsesOwned() {
+        return horsesOwned;
+    }
+
+    public void setHorsesOwned(List<Horse> horsesOwned) {
+        this.horsesOwned = horsesOwned;
+    }
+
+    public List<Horse> getHorsesRidden() {
+        return horsesRidden;
+    }
+
+    public void setHorsesRidden(List<Horse> horsesRidden) {
+        this.horsesRidden = horsesRidden;
     }
 }

@@ -41,13 +41,13 @@ public class Horse implements java.io.Serializable {
 
 	private String damnsire;
 
-   /*
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "horse_account",
-			joinColumns = { @JoinColumn(name = "horseId") },
-			inverseJoinColumns = { @JoinColumn(name = "accountId") }
-	)
-	private List<Account> owners;*/
+	@ManyToOne
+	@JoinColumn(name = "fk_owner", insertable = false, updatable = false)
+	private Account owner;
+
+	@ManyToOne
+	@JoinColumn(name = "fk_rider", insertable = false, updatable = false)
+	private Account rider = null;  //Para que no tenga jinete inicialmente
 
 	private String licensenumber;
 
@@ -60,7 +60,8 @@ public class Horse implements java.io.Serializable {
 	}
 	
 	public Horse(String nickname, String name, String breed, Date birthdate, String gender, String fur,
-				 String markings, String sire, String damnsire, List<Account> owners, String licensenumber, String chipnumber) {
+				 String markings, String sire, String damnsire, String licensenumber, String chipnumber,
+				 Account owner, Account rider) {
 		this.nickname = nickname;
 		this.name = name;
 		this.breed = breed;
@@ -70,9 +71,10 @@ public class Horse implements java.io.Serializable {
 		this.markings = markings;
 		this.sire = sire;
 		this.damnsire = damnsire;
-		//this.owners = owners;
 		this.licensenumber = licensenumber;
 		this.chipnumber = chipnumber;
+		this.owner = owner;
+		this.rider = rider;
 		this.created = Instant.now();
 	}
 
@@ -128,14 +130,6 @@ public class Horse implements java.io.Serializable {
 		this.damnsire = damnSire;
 	}
 
-	/*public List<Account> getOwners() {
-		return owners;
-	} */
-
-	/*public void setOwners(List<Account> owner) {
-		this.owners = owners;
-	}*/
-
 	public String getLicensenumber() {
 		return licensenumber;
 	}
@@ -178,5 +172,21 @@ public class Horse implements java.io.Serializable {
 
 	public void setMarkings(String markings) {
 		this.markings = markings;
+	}
+
+	public Account getRider() {
+		return rider;
+	}
+
+	public void setRider(Account rider) {
+		this.rider = rider;
+	}
+
+	public Account getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Account owner) {
+		this.owner = owner;
 	}
 }

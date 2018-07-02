@@ -90,7 +90,8 @@ public class AccountService implements UserDetailsService {
         local.setPassword(account.getPassword());
         local.setPhonenumber(account.getPhonenumber());
         local.setRole(account.getRole());
-        local.setHorses(account.getHorses());
+        local.setHorsesOwned(account.getHorsesOwned());
+        local.setHorsesRidden(account.getHorsesRidden());
         accountRepository.save(local);
     }
 
