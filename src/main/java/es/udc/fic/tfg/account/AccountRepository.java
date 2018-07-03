@@ -16,6 +16,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 	@Query("select count(a) > 0 from Account a where a.email = :email")
 	boolean exists(@Param("email") String email);
 
+	List<Account> findByRider(Boolean rider);
+
 	/*@Query("select horse.id, horse.name FROM horse inner join accounts_horses " +
 			"on accounts_horses.horse_id=horse.id " +
 			"where accounts_horses.horse_id=$horse_id")

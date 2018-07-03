@@ -17,6 +17,7 @@ import es.udc.fic.tfg.account.AccountRepository;
 
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.horse.Horse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class NewHorseForm {
@@ -24,7 +25,11 @@ public class NewHorseForm {
 	private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
 	private static final String NICKNAME_EXISTS_MESSAGE = "{nickname-exists.message}";
 
-    @NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
+	@Autowired
+	private AccountRepository accountRepository;
+
+
+	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	//@NicknameExists(message = NewHorseForm.NICKNAME_EXISTS_MESSAGE)
 	private String nickname;
 
@@ -120,7 +125,6 @@ public class NewHorseForm {
 		this.markings = markings;
 	}
 
-
 	public String getSire() {
 		return sire;
 	}
@@ -169,14 +173,14 @@ public class NewHorseForm {
 		this.rider = rider;
 	}
 
-	public Horse createHorse(Account owner) throws ParseException {
+	public Horse createHorse() throws ParseException {
 
-		//Recibes de la vista el email del rider
+		//Recibes de la vista el email o nombre del rider
 		//Hacer aquí la búsqueda (findByEmail) y obtener el Account Rider
 		//y mandárselo al constructor
 
-        return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
-				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), owner, null);
+		return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
+				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null);
 	}
 
 

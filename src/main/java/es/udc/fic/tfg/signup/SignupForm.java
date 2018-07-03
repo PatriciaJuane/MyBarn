@@ -32,8 +32,11 @@ public class SignupForm {
     @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
     private String phonenumber;
 
-    private List<Horse> horses = new ArrayList<Horse>();
+    private Boolean rider;
 
+    private List<Horse> horsesOwned = new ArrayList<Horse>();
+
+    private List<Horse> horsesRidden = new ArrayList<Horse>();
 
     public String getEmail() {
         return email;
@@ -75,15 +78,20 @@ public class SignupForm {
         this.phonenumber = phonenumber;
     }
 
-    public List<Horse> getHorses() {
-        return horses;
-    }
+    public Boolean getRider() { return rider; }
 
-    public void setHorses(List<Horse> horses) {
-        this.horses = horses;
-    }
+    public void setRider(Boolean rider) { this.rider = rider; }
+
+    public List<Horse> getHorsesOwned() { return horsesOwned; }
+
+    public void setHorsesOwned(List<Horse> horsesOwned) { this.horsesOwned = horsesOwned; }
+
+    public List<Horse> getHorsesRidden() { return horsesRidden; }
+
+    public void setHorsesRidden(List<Horse> horsesRidden) { this.horsesRidden = horsesRidden; }
 
     public Account createAccount() {
-        return new Account(getEmail(), getFirstname(), getLastname(), getPassword(), "ROLE_USER", getPhonenumber(), getHorses());
+        return new Account(getEmail(), getFirstname(), getLastname(), getPassword(), "ROLE_USER", getPhonenumber(),
+                getRider(), getHorsesOwned(), getHorsesRidden());
     }
 }

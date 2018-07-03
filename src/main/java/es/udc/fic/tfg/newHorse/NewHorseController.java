@@ -34,9 +34,6 @@ class NewHorseController {
     private AccountRepository accountRepository;
 
     @Autowired
-    private HorseRepository horseRepository;
-
-    @Autowired
     private HorseService horseService;
     private NewHorseForm newhorseForm;
     private Errors errors;
@@ -64,7 +61,8 @@ class NewHorseController {
         }
         if(principal!=null) {
             Account owner = accountRepository.findOneByEmail(principal.getName());
-            horseService.save(newhorseForm.createHorse(owner), owner);
+            Horse horse = newhorseForm.createHorse();
+            Horse saved = horseService.save(horse, owner);
             MessageHelper.addSuccessAttribute(ra, "newHorse.success");
         }
         return "redirect:/";

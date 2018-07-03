@@ -57,6 +57,20 @@
                         <span class="help-block" th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}">Incorrect phone number</span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="isRider" class="col-lg-2 control-label">Rider</label>
+                    <div class="col-lg-10">
+                        <a type="text" class="form-control" id="isRider"
+                               th:text="${account.rider}"/>
+                    </div>
+                </div>
+               <!-- <div class="form-group">
+                    <label for="rider" class="col-lg-2 control-label">Keep being a Rider?</label>
+                    <div class="col-lg-2">
+                        <input type="checkbox" class="form-control" id="rider" name=rider
+                               th:value="${account.rider}"/>
+                    </div>
+                </div> -->
                 <button class="btn btn-primary" onclick="@{/user/userDetails}">Edit</button>
                 <button class="btn btn-danger">Delete Account</button>
             </fieldset>

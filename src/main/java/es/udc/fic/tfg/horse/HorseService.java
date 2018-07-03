@@ -64,6 +64,7 @@ public class HorseService {
 
     @Transactional
     public Horse save(Horse horse, Account account) {
+        horse.setOwner(account);
         horseRepository.save(horse);
         List<Horse> horsesOwned = account.getHorsesOwned();
         horsesOwned.add(horse);
@@ -73,7 +74,7 @@ public class HorseService {
     }
 
     @Transactional
-    public void update(Account account, Long id, Horse horse){
+    public void update(Long id, Horse horse){
         Horse local = horseRepository.findOneByHorseId(id);
         local.setBirthDate(horse.getBirthdate());
         local.setBreed(horse.getBreed());
@@ -85,6 +86,8 @@ public class HorseService {
         local.setName(horse.getName());
         local.setNickname(horse.getNickname());
         local.setSire(horse.getSire());
+     //   local.setOwner(horse.getOwner()); //No se debe cambiar
+        local.setRider(horse.getRider());
         horseRepository.save(local);
     }
 

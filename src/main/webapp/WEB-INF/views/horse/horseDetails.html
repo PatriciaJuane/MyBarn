@@ -138,9 +138,16 @@
                                       th:errors="*{chipNumber}">Incorrect chipNumber</span>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="owner" class="col-lg-3 control-label">Owner</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="owner"
+                                       th:text="${horse.owner.firstname}"/>
+                            </div>
+                        </div>
                         <button class="btn btn-primary" onclick="@{/horse/horseDetails/} + ${horse.horseId}">Edit
                         </button>
-                        <button class="btn btn-danger">Delete Account</button>
+                        <button class="btn btn-danger">Delete Horse</button>
                     </div>
                 </fieldset>
             </div>

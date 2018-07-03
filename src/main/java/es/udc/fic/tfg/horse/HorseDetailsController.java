@@ -58,9 +58,9 @@ public class HorseDetailsController {
         /*if (errors.hasErrors()) {
             return HORSEDETAILS_VIEW_NAME;
         }*/
-        Account owner = accountRepository.findOneByEmail(principal.getName());
-        Horse local = newhorseForm.createHorse(owner);
-        horseService.update(owner, id, local);
+       // Account owner = accountRepository.findOneByEmail(principal.getName());
+        Horse local = newhorseForm.createHorse();
+        horseService.update(id, local);
 
         Horse horse = horseService.findOneById(id);
         model.addAttribute("horse", horse);

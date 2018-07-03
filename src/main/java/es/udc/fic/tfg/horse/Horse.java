@@ -41,12 +41,12 @@ public class Horse implements java.io.Serializable {
 
 	private String damnsire;
 
-	@ManyToOne
-	@JoinColumn(name = "fk_owner", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	//@JoinColumn(name = "owner",insertable = false, updatable = false)
 	private Account owner;
 
-	@ManyToOne
-	@JoinColumn(name = "fk_rider", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	//@JoinColumn(name = "accountid", insertable = false, updatable = false)
 	private Account rider = null;  //Para que no tenga jinete inicialmente
 
 	private String licensenumber;

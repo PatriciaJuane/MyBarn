@@ -16,6 +16,7 @@ public class Account implements java.io.Serializable {
 
     @Id
     @GeneratedValue
+    @Column(name="accountid")
     private Long accountid;
 
     @Column(unique = true)
@@ -31,13 +32,16 @@ public class Account implements java.io.Serializable {
     private String role = "ROLE_USER";
 
     private String phonenumber;
-    
+
+    private Boolean rider; //Por si el usuario, ademas de propietario, decide ser jinete
+
+   // private Boolean owner;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
-    private List<Horse> horsesOwned = new ArrayList<>();
+    private List<Horse> horsesOwned;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "rider")
-    private List<Horse> horsesRidden = new ArrayList<>();
+    private List<Horse> horsesRidden;
 
 
     //private bitmap profilePicture;
@@ -48,13 +52,15 @@ public class Account implements java.io.Serializable {
 
     }
 
-    public Account(String email, String firstname, String lastname, String password, String role, String phonenumber, List<Horse> horses) {
+    public Account(String email, String firstname, String lastname, String password,
+                   String role, String phonenumber, Boolean rider, List<Horse> horsesOwned, List<Horse> horsesRidden) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.role = role;
         this.phonenumber = phonenumber;
+        this.rider = rider;
         this.horsesOwned = new ArrayList<>();
         this.horsesRidden = new ArrayList<>();
         this.created = Instant.now();
@@ -111,7 +117,11 @@ public class Account implements java.io.Serializable {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
-    
+
+    public Boolean getRider() { return rider; }
+
+    public void setRider(Boolean rider) { this.rider = rider; }
+
     /*public bitmap getProfilePicture(){return profilePicture;}
 
     public void setProfilePicture(bitmap profilePicture){ this.profilePicture = profilePicture;}
