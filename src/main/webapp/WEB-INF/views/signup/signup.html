@@ -15,13 +15,10 @@
 <div th:replace="fragments/layout :: header"></div>
 <div class="py-5">
     <div class="container">
-            <div class="col-md-2">
-                <img class="img-fluid d-block float-right rounded-circle"
-                     src="../../../resources/images/icono-de-perfil-de-usuario_318-33925.jpg">
-            </div>
+        <div class="col-md-2"></div>
         <div class="col-md-8">
             <form class="form-narrow form-horizontal" method="post" th:action="@{/signup}" th:object="${signupForm}"
-                  th:fragment="signupForm">
+                  th:fragment="signupForm" enctype="multipart/form-data">
                 <!--/* Show general error message when form contains errors */-->
                 <th:block th:if="${#fields.hasErrors('${signupForm.*}')}">
                     <div th:replace="fragments/components :: alert (type='danger', message='Form contains errors. Please try again.')">
@@ -71,6 +68,13 @@
                         <label for="rider" class="col-lg-2 control-label">Rider</label>
                         <div class="col-lg-2">
                             <input type="checkbox" class="form-control" id="rider" placeholder="rider" th:field="*{rider}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePic" class="col-lg-2 control-label">Profile Pic</label>
+                        <div class="col-lg-10">
+                            <input type="file" class="form-control-file" id="profilePic" name ="profilePic"
+                                   th:field="*{profilePic}" accept="image/*"/>
                         </div>
                     </div>
                     <div class="form-group">

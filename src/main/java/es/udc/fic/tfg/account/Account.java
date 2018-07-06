@@ -43,8 +43,8 @@ public class Account implements java.io.Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "rider")
     private List<Horse> horsesRidden;
 
-
-    //private bitmap profilePicture;
+    @Column(length=10485760)
+    private String profilePic = "";
 
     private Instant created;
 
@@ -53,7 +53,7 @@ public class Account implements java.io.Serializable {
     }
 
     public Account(String email, String firstname, String lastname, String password,
-                   String role, String phonenumber, Boolean rider, List<Horse> horsesOwned, List<Horse> horsesRidden) {
+                   String role, String phonenumber, Boolean rider, List<Horse> horsesOwned, List<Horse> horsesRidden, String profilePic) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -64,6 +64,7 @@ public class Account implements java.io.Serializable {
         this.horsesOwned = new ArrayList<>();
         this.horsesRidden = new ArrayList<>();
         this.created = Instant.now();
+        this.profilePic = profilePic;
     }
 
     public Long getAccountId() {
@@ -122,10 +123,6 @@ public class Account implements java.io.Serializable {
 
     public void setRider(Boolean rider) { this.rider = rider; }
 
-    /*public bitmap getProfilePicture(){return profilePicture;}
-
-    public void setProfilePicture(bitmap profilePicture){ this.profilePicture = profilePicture;}
-    */
     public Instant getCreated() {
         return created;
     }
@@ -144,5 +141,13 @@ public class Account implements java.io.Serializable {
 
     public void setHorsesRidden(List<Horse> horsesRidden) {
         this.horsesRidden = horsesRidden;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 }

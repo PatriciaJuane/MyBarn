@@ -15,8 +15,19 @@
 <div th:replace="fragments/layout :: header"></div>
 <div class="container">
     <div class="col-md-2">
-        <img class="img-fluid d-block float-right rounded-circle"
-             src="../../../resources/images/icono-de-perfil-de-usuario_318-33925.jpg">
+        <div th:switch="${account.getProfilePic().isEmpty()}">
+            <div th:case="true">
+                <img class="img-fluid d-block float-right rounded-circle"
+                     src="../../../resources/images/icono-de-perfil-de-usuario_318-33925.jpg">
+            </div>
+            <div th:case="false">
+                <img class="img-fluid d-block float-right rounded-circle" th:src="@{'data:image/jpeg;base64,'+${account.getProfilePic()}}"
+                     style="background-color:white"/>
+            </div>
+            <div th:case="*">Never gonna be here</div>
+        </div>
+
+
     </div>
     <div class="col-md-8">
         <form class="form-narrow form-horizontal" method="post" th:action="@{/user/userDetails}"
@@ -61,16 +72,16 @@
                     <label for="isRider" class="col-lg-2 control-label">Rider</label>
                     <div class="col-lg-10">
                         <a type="text" class="form-control" id="isRider"
-                               th:text="${account.rider}"/>
+                           th:text="${account.rider}"/>
                     </div>
                 </div>
-               <!-- <div class="form-group">
-                    <label for="rider" class="col-lg-2 control-label">Keep being a Rider?</label>
-                    <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" id="rider" name=rider
-                               th:value="${account.rider}"/>
-                    </div>
-                </div> -->
+                <!-- <div class="form-group">
+                     <label for="rider" class="col-lg-2 control-label">Keep being a Rider?</label>
+                     <div class="col-lg-2">
+                         <input type="checkbox" class="form-control" id="rider" name=rider
+                                th:value="${account.rider}"/>
+                     </div>
+                 </div> -->
                 <button class="btn btn-primary" onclick="@{/user/userDetails}">Edit</button>
                 <button class="btn btn-danger">Delete Account</button>
             </fieldset>

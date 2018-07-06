@@ -20,6 +20,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 class WebMvcConfig extends WebMvcConfigurationSupport {
@@ -37,6 +38,14 @@ class WebMvcConfig extends WebMvcConfigurationSupport {
         requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
         requestMappingHandlerMapping.setUseTrailingSlashMatch(false);
         return requestMappingHandlerMapping;
+    }
+
+    //Para las fotografias
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(100000);
+        return new CommonsMultipartResolver();
     }
 
     @Bean(name = "messageSource")

@@ -72,7 +72,7 @@ class NewHorseController {
         if (errors.hasErrors()) {
             return NEWHORSE_VIEW_NAME;
         }
-       
+
 
         if(principal!=null) {
             Account owner = accountRepository.findOneByEmail(principal.getName());

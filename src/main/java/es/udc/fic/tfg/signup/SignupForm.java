@@ -5,9 +5,18 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import es.udc.fic.tfg.account.Account;
+import org.springframework.web.multipart.MultipartFile;
+import javassist.bytecode.ByteArray;
+import org.hibernate.validator.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+import java.nio.file.Files;
+import java.text.ParseException;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SignupForm {
 
@@ -37,7 +46,8 @@ public class SignupForm {
     private List<Horse> horsesOwned;
 
     private List<Horse> horsesRidden;
-    //= new ArrayList<Horse>();
+
+    private MultipartFile profilePic;
 
     public String getEmail() {
         return email;
@@ -91,8 +101,35 @@ public class SignupForm {
 
     public void setHorsesRidden(List<Horse> horsesRidden) { this.horsesRidden = horsesRidden; }
 
+    public MultipartFile getProfilePic() { return profilePic; }
+
+    public void setProfilePic(MultipartFile profilePic) { this.profilePic = profilePic; }
+
+
     public Account createAccount() {
+
+        try {
+            byte[] bytes = null;
+            String base64Encoded = null;
+            if (getProfilePic() != null) {
+                try {
+                    bytes = getProfilePic().getBytes();
+                    base64Encoded = Base64.getEncoder().encodeToString(bytes);
+                } catch (IOException e) {
+                    Logger.getGlobal().log(Level.WARNING, e.toString());
+                }
+            }
+            return new Account(getEmail(), getFirstname(), getLastname(), getPassword(), "ROLE_USER", getPhonenumber(),
+                    getRider(), getHorsesOwned(), getHorsesRidden(), base64Encoded);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.WARNING, e.toString());
+            return null;
+        }
+    }
+
+   /* public Account createAccount() {
+
         return new Account(getEmail(), getFirstname(), getLastname(), getPassword(), "ROLE_USER", getPhonenumber(),
                 getRider(), getHorsesOwned(), getHorsesRidden());
-    }
+    } */
 }
