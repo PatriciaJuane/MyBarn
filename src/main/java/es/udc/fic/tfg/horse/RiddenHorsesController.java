@@ -11,9 +11,9 @@ import java.security.Principal;
 
 
 @Controller
-public class MyHorsesController {
+public class RiddenHorsesController {
 
-    private static final String MYHORSES_VIEW_NAME = "horse/myHorses";
+    private static final String RIDDENHORSES_VIEW_NAME = "horse/riddenHorses";
 
     @Autowired
     private HorseService horseService;
@@ -21,14 +21,14 @@ public class MyHorsesController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("myHorses")
+    @GetMapping("riddenHorses")
     // @ResponseStatus(value = HttpStatus.OK)
     //@Secured({"ROLE_USER", "ROLE_ADMIN"})
-    public String myHorses(Model m, Principal principal) {
+    public String riddenHorses(Model m, Principal principal) {
     	 Account owner = accountService.findByEmail(principal.getName());
          
-    	m.addAttribute("horses", owner.getHorsesOwned());
-        return MYHORSES_VIEW_NAME;
+    	m.addAttribute("horses", owner.getHorsesRidden());
+        return RIDDENHORSES_VIEW_NAME;
     }
 
 }

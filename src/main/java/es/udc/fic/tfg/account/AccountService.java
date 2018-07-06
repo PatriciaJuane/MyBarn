@@ -34,8 +34,6 @@ public class AccountService implements UserDetailsService {
 
     @PostConstruct
     protected void initialize() {
-        //List<Horse> horses = new ArrayList<Horse>();
-       // List<Horse> horses2 = new ArrayList<Horse>();
        // save(new Account("user@udc.es", "User", "User", "demo", "ROLE_USER", "666666666",horses));
         //save(new Account("admin@udc.es", "Admin", "Admin", "admin", "ROLE_ADMIN", "617617617",horses2));
     }
@@ -76,10 +74,6 @@ public class AccountService implements UserDetailsService {
         Account account = accountRepository.findOneByEmail(email);
         return account;
     }
-/*
-    public List<Horse> findHorsesByOwner(String email){
-        return accountRepository.findOneByEmail(email).getHorses();
-    }*/
 
     @Transactional
     public void update(Account account, String email){
@@ -93,6 +87,15 @@ public class AccountService implements UserDetailsService {
         local.setHorsesOwned(account.getHorsesOwned());
         local.setHorsesRidden(account.getHorsesRidden());
         accountRepository.save(local);
+    }
+
+    @Transactional
+    public Account addHorseToAccount(Account account, Horse horse) {
+        List<Horse> horsesRidden = account.getHorsesRidden();
+        horsesRidden.add(horse);
+        account.setHorsesRidden(horsesRidden);
+        accountRepository.save(account);
+        return account;
     }
 
 }

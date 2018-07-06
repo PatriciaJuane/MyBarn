@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import es.udc.fic.tfg.account.AccountService;
 import es.udc.fic.tfg.horse.FurType;
 import es.udc.fic.tfg.horse.GenderType;
 import es.udc.fic.tfg.horse.MarkingsType;
@@ -27,6 +28,7 @@ public class NewHorseForm {
 
 	@Autowired
 	private AccountRepository accountRepository;
+
 
 
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
@@ -60,7 +62,7 @@ public class NewHorseForm {
 
 	private Account owner;
 
-	private Account rider;
+	private String rider;
 
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String licenseNumber;
@@ -165,23 +167,19 @@ public class NewHorseForm {
 		this.owner = owner;
 	}
 
-	public Account getRider() {
+	public String getRider() {
 		return rider;
 	}
 
-	public void setRider(Account rider) {
+	public void setRider(String rider) {
 		this.rider = rider;
 	}
 
 	public Horse createHorse() throws ParseException {
 
-		//Recibes de la vista el email o nombre del rider
-		//Hacer aquí la búsqueda (findByEmail) y obtener el Account Rider
-		//y mandárselo al constructor
 
 		return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
 				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null);
 	}
-
 
 }

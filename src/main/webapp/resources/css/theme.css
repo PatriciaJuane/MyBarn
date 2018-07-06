@@ -165,7 +165,7 @@ sup {
 a {
     color: #12bbad;
     text-decoration: none;
-    background-color: transparent;
+    background-color: gradient;
     -webkit-text-decoration-skip: objects;
 }
 

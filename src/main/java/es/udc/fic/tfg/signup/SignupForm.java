@@ -34,9 +34,10 @@ public class SignupForm {
 
     private Boolean rider;
 
-    private List<Horse> horsesOwned = new ArrayList<Horse>();
+    private List<Horse> horsesOwned;
 
-    private List<Horse> horsesRidden = new ArrayList<Horse>();
+    private List<Horse> horsesRidden;
+    //= new ArrayList<Horse>();
 
     public String getEmail() {
         return email;

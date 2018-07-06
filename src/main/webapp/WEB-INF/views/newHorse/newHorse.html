@@ -10,8 +10,21 @@
           th:href="@{/resources/css/theme.css}"/>
     <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
     <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
-
+    <!--autocomplete -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"> </script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"> </script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autoComplete.js"></script>
+    <!--end -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="../../../resources/easyautocomplete/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet" href="../../../resources/easyautocomplete/easy-autocomplete.min.css">
+    <link rel="stylesheet" href="../../../resources/easyautocomplete/easy-autocomplete.themes.min.css">
+
+
+
     <link rel="stylesheet"
           href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -66,8 +79,10 @@
                             <div class="form-group" th:classappend="${#fields.hasErrors('birthdate')}? 'has-error'">
                                 <label for="birthdate" class="col-lg-4 control-label">BirthDate</label>
                                 <div class="col-lg-8">
-                                    <input type="date" class="form-control" id="birthdate" placeholder="Birthdate" th:field="*{birthdate}"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}">Incorrect Birth Date</span>
+                                    <input type="date" class="form-control" id="birthdate" placeholder="Birthdate"
+                                           th:field="*{birthdate}"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('birthdate')}"
+                                          th:errors="*{birthdate}">Incorrect Birth Date</span>
                                 </div>
                             </div>
                             <div class="form-group" th:classappend="${#fields.hasErrors('gender')}? 'has-error'">
@@ -79,7 +94,8 @@
                                                 th:text="${gender}">
                                         </option>
                                     </select>
-                                    <span class="help-block" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Incorrect gender</span>
+                                    <span class="help-block" th:if="${#fields.hasErrors('gender')}"
+                                          th:errors="*{gender}">Incorrect gender</span>
                                 </div>
                             </div>
 
@@ -102,13 +118,15 @@
                             <div class="form-group" th:classappend="${#fields.hasErrors('markings')}? 'has-error'">
                                 <label for="markings" class="col-lg-3 control-label">markings</label>
                                 <div class="col-lg-9">
-                                    <select class="form-control" id="markings" placeholder="markings" th:field="*{markings}">
+                                    <select class="form-control" id="markings" placeholder="markings"
+                                            th:field="*{markings}">
                                         <option th:each="markings : ${T(es.udc.fic.tfg.horse.MarkingsType).values()}"
                                                 th:value="${markings}"
                                                 th:text="${markings}">
                                         </option>
                                     </select>
-                                    <span class="help-block" th:if="${#fields.hasErrors('markings')}" th:errors="*{markings}">Incorrect markings</span>
+                                    <span class="help-block" th:if="${#fields.hasErrors('markings')}"
+                                          th:errors="*{markings}">Incorrect markings</span>
                                 </div>
                             </div>
                             <div class="form-group" th:classappend="${#fields.hasErrors('sire')}? 'has-error'">
@@ -147,9 +165,18 @@
                                           th:errors="*{chipNumber}">Incorrect Chip Number</span>
                                 </div>
                             </div>
+                          <div class="form-group">
+                                <label for="rider" class="col-lg-3 control-label">Assign Rider?</label>
+                                <div class="col-lg-3">
+                                    <input id="rider" placeholder="rider"
+                                           th:field="*{rider}"/>
+                                </div>
+                           </div> <!-- AQUI IRIA EL AUTOCOMPLETADO -->
+
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <button type="submit" class="btn btn-default">Register Horse</button>
+                                    <button type="submit" class="btn btn-default">Register Horse
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -160,5 +187,22 @@
     </div>
 </div>
 <div th:replace="fragments/layout :: footer"></div>
+
+<script th:inline="javascript">
+
+var message = [[${list}]];
+var options = {
+        data: Array.from(message),
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+};
+
+$("#rider").easyAutocomplete(options);
+
+</script>
+
 </body>
 </html>

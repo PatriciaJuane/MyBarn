@@ -47,7 +47,7 @@ public class Horse implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	//@JoinColumn(name = "accountid", insertable = false, updatable = false)
-	private Account rider = null;  //Para que no tenga jinete inicialmente
+	private Account rider;  //Para que no tenga jinete inicialmente
 
 	private String licensenumber;
 

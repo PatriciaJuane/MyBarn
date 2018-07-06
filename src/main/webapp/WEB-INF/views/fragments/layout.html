@@ -15,6 +15,8 @@
         <a th:if="${#authorization.expression('isAuthenticated()')}"
            class="navbar-brand" href="#" th:href="@{/myHorses}"><i class="glyphicon glyphicon-menu-hamburger"></i><b id="textMyHorses"> My Horses</b></a>
         <a th:if="${#authorization.expression('isAuthenticated()')}"
+           class="navbar-brand" href="#" th:href="@{/riddenHorses}"><i class="glyphicon glyphicon-menu-hamburger"></i><b id="textRiddenHorses"> Training Horses</b></a>
+        <a th:if="${#authorization.expression('isAuthenticated()')}"
            class="navbar-brand" href="#" th:href="@{/user/userDetails}"><i class="glyphicon glyphicon-user"></i><b id="textUserDetails"> User Details</b></a>
         <a th:if="${#authorization.expression('isAuthenticated()')}"
            class="navbar-brand" href="#" th:href="@{/newHorse}"><i class="glyphicon glyphicon-knight"></i><b id="textNewHorse"> Register Horse</b></a>
