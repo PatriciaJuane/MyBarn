@@ -14,8 +14,9 @@
 <script src="../../../resources/js/bootstrap.min.js"
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
 </head>
-<body
-	style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;   -webkit-backdrop-filter: blur(6px);	">
+	<div>
+
 	<div th:replace="fragments/layout :: header"></div>
 	<div class="container">
 		<div class="col-md-2">
@@ -34,7 +35,8 @@
 			<form class="form-narrow form-horizontal" method="post"
 				th:action="@{/user/userDetails/changeProfilePic}"
 				th:object="${profilePicForm}" th:fragment="profilePicForm"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" style="background-color: transparent;
+				border: 0px solid transparent;">
 				<div>
 					<div>
 						<input type="file" class="form-control-file" id="profilePic"
@@ -106,6 +108,7 @@
 				</fieldset>
 			</form>
 		</div>
+	</div>
 	</div>
 </body>
 <div th:replace="fragments/layout :: footer"></div>

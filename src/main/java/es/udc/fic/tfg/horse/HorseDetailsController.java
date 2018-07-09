@@ -5,8 +5,11 @@ import javax.validation.Valid;
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.account.AccountRepository;
 import es.udc.fic.tfg.newHorse.NewHorseForm;
+import es.udc.fic.tfg.signup.SignupForm;
 import es.udc.fic.tfg.support.web.Ajax;
 import es.udc.fic.tfg.support.web.MessageHelper;
+import es.udc.fic.tfg.userDetails.ProfilePicForm;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -39,15 +42,18 @@ public class HorseDetailsController {
 
     @GetMapping("horse/horseDetails/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public String horse(@PathVariable("id") Long id, Model model, @RequestHeader(value = "X-Requested-With", required = false) String requestedWith) {
-
+    public String horse(@PathVariable("id") Long id, Model model, @RequestHeader(value = "X-Requested-With", required = false) String requestedWith,
+                        Principal principal) {
+        Account account = accountRepository.findOneByEmail(principal.getName());
+        model.addAttribute("account",account);
         Horse horse = horseService.findOneById(id);
         model.addAttribute("horse", horse);
         model.addAttribute(new NewHorseForm());
+        model.addAttribute(new ProfilePicHorseForm());
 
-        if (Ajax.isAjaxRequest(requestedWith)) {
+        /*if (Ajax.isAjaxRequest(requestedWith)) {
             return HORSEDETAILS_VIEW_NAME.concat(" :: newHorseForm");
-        }
+        } */
         return HORSEDETAILS_VIEW_NAME;
     }
 
@@ -58,15 +64,31 @@ public class HorseDetailsController {
         /*if (errors.hasErrors()) {
             return HORSEDETAILS_VIEW_NAME;
         }*/
-       // Account owner = accountRepository.findOneByEmail(principal.getName());
         Horse local = newhorseForm.createHorse();
         horseService.update(id, local);
 
+        Account account = accountRepository.findOneByEmail(principal.getName());
+        model.addAttribute("account",account);
         Horse horse = horseService.findOneById(id);
         model.addAttribute("horse", horse);
-        MessageHelper.addSuccessAttribute(ra, "newHorse.success");
+        model.addAttribute(new NewHorseForm());
+		model.addAttribute(new ProfilePicHorseForm());
         return "horse/horseDetails";
     }
+    
+    @PostMapping("horse/horseDetails/changeProfilePic/{id}")
+	public String changeProfilePic(@PathVariable("id") Long id, Model model, @Valid @ModelAttribute ProfilePicHorseForm profilePicHorseForm,
+			Principal principal) {
+    	Horse horse = horseService.findOneById(id);
+		String newPic = profilePicHorseForm.changePhoto(horse);
+		Horse changed = horseService.changeProfilePic(horse, newPic);
+        Account account = accountRepository.findOneByEmail(principal.getName());
+        model.addAttribute("account",account);
+		model.addAttribute("horse", changed);
+		model.addAttribute(new NewHorseForm());
+		model.addAttribute(new ProfilePicHorseForm());
+		return "horse/horseDetails";
+	}
 
 }
 

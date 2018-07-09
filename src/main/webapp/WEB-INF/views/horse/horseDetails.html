@@ -14,9 +14,36 @@
 <body style="background-image: url('../../../resources/images/hipica.jpg');background-size:fit;background-position:center center;">
 <div th:replace="fragments/layout :: header"></div>
 <div class="container">
-    <div class="col-md-2">
-        <img class="img-fluid d-block float-right rounded-circle"
-             src="../../../resources/images/noun_765845_cc.png">
+    <div class="col-md-2" style="background-color: transparent">
+        <div th:switch="${horse.getProfilePic().isEmpty()}">
+				<div th:case="true">
+					<img class="img-fluid d-block float-right rounded-circle"
+						src="../../../resources/images/noun_765845_cc.png">
+				</div>
+				<div th:case="false">
+					<img class="img-fluid d-block float-right rounded-circle"
+						th:src="@{'data:image/jpeg;base64,'+${horse.getProfilePic()}}"
+						 />
+				</div>
+				<div th:case="*">Never gonna be here</div>
+			</div>
+			<form class="form-narrow form-horizontal" method="post"
+				th:action="@{/horse/horseDetails/changeProfilePic/}+ ${id}"
+				th:object="${profilePicHorseForm}" th:fragment="profilePicHorseForm"
+				enctype="multipart/form-data" style="background-color: transparent;
+border: 0px solid transparent;">
+				<div>
+					<div>
+						<input type="file" class="form-control-file" id="profilePic"
+							name="profilePic" th:field="*{profilePic}" accept="image/*" />
+						<div>
+							<button class="btn btn-primary"
+								onclick="@{/horse/horseDetails/changeProfilePic/}+ ${id}">Edit
+								Picture</button>
+						</div>
+					</div>
+				</div>
+			</form>
     </div>
     <div class="col-md-10">
         <form class="form-narrow form-horizontal" method="post" th:action="@{/horse/horseDetails/} + ${id}"

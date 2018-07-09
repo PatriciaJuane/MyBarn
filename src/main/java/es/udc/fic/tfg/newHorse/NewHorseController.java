@@ -54,9 +54,8 @@ class NewHorseController {
              ) {
             names.add(a.getFirstname()+" "+a.getLastname());
         }
-        System.out.println("AAAAAAA"+names);
-        model.addAttribute("list", names);
 
+        model.addAttribute("list", names);
 
         if (Ajax.isAjaxRequest(requestedWith)) {
             return NEWHORSE_VIEW_NAME.concat(" :: newHorseForm");
@@ -72,7 +71,6 @@ class NewHorseController {
         if (errors.hasErrors()) {
             return NEWHORSE_VIEW_NAME;
         }
-
 
         if(principal!=null) {
             Account owner = accountRepository.findOneByEmail(principal.getName());

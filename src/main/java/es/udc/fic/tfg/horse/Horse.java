@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.*;
 import es.udc.fic.tfg.account.Account;
 
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "horse")
@@ -29,25 +28,25 @@ public class Horse implements java.io.Serializable {
 
 	private Date birthdate;
 
-	private String gender; //Enumerado
+	private String gender; // Enumerado
 
-	private String fur; //Enumerado
+	private String fur; // Enumerado
 
-	private String markings; //Enumerado
+	private String markings; // Enumerado
 
-	//private bitmap profilePicture;
+	// private bitmap profilePicture;
 
 	private String sire;
 
 	private String damnsire;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name = "owner",insertable = false, updatable = false)
+	// @JoinColumn(name = "owner",insertable = false, updatable = false)
 	private Account owner;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name = "accountid", insertable = false, updatable = false)
-	private Account rider;  //Para que no tenga jinete inicialmente
+	// @JoinColumn(name = "accountid", insertable = false, updatable = false)
+	private Account rider; // Para que no tenga jinete inicialmente
 
 	private String licensenumber;
 
@@ -55,17 +54,20 @@ public class Horse implements java.io.Serializable {
 
 	private Instant created;
 
-    protected Horse() {
+	@Column(length = 10485760)
+	private String profilePic = "";
+
+	protected Horse() {
 
 	}
-	
-	public Horse(String nickname, String name, String breed, Date birthdate, String gender, String fur,
-				 String markings, String sire, String damnsire, String licensenumber, String chipnumber,
-				 Account owner, Account rider) {
+
+	public Horse(String nickname, String name, String breed, Date birthdate, String gender, String fur, String markings,
+			String sire, String damnsire, String licensenumber, String chipnumber, Account owner, Account rider,
+			String profilePic) {
 		this.nickname = nickname;
 		this.name = name;
 		this.breed = breed;
-		this.birthdate=birthdate;
+		this.birthdate = birthdate;
 		this.gender = gender;
 		this.fur = fur;
 		this.markings = markings;
@@ -76,13 +78,14 @@ public class Horse implements java.io.Serializable {
 		this.owner = owner;
 		this.rider = rider;
 		this.created = Instant.now();
+		this.profilePic = profilePic;
 	}
 
 	public Long getHorseId() {
 		return horseId;
 	}
 
-    public String getNickname() {
+	public String getNickname() {
 		return nickname;
 	}
 
@@ -146,10 +149,6 @@ public class Horse implements java.io.Serializable {
 		this.chipnumber = chipnumber;
 	}
 
-	/*public bitmap getProfilePicture(){return profilePicture;}
-
-	public void setProfilePicture(bitmap profilePicture){ this.profilePicture = profilePicture;}
-	*/
 	public Instant getCreated() {
 		return created;
 	}
@@ -188,5 +187,13 @@ public class Horse implements java.io.Serializable {
 
 	public void setOwner(Account owner) {
 		this.owner = owner;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 }

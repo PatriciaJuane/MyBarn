@@ -1,13 +1,17 @@
 package es.udc.fic.tfg.newHorse;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import es.udc.fic.tfg.account.AccountService;
 import es.udc.fic.tfg.horse.FurType;
@@ -20,6 +24,7 @@ import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.horse.Horse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 public class NewHorseForm {
 
@@ -70,6 +75,7 @@ public class NewHorseForm {
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	private String chipNumber;
 
+    private MultipartFile profilePic;
 
 	public String getNickname() {
 		return nickname;
@@ -174,12 +180,36 @@ public class NewHorseForm {
 	public void setRider(String rider) {
 		this.rider = rider;
 	}
+    public MultipartFile getProfilePic() { return profilePic; }
+
+    public void setProfilePic(MultipartFile profilePic) { this.profilePic = profilePic; }
+
 
 	public Horse createHorse() throws ParseException {
+		   try {
+	            byte[] bytes = null;
+	            String base64Encoded = null;
+	            if (getProfilePic() != null) {
+	                try {
+	                    bytes = getProfilePic().getBytes();
+	                    base64Encoded = Base64.getEncoder().encodeToString(bytes);
+	                } catch (IOException e) {
+	                    Logger.getGlobal().log(Level.WARNING, e.toString());
+	                }
+	            }
+	            return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
+	    				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null, base64Encoded);
+	        } catch (Exception e) {
+	            Logger.getGlobal().log(Level.WARNING, e.toString());
+	            return null;
+	        }
+	}
+	
+/*	public Horse createHorse() throws ParseException {
 
 
 		return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
 				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null);
-	}
+	} */
 
 }

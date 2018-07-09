@@ -10,8 +10,7 @@
 <!-- Header -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top" th:fragment="header">
     <div class="container">
-        <a class="navbar-brand" style="margin-left: -10px;"><h1 id="textAPP">MyBarnAPP</h1></a>
-        <a class="navbar-brand" href="#" th:href="@{/}"><i class="glyphicon glyphicon-home"></i><b id="textMyBarn"> My barn</b></a>
+        <a class="navbar-brand" href="#" th:href="@{/}" style="margin-left: -10px;"><h1 class="glyphicon glyphicon-home" id="textAPP">MyBarnAPP</h1></a>
         <a th:if="${#authorization.expression('isAuthenticated()')}"
            class="navbar-brand" href="#" th:href="@{/myHorses}"><i class="glyphicon glyphicon-menu-hamburger"></i><b id="textMyHorses"> My Horses</b></a>
         <a th:if="${#authorization.expression('isAuthenticated()')}"

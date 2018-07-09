@@ -65,7 +65,6 @@ public class UserDetailsController {
 		model.addAttribute(new SignupForm());
 		model.addAttribute(new ProfilePicForm());
 		
-		MessageHelper.addSuccessAttribute(ra, "signup.success");
 		return "user/userDetails";
 	}
 

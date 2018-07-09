@@ -34,7 +34,46 @@
             </div>
         </div>
     </div>
+    <div th:if="${horses.getContent().size()>0}">
+
+        <div class="row center pd-bottom-1" style="margin-left:500px">
+            <div class="col-md-12 text-center">
+                <ul class="pagination">
+                    <li th:class="${horses.number eq 0} ? 'disabled' : ''"><a
+                            th:if="${not horses.isFirst()}"
+                            th:onclick="|pageChange('${horses.number-1}')|">Previous</a>
+                        <a th:if="${horses.isFirst()}" href="javascript:void(0);">Previous</a>
+                    </li>
+
+
+                    <li th:if="${horses.getTotalPages() != 0}"
+                        th:each="pageNo : ${#numbers.sequence(0, horses.totalPages - 1)}"
+                        th:class="${horses.number eq pageNo}? 'active' : ''">
+                        <a th:if="${horses.number  eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo + 1}"></span>
+                        </a>
+                        <a th:if="${not (horses.number  eq pageNo)}"
+                           th:onclick="|pageChange('${pageNo}')|">
+                            <span th:text="${pageNo + 1}"></span>
+                        </a>
+
+                    </li>
+                    <li th:class="${horses.number + 1 ge horses.totalPages} ? 'disabled' : ''">
+                        <a th:if="${not horses.isLast()}"
+                           th:onclick="|pageChange('${horses.number+1}')|">Next</a>
+                        <a th:if="${horses.isLast()}" href="javascript:void(0);">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    function pageChange(page) {
+        window.location.href = "/myHorses/"+ page.toString();
+    }
+
+</script>
 
 <div th:replace="fragments/layout :: footer"></div>
 </body>

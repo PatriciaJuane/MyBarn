@@ -87,7 +87,8 @@ public class HorseService {
         local.setNickname(horse.getNickname());
         local.setSire(horse.getSire());
      //   local.setOwner(horse.getOwner()); //No se debe cambiar
-        local.setRider(horse.getRider());
+        if (horse.getRider()!=null)
+            local.setRider(horse.getRider());
         horseRepository.save(local);
     }
 
@@ -99,5 +100,12 @@ public class HorseService {
     public List<Horse> findAll(){
         return horseRepository.findAll();
     }
+    
+    @Transactional
+	public Horse changeProfilePic(Horse horse, String newPic) {
+		horse.setProfilePic(newPic);
+		horseRepository.save(horse);
+		return horse;
+	}
 
 }
