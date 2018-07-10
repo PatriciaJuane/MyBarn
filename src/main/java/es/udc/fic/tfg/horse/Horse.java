@@ -34,8 +34,6 @@ public class Horse implements java.io.Serializable {
 
 	private String markings; // Enumerado
 
-	// private bitmap profilePicture;
-
 	private String sire;
 
 	private String damnsire;

@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.account.AccountRepository;
 import es.udc.fic.tfg.account.AccountService;
+import es.udc.fic.tfg.expense.Expense;
+import es.udc.fic.tfg.expense.ExpenseService;
 import es.udc.fic.tfg.horse.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +23,12 @@ import es.udc.fic.tfg.support.web.Ajax;
 import es.udc.fic.tfg.support.web.MessageHelper;
 import org.springframework.ui.Model;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -40,6 +44,10 @@ class NewHorseController {
 
     @Autowired
     private HorseService horseService;
+
+    @Autowired
+    private ExpenseService expenseService;
+
     private Errors errors;
 
     private RedirectAttributes ra;
@@ -76,6 +84,7 @@ class NewHorseController {
             Account owner = accountRepository.findOneByEmail(principal.getName());
             Horse horse = newhorseForm.createHorse();
 
+            /*Asignar jinete con autocompletado*/
             String riderName = newhorseForm.getRider();
             String[] splited = riderName.split("\\s+");
             String riderFirstname = splited[0];
@@ -93,10 +102,18 @@ class NewHorseController {
             if (horse.getRider()!=null) {
             	Account account = accountRepository.findOneByEmail(horse.getRider().getEmail());
                 accountService.addHorseToAccount(account, horse);
-            }
-             //Añado el caballo a la lista de caballos montados por ESE JINETE
+            } /*Añado el caballo a la lista de caballos montados por ESE JINETE*/
+
             Horse saved = horseService.save(horse, owner);
             MessageHelper.addSuccessAttribute(ra, "newHorse.success");
+
+            /*Crear gasto asociado al caballo*/
+            String amountText = newhorseForm.getExpenseAmount();
+            BigDecimal amount = new BigDecimal(amountText);
+            Date ahora = new Date();
+            Expense expense = new Expense("",amount,ahora,owner,saved);
+            expense.setTitle("Gasto mensual asociado al caballo "+saved.getNickname());
+            expenseService.save(expense);
         }
         return "redirect:/";
     }

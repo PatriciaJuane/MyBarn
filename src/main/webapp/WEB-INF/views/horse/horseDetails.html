@@ -127,21 +127,21 @@
 									</select>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
 							<div class="form-group">
 								<label for="markings" class="col-lg-3 control-label">Markings</label>
 								<div class="col-lg-9">
 									<select class="form-control" id="markings"
-										placeholder="markings" name="markings" th:value="*{markings}">
+											placeholder="markings" name="markings" th:value="*{markings}">
 										<option
-											th:each="markings : ${T(es.udc.fic.tfg.horse.MarkingsType).values()}"
-											th:value="${markings}" th:text="${markings}"
-											th:selected="${markings.toString().equals(horse.markings)}">
+												th:each="markings : ${T(es.udc.fic.tfg.horse.MarkingsType).values()}"
+												th:value="${markings}" th:text="${markings}"
+												th:selected="${markings.toString().equals(horse.markings)}">
 										</option>
 									</select>
 								</div>
 							</div>
+						</div>
+						<div class="col-md-6">
 							<div class="form-group">
 								<label for="sire" class="col-lg-3 control-label">Sire</label>
 								<div class="col-lg-9">

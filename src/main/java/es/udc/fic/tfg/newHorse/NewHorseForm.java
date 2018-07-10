@@ -77,6 +77,8 @@ public class NewHorseForm {
 
     private MultipartFile profilePic;
 
+	private String expenseAmount;
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -184,6 +186,13 @@ public class NewHorseForm {
 
     public void setProfilePic(MultipartFile profilePic) { this.profilePic = profilePic; }
 
+	public String getExpenseAmount() {
+		return expenseAmount;
+	}
+
+	public void setExpenseAmount(String expenseAmount) {
+		this.expenseAmount = expenseAmount;
+	}
 
 	public Horse createHorse() throws ParseException {
 		   try {
@@ -204,12 +213,5 @@ public class NewHorseForm {
 	            return null;
 	        }
 	}
-	
-/*	public Horse createHorse() throws ParseException {
-
-
-		return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
-				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null);
-	} */
 
 }

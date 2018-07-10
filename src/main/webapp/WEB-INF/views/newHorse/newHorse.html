@@ -115,7 +115,6 @@
 									</div>
 								</div>
 
-
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('fur')}? 'has-error'">
 									<label for="fur" class="col-lg-3 control-label">fur</label>
@@ -130,22 +129,23 @@
 									</div>
 								</div>
 
-							</div>
-							<div class="col-md-6">
 								<div class="form-group"
-									th:classappend="${#fields.hasErrors('markings')}? 'has-error'">
+									 th:classappend="${#fields.hasErrors('markings')}? 'has-error'">
 									<label for="markings" class="col-lg-3 control-label">markings</label>
 									<div class="col-lg-9">
 										<select class="form-control" id="markings"
-											placeholder="markings" th:field="*{markings}">
+												placeholder="markings" th:field="*{markings}">
 											<option
-												th:each="markings : ${T(es.udc.fic.tfg.horse.MarkingsType).values()}"
-												th:value="${markings}" th:text="${markings}"></option>
+													th:each="markings : ${T(es.udc.fic.tfg.horse.MarkingsType).values()}"
+													th:value="${markings}" th:text="${markings}"></option>
 										</select> <span class="help-block"
-											th:if="${#fields.hasErrors('markings')}"
-											th:errors="*{markings}">Incorrect markings</span>
+														th:if="${#fields.hasErrors('markings')}"
+														th:errors="*{markings}">Incorrect markings</span>
 									</div>
 								</div>
+
+							</div>
+							<div class="col-md-6">
 								<div class="form-group"
 									th:classappend="${#fields.hasErrors('sire')}? 'has-error'">
 									<label for="sire" class="col-lg-3 control-label">Sire</label>
@@ -172,7 +172,7 @@
 										Number</label>
 									<div class="col-lg-9">
 										<input type="text" class="form-control" id="licenseNumber"
-											placeholder="licenseNumber" th:field="*{licenseNumber}" /> <span
+											placeholder="licenseNumber" th:field="*{licenseNumber}"/> <span
 											class="help-block"
 											th:if="${#fields.hasErrors('licenseNumber')}"
 											th:errors="*{licenseNumber}">Incorrect License Number</span>
@@ -196,7 +196,6 @@
 										<input id="rider" placeholder="rider" th:field="*{rider}" />
 									</div>
 								</div>
-								<!-- AQUI IRIA EL AUTOCOMPLETADO -->
 
 								<div class="form-group">
 									<label for="profilePic" class="col-lg-2 control-label">Profile
@@ -204,6 +203,18 @@
 									<div class="col-lg-10">
 										<input type="file" class="form-control-file" id="profilePic"
 											name="profilePic" th:field="*{profilePic}" accept="image/*" />
+									</div>
+								</div>
+
+								<div class="form-group" th:classappend="${#fields.hasErrors('expenseAmount')}? 'has-error'">
+									<label for="expenseAmount" class="col-lg-3 control-label">Mensual Expenses (format xxx.xx)
+										</label>
+									<div class="col-lg-9">
+										<input type="text" class="form-control" id="expenseAmount"
+											   placeholder="expenseAmount" th:field="*{expenseAmount}"/> <span
+											class="help-block"
+											th:if="${#fields.hasErrors('expenseAmount')}"
+											th:errors="*{expenseAmount}">Incorrect Amount</span>
 									</div>
 								</div>
 
