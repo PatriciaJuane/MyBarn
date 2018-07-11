@@ -16,5 +16,9 @@ public class ExpenseService {
         return expense;
     }
 
+    public Expense findOneById(Long expenseid) {
+        Expense expense = expenseRepository.findOneByExpenseid(expenseid);
+        return expense;
+    }
 
 }

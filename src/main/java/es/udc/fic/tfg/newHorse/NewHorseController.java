@@ -112,7 +112,7 @@ class NewHorseController {
             BigDecimal amount = new BigDecimal(amountText);
             Date ahora = new Date();
             Expense expense = new Expense("",amount,ahora,owner,saved);
-            expense.setTitle("Gasto mensual asociado al caballo "+saved.getNickname());
+            expense.setTitle("Gasto mensual asociado al caballo: "+saved.getNickname());
             expenseService.save(expense);
         }
         return "redirect:/";

@@ -78,12 +78,12 @@ public class Expense {
 		this.amount = amount;
 	}
 
-	public Date getExpenseDate() {
+	public Date getExpensedate() {
 		return expensedate;
 	}
 
-	public void setExpenseDate(Date expenseDate) {
-		this.expensedate = expenseDate;
+	public void setExpensedate(Date expensedate) {
+		this.expensedate = expensedate;
 	}
 
 	public Account getConsumer() {

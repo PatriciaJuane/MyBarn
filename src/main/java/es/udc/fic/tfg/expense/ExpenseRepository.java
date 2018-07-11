@@ -13,6 +13,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long>{
 
     Expense findOneByTitle(String title);
 
+    Expense findOneByExpenseid(Long expenseid);
+
     @Query("select e from Expense e where e.consumer= :consumer")
     List<Expense> findByConsumer(@Param("consumer") Account consumer);
 }
