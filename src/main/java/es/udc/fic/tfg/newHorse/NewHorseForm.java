@@ -35,7 +35,6 @@ public class NewHorseForm {
 	private AccountRepository accountRepository;
 
 
-
 	@NotBlank(message = NewHorseForm.NOT_BLANK_MESSAGE)
 	//@NicknameExists(message = NewHorseForm.NICKNAME_EXISTS_MESSAGE)
 	private String nickname;

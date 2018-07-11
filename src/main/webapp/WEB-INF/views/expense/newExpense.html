@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{view.index.title}">New Expense</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+    <link href="../../../resources/css/core.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/core.css}" />
+    <link href="../../../resources/css/theme.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/theme.css}" />
+    <script src="../../../resources/js/jquery.min.js"
+            th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js"
+            th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <!--autocomplete -->
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.10.2.js"> </script>
+    <script type="text/javascript"
+            src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"> </script>
+    <link rel="stylesheet"
+          href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/resources/js/autoComplete.js"></script>
+    <!--end -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script
+            src="../../../resources/easyautocomplete/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet"
+          href="../../../resources/easyautocomplete/easy-autocomplete.min.css">
+    <link rel="stylesheet"
+          href="../../../resources/easyautocomplete/easy-autocomplete.themes.min.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+<div th:replace="fragments/layout :: header"></div>
+<div class="py-1">
+    <div class="container">
+        <div class="col-md-10">
+            <form class="form-narrow form-horizontal" method="post"
+                  th:action="@{/newExpense}" th:object="${newExpenseForm}"
+                  th:fragment="newExpenseForm">
+                <div class="row">
+                    <!--/* Show general error message when form contains errors */-->
+                    <th:block th:if="${#fields.hasErrors('${newExpenseForm.*}')}">
+                        <div th:replace="fragments/components :: alert (type='danger', message='Form contains errors. Please try again.')">
+                            Alert</div>
+                    </th:block>
+                    <fieldset>
+                        <legend>Please Fill Your Expense</legend>
+
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('title')}? 'has-error'">
+                                <label for="title" class="col-lg-3 control-label">Concept</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="title"
+                                           placeholder="Title" th:field="*{title}" /> <span
+                                        class="help-block" th:if="${#fields.hasErrors('title')}"
+                                        th:errors="*{title}">Incorrect title</span>
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('amount')}? 'has-error'">
+                                <label for="amount" class="col-lg-3 control-label">Amount (xxx.xx)</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="amount"
+                                           placeholder="Amount" th:field="*{amount}" /> <span
+                                        class="help-block" th:if="${#fields.hasErrors('amount')}"
+                                        th:errors="*{amount}">Incorrect name</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="horseexpense" class="col-lg-3 control-label">Horse Related
+                                </label>
+                                <div class="col-lg-9">
+                                    <input id="horseexpense" class="form-control" placeholder="horseexpense" th:field="*{horseexpense}" />
+                             </div>
+                            </div>
+                        <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-default">Upload
+                                        Expense</button>
+                                </div>
+                            </div>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/layout :: footer"></div>
+
+<script th:inline="javascript">
+
+    var message = [[${list}]];
+    var options = {
+        data: Array.from(message),
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+
+    $("#horseexpense").easyAutocomplete(options);
+
+</script>
+
+</body>
+</html>

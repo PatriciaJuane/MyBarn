@@ -2,7 +2,6 @@ package es.udc.fic.tfg.newHorse;
 
 import javax.validation.Valid;
 
-
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.account.AccountRepository;
 import es.udc.fic.tfg.account.AccountService;
@@ -91,8 +90,6 @@ class NewHorseController {
             String riderFirstname = splited[0];
             String riderLastname = splited[1];
 
-            Account rider = null;
-
             for (Account account : accountRepository.findByRider()) {
                 if((account.getFirstname().equals(riderFirstname))
                         && (account.getLastname().equals(riderLastname))) {
@@ -110,7 +107,7 @@ class NewHorseController {
             /*Crear gasto asociado al caballo*/
             String amountText = newhorseForm.getExpenseAmount();
             BigDecimal amount = new BigDecimal(amountText);
-            if (amount.compareTo(BigDecimal.ZERO) == 0) {
+            if (amount.compareTo(BigDecimal.ZERO) == 1) {
                 Date ahora = new Date();
                 Expense expense = new Expense("", amount, ahora, owner, saved);
                 expense.setTitle("Gasto mensual asociado al caballo: " + saved.getNickname());
