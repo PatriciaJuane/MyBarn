@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.udc.fic.tfg.support.web.Ajax;
 import es.udc.fic.tfg.support.web.MessageHelper;
+import es.udc.fic.tfg.support.web.*;
 import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
@@ -105,7 +106,6 @@ class NewHorseController {
             } /*Añado el caballo a la lista de caballos montados por ESE JINETE*/
 
             Horse saved = horseService.save(horse, owner);
-            MessageHelper.addSuccessAttribute(ra, "newHorse.success");
 
             /*Crear gasto asociado al caballo*/
             String amountText = newhorseForm.getExpenseAmount();

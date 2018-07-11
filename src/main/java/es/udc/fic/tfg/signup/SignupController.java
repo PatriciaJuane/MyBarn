@@ -17,6 +17,7 @@ import es.udc.fic.tfg.account.AccountService;
 import es.udc.fic.tfg.support.web.Ajax;
 import es.udc.fic.tfg.support.web.MessageHelper;
 import es.udc.fic.tfg.support.*;
+import es.udc.fic.tfg.support.web.*;
 
 @Controller
 class SignupController {
