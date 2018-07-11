@@ -19,6 +19,8 @@
            class="navbar-brand" href="#" th:href="@{/user/userDetails}"><i class="glyphicon glyphicon-user"></i><b id="textUserDetails"> User Details</b></a>
         <a th:if="${#authorization.expression('isAuthenticated()')}"
            class="navbar-brand" href="#" th:href="@{/newHorse}"><i class="glyphicon glyphicon-knight"></i><b id="textNewHorse"> Register Horse</b></a>
+        <a th:if="${#authorization.expression('isAuthenticated()')}"
+           class="navbar-brand" href="#" th:href="@{/myExpenses}"><i class="glyphicon glyphicon-euro"></i><b id="textMyExpenses"> My Expenses</b></a>
         <a class="navbar-brand" href="#" th:href="@{/about}"><i class="glyphicon glyphicon-sunglasses"></i><b id="textAbout"> About</b></a>
         <a class="navbar-brand" href="#" th:href="@{/about}"><i class="glyphicon glyphicon-envelope"></i><b id="textContact"> Contact</b></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent"

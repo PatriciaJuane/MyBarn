@@ -40,7 +40,7 @@
                             <label for="expensedate" class="col-lg-3 control-label">Date</label>
                             <div class="col-lg-9">
                                 <a class="form-control" id="expensedate"
-                                   th:text="${#dates.format(expense.expensedate,'dd-MM-yyyy')}"/>
+                                   th:text="${#dates.format(expense.expensedate,'dd-MM-yyyy hh:mm')}"/>
                             </div>
                         </div>
 

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -15,6 +17,5 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long>{
 
     Expense findOneByExpenseid(Long expenseid);
 
-    @Query("select e from Expense e where e.consumer= :consumer")
-    List<Expense> findByConsumer(@Param("consumer") Account consumer);
+    Page<Expense> findByConsumer(Account consumer, Pageable pageable);
 }

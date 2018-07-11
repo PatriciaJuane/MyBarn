@@ -110,10 +110,12 @@ class NewHorseController {
             /*Crear gasto asociado al caballo*/
             String amountText = newhorseForm.getExpenseAmount();
             BigDecimal amount = new BigDecimal(amountText);
-            Date ahora = new Date();
-            Expense expense = new Expense("",amount,ahora,owner,saved);
-            expense.setTitle("Gasto mensual asociado al caballo: "+saved.getNickname());
-            expenseService.save(expense);
+            if (amount.compareTo(BigDecimal.ZERO) == 0) {
+                Date ahora = new Date();
+                Expense expense = new Expense("", amount, ahora, owner, saved);
+                expense.setTitle("Gasto mensual asociado al caballo: " + saved.getNickname());
+                expenseService.save(expense);
+            }
         }
         return "redirect:/";
     }
