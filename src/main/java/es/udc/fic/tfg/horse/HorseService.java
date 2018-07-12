@@ -33,33 +33,6 @@ public class HorseService {
 
 //    @PostConstruct
 //    protected void initialize() throws ParseException {
-//
-//        String s = "07/07/2005";
-//        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-//        Date date = format.parse(s);
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-//        String dateInString = "07/07/2013";
-//
-//        Date date2 = formatter.parse(dateInString);
-//
-//        List<Horse> horses = new ArrayList<Horse>();
-//        List<Horse> horses2 = new ArrayList<Horse>();
-//        accountService.save(new Account("user@udc.es", "User", "User", "demo", "ROLE_USER", "666666666",horses));
-//        accountService.save(new Account("admin@udc.es", "Admin", "Admin", "admin", "ROLE_ADMIN", "617617617",horses2));
-//
-//
-//        /*Owners*/
-//        Account a = accountService.findByEmail("user@udc.es");
-//        List<Account> owners = new ArrayList<Account>();
-//        owners.add(a);
-//
-//        save(new Horse("Cintia", "Cintia", "Holsteiner", date2, GenderType.MARE, FurType.DARKBAY,
-//                MarkingsType.BLAZE, "Cassini I", "Grundyman", owners, "079909", "1234"));
-//        save(new Horse("Chantré", "Chantré 34", "Mecklenburg", date2, GenderType.GELDING, FurType.BAY,
-//                MarkingsType.STRIPE, "Chandon", "Lord Kemm", owners, "030378", "1233"));
-//
-//
 //    }
 
     @Transactional

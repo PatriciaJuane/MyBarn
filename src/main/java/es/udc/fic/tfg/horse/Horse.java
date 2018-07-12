@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 
 import javax.persistence.*;
 import es.udc.fic.tfg.account.Account;
+import es.udc.fic.tfg.activity.Activity;
 
 @SuppressWarnings("serial")
 @Entity
@@ -55,13 +56,16 @@ public class Horse implements java.io.Serializable {
 	@Column(length = 10485760)
 	private String profilePic = "";
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "activityhorse")
+	private List<Activity> horseactivities;
+
 	protected Horse() {
 
 	}
 
 	public Horse(String nickname, String name, String breed, Date birthdate, String gender, String fur, String markings,
 			String sire, String damnsire, String licensenumber, String chipnumber, Account owner, Account rider,
-			String profilePic) {
+			String profilePic, List<Activity> horseactivities) {
 		this.nickname = nickname;
 		this.name = name;
 		this.breed = breed;
@@ -77,6 +81,7 @@ public class Horse implements java.io.Serializable {
 		this.rider = rider;
 		this.created = Instant.now();
 		this.profilePic = profilePic;
+		this.horseactivities = horseactivities;
 	}
 
 	public Long getHorseId() {
@@ -194,4 +199,8 @@ public class Horse implements java.io.Serializable {
 	public void setProfilePic(String profilePic) {
 		this.profilePic = profilePic;
 	}
+
+	public List<Activity> getHorseactivities() { return horseactivities; }
+
+	public void setHorseactivities(List<Activity> horseactivities) { this.horseactivities = horseactivities; }
 }

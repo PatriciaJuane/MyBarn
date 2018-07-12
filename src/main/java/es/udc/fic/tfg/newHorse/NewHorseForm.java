@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import es.udc.fic.tfg.account.AccountService;
+import es.udc.fic.tfg.activity.Activity;
 import es.udc.fic.tfg.horse.FurType;
 import es.udc.fic.tfg.horse.GenderType;
 import es.udc.fic.tfg.horse.MarkingsType;
@@ -205,8 +206,9 @@ public class NewHorseForm {
 	                    Logger.getGlobal().log(Level.WARNING, e.toString());
 	                }
 	            }
+	            List<Activity> empty = new ArrayList<>();
 	            return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
-	    				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null, base64Encoded);
+	    				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null, base64Encoded, empty);
 	        } catch (Exception e) {
 	            Logger.getGlobal().log(Level.WARNING, e.toString());
 	            return null;
