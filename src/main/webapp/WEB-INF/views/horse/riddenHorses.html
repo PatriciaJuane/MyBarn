@@ -37,7 +37,7 @@
 							</div>
 						</div>
 				
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<div class="list-group">
 						<a th:href="@{/horse/horseDetails/} + ${horse.horseId}"
 							class="list-group-item list-group-item-action flex-column align-items-start active my-3"
@@ -52,6 +52,13 @@
 						</a>
 					</div>
 				</div>
+						<div class="col-md-2">
+							<div style="padding-top: 25px">
+							<a class="button btn btn-primary" th:href="@{/newActivity}"> Register Activity</a>
+								<br><br>
+							<a class="button btn btn-primary" th:href="@{/newTraining}"> Register Training</a>
+							</div>
+						</div>
 			</div>
 		</div>
 	</div>

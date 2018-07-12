@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{view.index.title}">New Activity</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+    <link href="../../../resources/css/core.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/core.css}" />
+    <link href="../../../resources/css/theme.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/theme.css}" />
+    <script src="../../../resources/js/jquery.min.js"
+            th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js"
+            th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <!--autocomplete -->
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.10.2.js"> </script>
+    <script type="text/javascript"
+            src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"> </script>
+    <link rel="stylesheet"
+          href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/resources/js/autoComplete.js"></script>
+    <!--end -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script
+            src="../../../resources/easyautocomplete/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet"
+          href="../../../resources/easyautocomplete/easy-autocomplete.min.css">
+    <link rel="stylesheet"
+          href="../../../resources/easyautocomplete/easy-autocomplete.themes.min.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+<div th:replace="fragments/layout :: header"></div>
+<div class="py-1">
+    <div class="container">
+        <div class="col-md-10">
+            <form class="form-narrow form-horizontal" method="post"
+                  th:action="@{/newActivity}" th:object="${newActivityForm}"
+                  th:fragment="newActivityForm">
+                <div class="row">
+                    <!--/* Show general error message when form contains errors */-->
+                    <th:block th:if="${#fields.hasErrors('${newActivityForm.*}')}">
+                        <div th:replace="fragments/components :: alert (type='danger', message='Form contains errors. Please try again.')">
+                            Alert</div>
+                    </th:block>
+                    <fieldset>
+                        <legend>Register an Activity</legend>
+                        <div class="form-group"
+                             th:classappend="${#fields.hasErrors('type')}? 'has-error'">
+                            <label for="type" class="col-lg-3 control-label">Type</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" id="type"
+                                        placeholder="type" th:field="*{type}">
+                                    <option
+                                            th:each="type : ${T(es.udc.fic.tfg.activity.ActivityType).values()}"
+                                            th:value="${type}" th:text="${type}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             th:classappend="${#fields.hasErrors('activitydate')}? 'has-error'">
+                            <label for="activitydate" class="col-lg-3 control-label">Date</label>
+                            <div class="col-lg-9">
+                                <input type="date" class="form-control" id="activitydate"
+                                       placeholder="activitydate" th:field="*{activitydate}" /> <span
+                                    class="help-block" th:if="${#fields.hasErrors('activitydate')}"
+                                    th:errors="*{activitydate}">Incorrect Date</span>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             th:classappend="${#fields.hasErrors('description')}? 'has-error'">
+                            <label for="description" class="col-lg-3 control-label">Description</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="description"
+                                       placeholder="Description" th:field="*{description}" /> <span
+                                    class="help-block" th:if="${#fields.hasErrors('description')}"
+                                    th:errors="*{description}">Incorrect Description</span>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             th:classappend="${#fields.hasErrors('duration')}? 'has-error'">
+                            <label for="duration" class="col-lg-3 control-label">Duration</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="duration"
+                                       placeholder="Duration" th:field="*{duration}" /> <span
+                                    class="help-block" th:if="${#fields.hasErrors('duration')}"
+                                    th:errors="*{duration}">Incorrect Duration</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="activityhorse" class="col-lg-3 control-label">Horse Related
+                            </label>
+                            <div class="col-lg-9">
+                                <input id="activityhorse" class="form-control" placeholder="activityhorse" th:field="*{activityhorse}" />
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             th:classappend="${#fields.hasErrors('activityexpense')}? 'has-error'">
+                            <label for="activityexpense" class="col-lg-3 control-label">Costs? (xxx.xx)</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="activityexpense"
+                                       placeholder="activityexpense" th:field="*{activityexpense}" /> <span
+                                    class="help-block" th:if="${#fields.hasErrors('activityexpense')}"
+                                    th:errors="*{activityexpense}">Incorrect amount</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-default">Register Activity</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/layout :: footer"></div>
+
+<script th:inline="javascript">
+
+    var message = [[${list}]];
+    var options = {
+        data: Array.from(message),
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+
+    $("#activityhorse").easyAutocomplete(options);
+
+</script>
+
+</body>
+</html>

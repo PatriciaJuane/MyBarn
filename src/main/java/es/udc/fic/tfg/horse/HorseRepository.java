@@ -24,6 +24,8 @@ public interface HorseRepository extends JpaRepository<Horse, Long> {
 
 	List<Horse> findByOwner(Account owner); //para autocompletado en newExpense
 
+	List<Horse> findByRider(Account rider); //para autocompletado en newActivity
+
 	Page<Horse> findByOwner(Account owner, Pageable pageable);
 
 	Page<Horse> findByRider(Account rider, Pageable pageable);
