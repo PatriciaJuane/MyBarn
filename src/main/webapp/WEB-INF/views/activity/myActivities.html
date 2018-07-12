@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{view.index.title}">My Activities</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+    <link href="../../../resources/css/core.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/core.css}" />
+    <link href="../../../resources/css/theme.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/theme.css}" />
+    <script src="../../../resources/js/jquery.min.js"
+            th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js"
+            th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+<div th:replace="fragments/layout :: header"></div>
+
+<div class="py-1">
+    <div class="table">
+        <table class="table" style="width:50%; margin-left:300px;">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th>Horse</th>
+                <th>Amount</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody th:each="activity : ${activities}">
+            <td th:text="${activity.type}"></td>
+            <td th:text="${#dates.format(activity.activitydate,'dd-MM-yyyy hh:mm')}"></td>
+            <td th:text="${activity.duration}"></td>
+            <td th:text="${activity.description}"></td>
+            <td th:text="${activity.activityhorse.nickname}"></td>
+            <td th:text="${activity.activityexpense?.amount+'€'}"> 0€</td>
+            <td><a th:href="@{/activity/activityDetails/} + ${activity.activityid}" role="button" class="btn btn-xs btn-info">
+                <i class="fa fa-edit"></i></a></td>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${activities.getContent().size()>0}">
+        <div class="row center pd-bottom-1" style="margin-left: 500px">
+            <div class="col-md-12 text-center">
+                <ul class="pagination">
+                    <li th:class="${activities.number eq 0} ? 'disabled' : ''"><a
+                            th:if="${not activities.isFirst()}"
+                            th:onclick="|pageChange('${activities.number-1}')|">Previous</a> <a
+                            th:if="${activities.isFirst()}" href="javascript:void(0);">Previous</a>
+                    </li>
+
+
+                    <li th:if="${activities.getTotalPages() != 0}"
+                        th:each="pageNo : ${#numbers.sequence(0, activities.totalPages - 1)}"
+                        th:class="${activities.number eq pageNo}? 'active' : ''"><a
+                            th:if="${activities.number  eq pageNo}" href="javascript:void(0);">
+                        <span th:text="${pageNo + 1}"></span>
+                    </a> <a th:if="${not (activities.number  eq pageNo)}"
+                            th:onclick="|pageChange('${pageNo}')|"> <span
+                            th:text="${pageNo + 1}"></span>
+                    </a></li>
+                    <li
+                            th:class="${activities.number + 1 ge activities.totalPages} ? 'disabled' : ''">
+                        <a th:if="${not activities.isLast()}"
+                           th:onclick="|pageChange('${activities.number+1}')|">Next</a> <a
+                            th:if="${activities.isLast()}" href="javascript:void(0);">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function pageChange(page) {
+        window.location.href = "/myActivities/" + page.toString();
+    }
+</script>
+
+<div th:replace="fragments/layout :: footer"></div>
+</body>
+</html>
