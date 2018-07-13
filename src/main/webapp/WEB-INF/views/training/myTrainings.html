@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{view.index.title}">My Trainings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+    <link href="../../../resources/css/core.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/core.css}" />
+    <link href="../../../resources/css/theme.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/theme.css}" />
+    <script src="../../../resources/js/jquery.min.js"
+            th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js"
+            th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <!--autocomplete -->
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.10.2.js"> </script>
+    <script type="text/javascript"
+            src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"> </script>
+    <link rel="stylesheet"
+          href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/resources/js/autoComplete.js"></script>
+    <!--end -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script
+            src="../../../resources/easyautocomplete/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet"
+          href="../../../resources/easyautocomplete/easy-autocomplete.min.css">
+    <link rel="stylesheet"
+          href="../../../resources/easyautocomplete/easy-autocomplete.themes.min.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+<div th:replace="fragments/layout :: header"></div>
+<form class="form-narrow form-horizontal" style="width: 25%; height: 10%" method="post"
+      th:action="@{/myTrainings}" th:object="${myTrainingsForm}"
+      th:fragment="myTrainingsForm">
+    <div class="form-group">
+        <label for="horsename" class="col-lg-3 control-label">Horse</label>
+        <div class="col-lg-6">
+            <input id="horsename" class="form-control" placeholder="horsename" th:field="*{horsename}"/>
+        </div>
+        <div class="col-lg-3">
+            <button type="submit" style="align-self: right;" class="btn btn-default">Search</button>
+        </div>
+    </div>
+</form>
+<div class="py-1">
+    <div class="table">
+        <table class="table" style="width:50%; margin-left:300px;">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th>Horse</th>
+                <th>Amount</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody th:each="training : ${trainings}">
+            <td th:text="${training.type}"></td>
+            <td th:text="${#dates.format(training.trainingdate,'dd-MM-yyyy hh:mm')}"></td>
+            <td th:text="${training.duration}"></td>
+            <td th:text="${training.description}"></td>
+            <td th:text="${training.traininghorse.nickname}"></td>
+            <td th:text="${training.trainingexpense?.amount+'€'}"> 0€</td>
+            <td><a th:href="@{/training/trainingDetails/} + ${training.trainingid}" role="button" class="btn btn-xs btn-info">
+                <i class="fa fa-edit"></i></a></td>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${trainings.getContent().size()>0}">
+        <div class="row center pd-bottom-1" style="margin-left: 500px">
+            <div class="col-md-12 text-center">
+                <ul class="pagination">
+                    <li th:class="${trainings.number eq 0} ? 'disabled' : ''"><a
+                            th:if="${not trainings.isFirst()}"
+                            th:onclick="|pageChange('${trainings.number-1}')|">Previous</a> <a
+                            th:if="${trainings.isFirst()}" href="javascript:void(0);">Previous</a>
+                    </li>
+
+
+                    <li th:if="${trainings.getTotalPages() != 0}"
+                        th:each="pageNo : ${#numbers.sequence(0, trainings.totalPages - 1)}"
+                        th:class="${trainings.number eq pageNo}? 'active' : ''"><a
+                            th:if="${trainings.number  eq pageNo}" href="javascript:void(0);">
+                        <span th:text="${pageNo + 1}"></span>
+                    </a> <a th:if="${not (trainings.number  eq pageNo)}"
+                            th:onclick="|pageChange('${pageNo}')|"> <span
+                            th:text="${pageNo + 1}"></span>
+                    </a></li>
+                    <li
+                            th:class="${trainings.number + 1 ge trainings.totalPages} ? 'disabled' : ''">
+                        <a th:if="${not trainings.isLast()}"
+                           th:onclick="|pageChange('${trainings.number+1}')|">Next</a> <a
+                            th:if="${trainings.isLast()}" href="javascript:void(0);">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function pageChange(page) {
+        window.location.href = "/myTrainings/" + page.toString();
+    }
+</script>
+<script th:inline="javascript">
+
+    var message = [[${list}]];
+    var options = {
+        data: Array.from(message),
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+
+    $("#horsename").easyAutocomplete(options);
+
+</script>
+
+<div th:replace="fragments/layout :: footer"></div>
+</body>
+</html>

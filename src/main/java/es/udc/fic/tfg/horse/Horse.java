@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.*;
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.activity.Activity;
+import es.udc.fic.tfg.training.Training;
 
 @SuppressWarnings("serial")
 @Entity
@@ -59,13 +60,16 @@ public class Horse implements java.io.Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "activityhorse")
 	private List<Activity> horseactivities;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "traininghorse")
+	private List<Training> horsetrainings;
+
 	protected Horse() {
 
 	}
 
 	public Horse(String nickname, String name, String breed, Date birthdate, String gender, String fur, String markings,
 			String sire, String damnsire, String licensenumber, String chipnumber, Account owner, Account rider,
-			String profilePic, List<Activity> horseactivities) {
+			String profilePic, List<Activity> horseactivities, List<Training> horsetrainings) {
 		this.nickname = nickname;
 		this.name = name;
 		this.breed = breed;
@@ -82,6 +86,7 @@ public class Horse implements java.io.Serializable {
 		this.created = Instant.now();
 		this.profilePic = profilePic;
 		this.horseactivities = horseactivities;
+		this.horsetrainings = horsetrainings;
 	}
 
 	public Long getHorseId() {
@@ -203,4 +208,8 @@ public class Horse implements java.io.Serializable {
 	public List<Activity> getHorseactivities() { return horseactivities; }
 
 	public void setHorseactivities(List<Activity> horseactivities) { this.horseactivities = horseactivities; }
+
+	public List<Training> getHorsetrainings() { return horsetrainings; }
+
+	public void setHorsetrainings(List<Training> horsetrainings) { this.horsetrainings = horsetrainings; }
 }

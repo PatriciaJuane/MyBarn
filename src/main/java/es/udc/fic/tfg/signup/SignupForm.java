@@ -2,6 +2,7 @@ package es.udc.fic.tfg.signup;
 
 import es.udc.fic.tfg.activity.Activity;
 import es.udc.fic.tfg.horse.Horse;
+import es.udc.fic.tfg.training.Training;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -121,8 +122,9 @@ public class SignupForm {
                 }
             }
             List<Activity> empty = new ArrayList<>();
+            List<Training> t = new ArrayList<>();
             return new Account(getEmail(), getFirstname(), getLastname(), getPassword(), "ROLE_USER", getPhonenumber(),
-                    getRider(), getHorsesOwned(), getHorsesRidden(), base64Encoded, empty);
+                    getRider(), getHorsesOwned(), getHorsesRidden(), base64Encoded, empty, t);
         } catch (Exception e) {
             Logger.getGlobal().log(Level.WARNING, e.toString());
             return null;

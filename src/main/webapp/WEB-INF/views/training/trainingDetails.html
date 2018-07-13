@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Training Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+    <link href="../../../resources/css/core.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/core.css}" />
+    <link href="../../../resources/css/theme.css" rel="stylesheet"
+          media="screen" th:href="@{/resources/css/theme.css}" />
+    <script src="../../../resources/js/jquery.min.js"
+            th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js"
+            th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+<div th:replace="fragments/layout :: header"></div>
+<div class="container">
+    <div class="col-md-10">
+        <form class="form-narrow form-horizontal" th:object="${training}">
+            <fieldset>
+                <legend>Training Details</legend>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="type" class="col-lg-3 control-label">Type</label>
+                        <div class="col-lg-9">
+                            <a class="form-control" id="type"
+                               th:text="${training.type}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="trainingdate" class="col-lg-3 control-label">Date</label>
+                        <div class="col-lg-9">
+                            <a class="form-control" id="trainingdate"
+                               th:text="${#dates.format(training.trainingdate,'dd-MM-yyyy hh:mm')}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="col-lg-3 control-label">Description</label>
+                        <div class="col-lg-9">
+                            <a class="form-control" id="description"
+                               th:text="${training.description}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration" class="col-lg-3 control-label">Duration</label>
+                        <div class="col-lg-9">
+                            <a class="form-control" id="duration"
+                               th:text="${training.duration}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="trainingexpense" class="col-lg-3 control-label">Costs</label>
+                        <div class="col-lg-9">
+                            <a class="form-control" id="trainingexpense"
+                               th:text="${training.trainingexpense?.amount+'€'}"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="traininguser" class="col-lg-3 control-label">User</label>
+                        <div class="col-lg-9">
+                            <a class="form-control" id="traininguser"
+                               th:text="${training.traininguser.firstname + ' ' +training.traininguser.lastname}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="traininghorse" class="col-lg-3 control-label">Horse</label>
+                        <div class="col-lg-9">
+                            <a class="form-control" id="traininghorse"
+                               th:text="${training.traininghorse.nickname}"/>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-danger">Delete Training</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>
+</body>
+<div th:replace="fragments/layout :: footer"></div>
+</html>

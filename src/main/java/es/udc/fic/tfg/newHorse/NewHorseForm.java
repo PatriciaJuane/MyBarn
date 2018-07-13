@@ -18,6 +18,7 @@ import es.udc.fic.tfg.activity.Activity;
 import es.udc.fic.tfg.horse.FurType;
 import es.udc.fic.tfg.horse.GenderType;
 import es.udc.fic.tfg.horse.MarkingsType;
+import es.udc.fic.tfg.training.Training;
 import org.hibernate.validator.constraints.NotBlank;
 import es.udc.fic.tfg.account.AccountRepository;
 
@@ -207,8 +208,9 @@ public class NewHorseForm {
 	                }
 	            }
 	            List<Activity> empty = new ArrayList<>();
+	            List<Training> t = new ArrayList<>();
 	            return new Horse(getNickname(), getName(), getBreed(), getBirthdate(), getGender(), getFur(), getMarkings(),
-	    				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null, base64Encoded, empty);
+	    				getSire(),getDamnSire(), getLicenseNumber(),getChipNumber(), getOwner(), null, base64Encoded, empty, t);
 	        } catch (Exception e) {
 	            Logger.getGlobal().log(Level.WARNING, e.toString());
 	            return null;

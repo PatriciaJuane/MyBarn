@@ -3,6 +3,7 @@ package es.udc.fic.tfg.account;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.udc.fic.tfg.activity.Activity;
 import es.udc.fic.tfg.horse.Horse;
+import es.udc.fic.tfg.training.Training;
 
 
 import javax.persistence.*;
@@ -47,6 +48,10 @@ public class Account implements java.io.Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "activityuser")
     private List<Activity> useractivities;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "traininguser")
+    private List<Training> usertrainings;
+
+
     @Column(length=10485760)
     private String profilePic = "";
 
@@ -58,7 +63,8 @@ public class Account implements java.io.Serializable {
 
     public Account(String email, String firstname, String lastname, String password,
                    String role, String phonenumber, Boolean rider, List<Horse> horsesOwned,
-                   List<Horse> horsesRidden, String profilePic, List<Activity> useractivities) {
+                   List<Horse> horsesRidden, String profilePic, List<Activity> useractivities,
+                   List<Training> usertrainings) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -71,6 +77,7 @@ public class Account implements java.io.Serializable {
         this.created = Instant.now();
         this.profilePic = profilePic;
         this.useractivities = new ArrayList<>();
+        this.usertrainings = new ArrayList<>();
     }
 
     public Long getAccountId() {
@@ -160,4 +167,8 @@ public class Account implements java.io.Serializable {
     public List<Activity> getUseractivities() { return useractivities; }
 
     public void setUseractivities(List<Activity> useractivities) { this.useractivities = useractivities; }
+
+    public List<Training> getUsertrainings() { return usertrainings; }
+
+    public void setUsertrainings(List<Training> usertrainings) { this.usertrainings = usertrainings; }
 }

@@ -1,4 +1,4 @@
-package es.udc.fic.tfg.activity;
+package es.udc.fic.tfg.training;
 
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.horse.Horse;
@@ -10,11 +10,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @Repository
-public interface ActivityRepository extends JpaRepository<Activity, Long> {
+public interface TrainingRepository extends JpaRepository<Training, Long>{
 
-    Activity findOneByActivityid(Long activityid);
+    Training findOneByTrainingid(Long trainingid);
 
-    Page<Activity> findByActivityuser(Account consumer, Pageable pageable);
+    Page<Training> findByTraininguser(Account account, Pageable pageable);
 
-    Page <Activity> findByActivityuserAndActivityhorse(Account consumer, Horse horse, Pageable pageable);
+    Page <Training> findByTraininguserAndTraininghorse(Account account, Horse horse, Pageable pageable);
+
 }
