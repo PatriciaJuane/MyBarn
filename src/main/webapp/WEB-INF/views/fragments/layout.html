@@ -29,20 +29,20 @@
            class="navbar-brand" href="#" th:href="@{/myTrainings}"><i class="glyphicon glyphicon-thumbs-up"></i><b id="textMyTrainings"> My Trainings</b></a>
         <a class="navbar-brand" href="#" th:href="@{/about}"><i class="glyphicon glyphicon-sunglasses"></i><b id="textAbout"> About</b></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"-labpan> </button>
         <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent"> </div>
     </div>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav  navbar-right" style="height: 60px;">
         <li th:if="${#authorization.expression('!isAuthenticated()')}">
-            <a href="/signin" th:href="@{/signin}">
-                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                &nbsp;<b> Sign in</b>
+            <a class="navbar-brand" href="/signin" th:href="@{/signin}">
+               <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
+                <b> Sign in</b>
             </a>
         </li>
         <li th:if="${#authorization.expression('isAuthenticated()')}">
-            <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
-                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                &nbsp;<b> Logout</b>
+            <a class="navbar-brand" href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+                <b> Logout</b>
             </a>
             <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
         </li>

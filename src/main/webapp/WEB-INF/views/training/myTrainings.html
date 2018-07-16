@@ -37,7 +37,8 @@
 </head>
 <body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
 <div th:replace="fragments/layout :: header"></div>
-<form class="form-narrow form-horizontal" style="width: 25%; height: 10%" method="post"
+<div class="container" style="width: 60%; background-color: white; margin-left: 250px; margin-bottom: 50px;">
+<form class="form-horizontal" style="margin-top: 2%;" method="post"
       th:action="@{/myTrainings}" th:object="${myTrainingsForm}"
       th:fragment="myTrainingsForm">
     <div class="form-group">
@@ -46,13 +47,14 @@
             <input id="horsename" class="form-control" placeholder="horsename" th:field="*{horsename}"/>
         </div>
         <div class="col-lg-3">
-            <button type="submit" style="align-self: right;" class="btn btn-default">Search</button>
+            <button type="submit" style="align-self: right;" class="btn btn-primary">Search</button>
         </div>
     </div>
 </form>
+</div>
 <div class="py-1">
     <div class="table">
-        <table class="table" style="width:50%; margin-left:300px;">
+        <table class="table" style="width:60%; margin-left:250px;">
             <thead>
             <tr>
                 <th>Type</th>

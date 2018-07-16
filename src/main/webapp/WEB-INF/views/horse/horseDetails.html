@@ -58,8 +58,8 @@
 						<legend>Horse Details</legend>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="nickname" class="col-lg-4 control-label">Nickname</label>
-								<div class="col-lg-8">
+								<label for="nickname" class="col-lg-3 control-label">Nickname</label>
+								<div class="col-lg-9">
 									<input type="text" class="form-control" id="nickname"
 										name=nickname th:value="${horse.nickname}" /> <span
 										class="help-block" th:if="${#fields.hasErrors('nickname')}"
@@ -87,9 +87,9 @@
 
 							<div class="form-group"
 								th:classappend="${#fields.hasErrors('birthdate')}? 'has-error'">
-								<label for="birthdate" class="col-lg-4 control-label">Birth
+								<label for="birthdate" class="col-lg-3 control-label">Birth
 									Date</label>
-								<div class="col-lg-8">
+								<div class="col-lg-9">
 									<input type="date" class="form-control" id="birthdate"
 										placeholder="Birth Date" name=birthdate
 										th:value="${#dates.format(horse.birthdate, 'yyyy-MM-dd')}" />
@@ -196,13 +196,19 @@
 										th:text="${horse.rider.firstname}" />
 								</div>
 							</div>
-							<button class="btn btn-primary"
-								onclick="@{/horse/horseDetails/} + ${horse.horseId}">Edit
-							</button>
-							<button class="btn btn-danger">Delete Horse</button>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4"></div>
+							<div class="col-lg-8">
+								<button style="margin-left: 135px;" class="btn btn-primary"
+										onclick="@{/horse/horseDetails/} + ${horse.horseId}">Edit
+								</button>
+								<button class="btn btn-danger">Delete Horse</button>
+							</div>
 						</div>
 					</fieldset>
 				</div>
+
 			</form>
 		</div>
 
