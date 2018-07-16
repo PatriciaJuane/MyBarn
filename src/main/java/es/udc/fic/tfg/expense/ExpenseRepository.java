@@ -1,6 +1,7 @@
 package es.udc.fic.tfg.expense;
 
 import es.udc.fic.tfg.account.Account;
+import es.udc.fic.tfg.horse.Horse;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long>{
     Expense findOneByExpenseid(Long expenseid);
 
     Page<Expense> findByConsumer(Account consumer, Pageable pageable);
+
+    Page<Expense> findByConsumerAndHorseexpense(Account consumer, Horse horseexpense, Pageable pageable);
 }
