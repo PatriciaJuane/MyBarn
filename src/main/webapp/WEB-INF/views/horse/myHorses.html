@@ -14,49 +14,48 @@
 <script src="../../../resources/js/bootstrap.min.js"
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
 </head>
-<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+<body
+	style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
 	<div th:replace="fragments/layout :: header"></div>
 
-	<div class="py-5">
+	<div class="container"
+		style="background-color: transparent; margin-top: 15px; margin-left: 160px;">
 		<div class="container" th:each="horse : ${horses}">
 			<div class="row">
-				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-2" style="background-color: transparent">
-							<div th:switch="${horse.getProfilePic().isEmpty()}">
-								<div th:case="true">
-									<img class="img-fluid d-block float-right rounded-circle"
-										src="../../../resources/images/noun_765845_cc.png">
-								</div>
-								<div th:case="false">
-									<img class="img-fluid d-block float-right rounded-circle"
-										th:src="@{'data:image/jpeg;base64,'+${horse.getProfilePic()}}" />
-								</div>
-								<div th:case="*">Never gonna be here</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="list-group">
-								<a th:href="@{/horse/horseDetails/} + ${horse.horseId}"
-									class="list-group-item list-group-item-action flex-column align-items-start active my-3"
-									style="">
-									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1" th:text="${horse.nickname}"></h5>
+				<div class="col-md-10" style="margin-top: 30px;">
+					<div class="list-group">
+						<a th:href="@{/horse/horseDetails/} + ${horse.horseId}"
+							class="list-group-item list-group-item-action flex-column align-items-start active my-3"
+							style="">
+							<div class="col-md-3">
+								<div th:switch="${horse.getProfilePic().isEmpty()}">
+									<div th:case="true">
+										<img class="img-fluid d-block float-right rounded-circle"
+											src="../../../resources/images/noun_765845_cc.png">
 									</div>
-									<p class="mb-1" th:text="${horse.name}"></p> <small
-									th:text="${horse.breed}"></small>&nbsp;<small
-									th:text="${horse.gender}"></small>&nbsp;<small
-									th:text="${#dates.format(horse.birthdate,'dd-MM-yyyy')}"></small>
-								</a>
+									<div th:case="false">
+										<img class="img-fluid d-block float-right rounded-circle"
+											th:src="@{'data:image/jpeg;base64,'+${horse.getProfilePic()}}" />
+									</div>
+									<div th:case="*">Never gonna be here</div>
+								</div>
 							</div>
-						</div>
+							<div class="col-md-9">
+								<div class="d-flex w-100 justify-content-between">
+									<h1 class="mb-1" th:text="${horse.nickname}"></h1>
+								</div>
+								<h4 th:text="${horse.breed}"></h4>
+								<h4 th:text="${horse.gender}"></h4>
+								<h4 th:text="${#dates.format(horse.birthdate,'dd-MM-yyyy')}"></h4>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div th:if="${horses.getContent().size()>0}">
 
-			<div class="row center pd-bottom-1" style="margin-left: 500px">
+			<div class="row center pd-bottom-1" style="margin-left: 400px">
 				<div class="col-md-12 text-center">
 					<ul class="pagination">
 						<li th:class="${horses.number eq 0} ? 'disabled' : ''"><a
@@ -64,7 +63,6 @@
 							th:onclick="|pageChange('${horses.number-1}')|">Previous</a> <a
 							th:if="${horses.isFirst()}" href="javascript:void(0);">Previous</a>
 						</li>
-
 
 						<li th:if="${horses.getTotalPages() != 0}"
 							th:each="pageNo : ${#numbers.sequence(0, horses.totalPages - 1)}"
