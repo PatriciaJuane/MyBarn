@@ -2,10 +2,12 @@ package es.udc.fic.tfg.training;
 
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.account.AccountRepository;
+import es.udc.fic.tfg.account.AccountService;
 import es.udc.fic.tfg.expense.Expense;
 import es.udc.fic.tfg.expense.ExpenseService;
 import es.udc.fic.tfg.horse.Horse;
 import es.udc.fic.tfg.horse.HorseRepository;
+import es.udc.fic.tfg.horse.HorseService;
 import es.udc.fic.tfg.support.web.Ajax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,13 @@ public class NewTrainingController {
     private HorseRepository horseRepository;
 
     @Autowired
+    private HorseService horseService;
+
+    @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private TrainingService trainingService;
@@ -98,6 +106,8 @@ public class NewTrainingController {
             }
 
             Training t = trainingService.save(training);
+            horseService.addTrainingToHorse(t.getTraininghorse(),t);
+            accountService.addTrainingToAccount(t.getTraininguser(),t);
         }
         return "redirect:/";
     }

@@ -1,6 +1,8 @@
 package es.udc.fic.tfg.account;
 
+import es.udc.fic.tfg.activity.Activity;
 import es.udc.fic.tfg.horse.Horse;
+import es.udc.fic.tfg.training.Training;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -104,6 +106,24 @@ public class AccountService implements UserDetailsService {
 	@Transactional
 	public Account changeProfilePic(Account account, String newPic) {
 		account.setProfilePic(newPic);
+		accountRepository.save(account);
+		return account;
+	}
+
+	@Transactional
+	public Account addActivityToAccount(Account account, Activity activity) {
+		List<Activity> userActivities = account.getUseractivities();
+		userActivities.add(activity);
+		account.setUseractivities(userActivities);
+		accountRepository.save(account);
+		return account;
+	}
+
+	@Transactional
+	public Account addTrainingToAccount(Account account, Training training) {
+		List<Training> userTrainings = account.getUsertrainings();
+		userTrainings.add(training);
+		account.setUsertrainings(userTrainings);
 		accountRepository.save(account);
 		return account;
 	}

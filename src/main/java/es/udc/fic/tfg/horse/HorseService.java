@@ -10,6 +10,9 @@ import javax.annotation.PostConstruct;
 import es.udc.fic.tfg.account.AccountRepository;
 import es.udc.fic.tfg.account.AccountService;
 import java.security.Principal;
+
+import es.udc.fic.tfg.activity.Activity;
+import es.udc.fic.tfg.training.Training;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -80,5 +83,23 @@ public class HorseService {
 		horseRepository.save(horse);
 		return horse;
 	}
+
+	@Transactional
+    public Horse addActivityToHorse(Horse horse, Activity activity) {
+        List<Activity> horseActivities = horse.getHorseactivities();
+        horseActivities.add(activity);
+        horse.setHorseactivities(horseActivities);
+        horseRepository.save(horse);
+        return horse;
+    }
+
+    @Transactional
+    public Horse addTrainingToHorse(Horse horse, Training training) {
+        List<Training> horseTrainings = horse.getHorsetrainings();
+        horseTrainings.add(training);
+        horse.setHorsetrainings(horseTrainings);
+        horseRepository.save(horse);
+        return horse;
+    }
 
 }

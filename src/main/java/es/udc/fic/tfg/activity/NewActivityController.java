@@ -2,10 +2,12 @@ package es.udc.fic.tfg.activity;
 
 import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.account.AccountRepository;
+import es.udc.fic.tfg.account.AccountService;
 import es.udc.fic.tfg.expense.Expense;
 import es.udc.fic.tfg.expense.ExpenseService;
 import es.udc.fic.tfg.horse.Horse;
 import es.udc.fic.tfg.horse.HorseRepository;
+import es.udc.fic.tfg.horse.HorseService;
 import es.udc.fic.tfg.support.web.Ajax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,13 @@ public class NewActivityController {
     private HorseRepository horseRepository;
 
     @Autowired
+    private HorseService horseService;
+
+    @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private ActivityService activityService;
@@ -100,6 +108,8 @@ public class NewActivityController {
             }
 
             Activity a = activityService.save(activity);
+            horseService.addActivityToHorse(a.getActivityhorse(),a);
+            accountService.addActivityToAccount(a.getActivityuser(),a);
         }
         return "redirect:/";
     }
