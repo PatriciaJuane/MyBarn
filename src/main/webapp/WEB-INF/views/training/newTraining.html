@@ -43,19 +43,19 @@
             <form class="form-narrow form-horizontal" method="post"
                   th:action="@{/newTraining}" th:object="${newTrainingForm}"
                   th:fragment="newTrainingForm">
-                <div class="row">
+               
                     <!--/* Show general error message when form contains errors */-->
                     <th:block th:if="${#fields.hasErrors('${newTrainingForm.*}')}">
                         <div th:replace="fragments/components :: alert (type='danger', message='Form contains errors. Please try again.')">
                             Alert</div>
                     </th:block>
                     <fieldset>
-                        <legend>Register Training</legend>
+                        <legend style="font-size: 20px;">Register Training</legend>
                         <div class="form-group"
                              th:classappend="${#fields.hasErrors('type')}? 'has-error'">
-                            <label for="type" class="col-lg-3 control-label">Type</label>
+                            <label for="type" class="col-lg-3 control-label" style="font-size: 15px;">Type</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="type"
+                                <select class="form-control" id="type" style="font-size: 15px;"
                                         placeholder="type" th:field="*{type}">
                                     <option
                                             th:each="type : ${T(es.udc.fic.tfg.training.TrainingType).values()}"
@@ -65,9 +65,9 @@
                         </div>
                         <div class="form-group"
                              th:classappend="${#fields.hasErrors('trainingdate')}? 'has-error'">
-                            <label for="trainingdate" class="col-lg-3 control-label">Date</label>
+                            <label for="trainingdate" class="col-lg-3 control-label" style="font-size: 15px;">Date</label>
                             <div class="col-lg-9">
-                                <input type="date" class="form-control" id="trainingdate"
+                                <input type="date" class="form-control" id="trainingdate" style="font-size: 15px;"
                                        placeholder="trainingdate" th:field="*{trainingdate}" /> <span
                                     class="help-block" th:if="${#fields.hasErrors('trainingdate')}"
                                     th:errors="*{trainingdate}">Incorrect Date</span>
@@ -75,9 +75,9 @@
                         </div>
                         <div class="form-group"
                              th:classappend="${#fields.hasErrors('description')}? 'has-error'">
-                            <label for="description" class="col-lg-3 control-label">Description</label>
+                            <label for="description" class="col-lg-3 control-label" style="font-size: 15px;">Description</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="description"
+                                <input type="text" class="form-control" id="description" style="font-size: 15px;"
                                        placeholder="Description" th:field="*{description}" /> <span
                                     class="help-block" th:if="${#fields.hasErrors('description')}"
                                     th:errors="*{description}">Incorrect Description</span>
@@ -85,26 +85,27 @@
                         </div>
                         <div class="form-group"
                              th:classappend="${#fields.hasErrors('duration')}? 'has-error'">
-                            <label for="duration" class="col-lg-3 control-label">Duration</label>
+                            <label for="duration" class="col-lg-3 control-label" style="font-size: 15px;">Duration</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="duration"
+                                <input type="text" class="form-control" id="duration" style="font-size: 15px;"
                                        placeholder="Duration" th:field="*{duration}" /> <span
                                     class="help-block" th:if="${#fields.hasErrors('duration')}"
                                     th:errors="*{duration}">Incorrect Duration</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="traininghorse" class="col-lg-3 control-label">Horse
+                            <label for="traininghorse" class="col-lg-3 control-label" style="font-size: 15px;">Horse
                             </label>
                             <div class="col-lg-9">
-                                <input type="text" id="traininghorse" class="form-control" placeholder="traininghorse" th:field="*{traininghorse}" />
+                                <input type="text" id="traininghorse" class="form-control" style="font-size: 15px;"
+                                placeholder="traininghorse" th:field="*{traininghorse}" />
                             </div>
                         </div>
                         <div class="form-group"
                              th:classappend="${#fields.hasErrors('trainingexpense')}? 'has-error'">
-                            <label for="trainingexpense" class="col-lg-3 control-label">Costs? (xxx.xx)</label>
+                            <label for="trainingexpense" class="col-lg-3 control-label" style="font-size: 15px;">Costs? (xxx.xx)</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="trainingexpense"
+                                <input type="text" class="form-control" id="trainingexpense" style="font-size: 15px;"
                                        placeholder="trainingexpense" th:field="*{trainingexpense}" /> <span
                                     class="help-block" th:if="${#fields.hasErrors('trainingexpense')}"
                                     th:errors="*{trainingexpense}">Incorrect amount</span>
@@ -113,11 +114,11 @@
                         <div class="form-group">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-9">
-                                <button type="submit" class="btn btn-primary">Register Training</button>
+                                <button type="submit" style="font-size: 15px;" class="btn btn-primary">Register Training</button>
                             </div>
                         </div>
                     </fieldset>
-                </div>
+               
             </form>
         </div>
     </div>

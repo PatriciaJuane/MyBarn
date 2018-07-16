@@ -37,24 +37,24 @@
 </head>
 <body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
 <div th:replace="fragments/layout :: header"></div>
-<div class="container" style="width: 60%; background-color: white; margin-left: 250px; margin-bottom: 50px;">
+<div class="container" style="width: 65%; background-color: white; margin-left: 225px; margin-bottom: 30px;">
 <form class="form-horizontal" style="margin-top: 2%;" method="post"
       th:action="@{/myTrainings}" th:object="${myTrainingsForm}"
       th:fragment="myTrainingsForm">
     <div class="form-group">
-        <label for="horsename" class="col-lg-3 control-label">Horse</label>
+        <label for="horsename" class="col-lg-3 control-label" style="font-size: 15px;">Horse</label>
         <div class="col-lg-6">
-            <input id="horsename" class="form-control" placeholder="horsename" th:field="*{horsename}"/>
+            <input id="horsename" style="font-size: 15px;" class="form-control" placeholder="horsename" th:field="*{horsename}"/>
         </div>
         <div class="col-lg-3">
-            <button type="submit" style="align-self: right;" class="btn btn-primary">Search</button>
+            <button type="submit" style="align-self: right; font-size: 15px;" class="btn btn-primary">Search</button>
         </div>
     </div>
 </form>
 </div>
 <div class="py-1">
     <div class="table">
-        <table class="table" style="width:60%; margin-left:250px;">
+        <table class="table" style="width:65%; margin-left:225px; font-size: 15px;">
             <thead>
             <tr>
                 <th>Type</th>

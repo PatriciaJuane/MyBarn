@@ -19,7 +19,7 @@
 
 	<div th:replace="fragments/layout :: header"></div>
 	<div class="container">
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<div th:switch="${account.getProfilePic().isEmpty()}">
 				<div th:case="true">
 					<img class="img-fluid d-block float-right rounded-circle"
@@ -42,7 +42,7 @@
 						<input type="file" class="form-control-file" id="profilePic"
 							name="profilePic" th:field="*{profilePic}" accept="image/*" />
 						<div>
-							<button class="btn btn-primary"
+							<button class="btn btn-primary" style="font-size: 12px;"
 								onclick="@{/user/userDetails/changeProfilePic}">Edit
 								Picture</button>
 						</div>
@@ -55,58 +55,57 @@
 				th:action="@{/user/userDetails}" th:object="${signupForm}"
 				th:fragment="signupForm">
 				<fieldset>
-					<legend>User Details</legend>
+					<legend style="font-size: 20px;">User Details</legend>
 					<div class="form-group">
-						<label for="email" class="col-lg-2 control-label">Email</label>
-						<div class="col-lg-10">
-
-							<input type="text" class="form-control" id="email" name=email
+						<label for="email" class="col-lg-3 control-label" style="font-size: 15px;">Email</label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="email" name=email style="font-size: 15px;"
 								th:value="${account.email}" /> <span class="help-block"
 								th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect
 								email</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="firstName" class="col-lg-2 control-label">First
+						<label for="firstName" class="col-lg-3 control-label" style="font-size: 15px;">First
 							Name</label>
-						<div class="col-lg-10">
-							<input type="text" class="form-control" id="firstname"
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="firstname" style="font-size: 15px;"
 								name=firstname th:value="${account.firstname}" /> <span
 								class="help-block" th:if="${#fields.hasErrors('firstname')}"
 								th:errors="*{firstname}">Incorrect first Name</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="lastName" class="col-lg-2 control-label">Last
+						<label for="lastName" class="col-lg-3 control-label" style="font-size: 15px;">Last
 							Name</label>
-						<div class="col-lg-10">
-							<input type="text" class="form-control" id="lastname"
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="lastname" style="font-size: 15px;"
 								name=lastname th:value="${account.lastname}" /> <span
 								class="help-block" th:if="${#fields.hasErrors('lastname')}"
 								th:errors="*{lastname}">Incorrect last name</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="phoneNumber" class="col-lg-2 control-label">Phone
+						<label for="phoneNumber" class="col-lg-3 control-label" style="font-size: 15px;">Phone
 							Number</label>
-						<div class="col-lg-10">
-							<input type="text" class="form-control" id="phonenumber"
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="phonenumber" style="font-size: 15px;"
 								name=phonenumber th:value="${account.phonenumber}" /> <span
 								class="help-block" th:if="${#fields.hasErrors('phonenumber')}"
 								th:errors="*{phonenumber}">Incorrect phone number</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="isRider" class="col-lg-2 control-label">Rider</label>
-						<div class="col-lg-10">
-							<a type="text" class="form-control" id="rider"
+						<label for="isRider" class="col-lg-3 control-label" style="font-size: 15px;">Rider</label>
+						<div class="col-lg-9">
+							<a type="text" class="form-control" id="rider" style="font-size: 15px;"
 								th:text="${account.rider}" />
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-lg-2"></div>
+						<div class="col-lg-3"></div>
 						<div class="col-lg-9">
-						<button class="btn btn-primary" onclick="@{/user/userDetails}">Edit</button>
+						<button class="btn btn-primary" style="font-size: 15px;" onclick="@{/user/userDetails}">Edit</button>
 						</div>
 					</div>
 				</fieldset>

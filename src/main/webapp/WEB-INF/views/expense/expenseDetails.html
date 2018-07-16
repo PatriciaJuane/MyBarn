@@ -1,72 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Expense Details</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
-          media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
-    <link href="../../../resources/css/core.css" rel="stylesheet"
-          media="screen" th:href="@{/resources/css/core.css}" />
-    <link href="../../../resources/css/theme.css" rel="stylesheet"
-          media="screen" th:href="@{/resources/css/theme.css}" />
-    <script src="../../../resources/js/jquery.min.js"
-            th:src="@{/resources/js/jquery.min.js}"></script>
-    <script src="../../../resources/js/bootstrap.min.js"
-            th:src="@{/resources/js/bootstrap.min.js}"></script>
+<title>Expense Details</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="../../../resources/css/core.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/core.css}" />
+<link href="../../../resources/css/theme.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/theme.css}" />
+<script src="../../../resources/js/jquery.min.js"
+	th:src="@{/resources/js/jquery.min.js}"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
 </head>
-<body style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
-<div th:replace="fragments/layout :: header"></div>
-<div class="container">
-    <div class="col-md-10">
-        <form class="form-narrow form-horizontal" th:object="${expense}">
-         <fieldset>
-             <legend>Expense Details</legend>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="title" class="col-lg-3 control-label">Concept</label>
-                            <div class="col-lg-9">
-                                <a class="form-control" id="title"
-                                     th:text="${expense.title}" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="amount" class="col-lg-3 control-label">Amount</label>
-                            <div class="col-lg-9">
-                                <a class="form-control" id="amount"
-                                   th:text="${expense.amount+'€'}"  />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="expensedate" class="col-lg-3 control-label">Date</label>
-                            <div class="col-lg-9">
-                                <a class="form-control" id="expensedate"
-                                   th:text="${#dates.format(expense.expensedate,'dd-MM-yyyy hh:mm')}"/>
-                            </div>
-                        </div>
+<body
+	style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+	<div th:replace="fragments/layout :: header"></div>
+	<div class="container">
+		<form class="form-narrow form-horizontal" th:object="${expense}">
+			<fieldset>
+				<legend style="font-size: 20px;">Expense Details</legend>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="title" class="col-lg-3 control-label"
+							style="font-size: 15px;"> Concept</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="title" style="font-size: 14px;"
+								th:text="${expense.title}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="amount" class="col-lg-3 control-label"
+							style="font-size: 15px;"> Amount</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="amount" style="font-size: 14px;"
+								th:text="${expense.amount+'€'}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="expensedate" class="col-lg-3 control-label"
+							style="font-size: 15px;"> Date</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="expensedate" style="font-size: 14px;"
+								th:text="${#dates.format(expense.expensedate,'dd-MM-yyyy hh:mm')}" />
+						</div>
+					</div>
 
-                        <div class="form-group">
-                            <label for="consumer" class="col-lg-3 control-label">Consumer</label>
-                            <div class="col-lg-9">
-                                <a class="form-control" id="consumer"
-                                   th:text="${expense.consumer.firstname + ' ' +expense.consumer.lastname}"/>
-                            </div>
-                        </div>
+					<div class="form-group">
+						<label for="consumer" class="col-lg-3 control-label"
+							style="font-size: 15px;"> Consumer</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="consumer" style="font-size: 14px;"
+								th:text="${expense.consumer.firstname + ' ' +expense.consumer.lastname}" />
+						</div>
+					</div>
 
-                        <div class="form-group">
-                            <label for="horseexpense" class="col-lg-3 control-label">Horse Expenser</label>
-                            <div class="col-lg-9">
-                                <a class="form-control" id="horseexpense"
-                                   th:text="${expense.horseexpense.nickname}"/>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-danger">Delete Expense</button>
-                    </div>
-         </fieldset>
-        </form>
-    </div>
-
-</div>
+					<div class="form-group">
+						<label for="horseexpense" class="col-lg-3 control-label"
+							style="font-size: 15px;"> Horse Expenser</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="horseexpense"
+								style="font-size: 14px;"
+								th:text="${expense.horseexpense.nickname}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3"></div>
+						<div class="col-lg-9">
+							<button style="font-size: 15px;" class="btn btn-danger">Delete Expense</button>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
 </body>
 <div th:replace="fragments/layout :: footer"></div>
 </html>

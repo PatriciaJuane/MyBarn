@@ -1,97 +1,134 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Signup</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen"
-          th:href="@{/resources/css/bootstrap.min.css}"/>
-    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
-    <link href="../../../resources/css/theme.css" rel="stylesheet" media="screen"
-          th:href="@{/resources/css/theme.css}"/>
-    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
-    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+<title>Signup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="../../../resources/css/core.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/core.css}" />
+<link href="../../../resources/css/theme.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/theme.css}" />
+<script src="../../../resources/js/jquery.min.js"
+	th:src="@{/resources/js/jquery.min.js}"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
 </head>
-<body style="background-image: url('../../../resources/images/hipica.jpg');background-size:fit;background-position:center center;">
-<div th:replace="fragments/layout :: header"></div>
-<div class="py-5">
-    <div class="container">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form class="form-narrow form-horizontal" method="post" th:action="@{/signup}" th:object="${signupForm}"
-                  th:fragment="signupForm" enctype="multipart/form-data">
-                <!--/* Show general error message when form contains errors */-->
-                <th:block th:if="${#fields.hasErrors('${signupForm.*}')}">
-                    <div th:replace="fragments/components :: alert (type='danger', message='Form contains errors. Please try again.')">
-                        Alert
-                    </div>
-                </th:block>
-                <fieldset>
-                    <legend>Please Sign Up</legend>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-                        <label for="email" class="col-lg-2 control-label">Email</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" id="email" placeholder="Email address"
-                                   th:field="*{email}"/>
-                            <span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect email</span>
-                        </div>
-                    </div>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
-                        <label for="password" class="col-lg-2 control-label">Password</label>
-                        <div class="col-lg-10">
-                            <input type="password" class="form-control" id="password" placeholder="Password"
-                                   th:field="*{password}"/>
-                            <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
-                        </div>
-                    </div>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('firstname')}? 'has-error'">
-                         <label for="firstname" class="col-lg-2 control-label">First Name</label>
-                         <div class="col-lg-10">
-                             <input type="text" class="form-control" id="firstname" placeholder="First Name" th:field="*{firstname}" />
-                             <span class="help-block" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Incorrect Name</span>
-                         </div>
-                     </div>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('lastname')}? 'has-error'">
-                        <label for="lastname" class="col-lg-2 control-label">Last Name</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" id="lastname" placeholder="Last Name" th:field="*{lastname}" />
-                            <span class="help-block" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Incorrect Name</span>
-                        </div>
-                    </div>
-                      <div class="form-group" th:classappend="${#fields.hasErrors('phonenumber')}? 'has-error'">
-                          <label for="phonenumber" class="col-lg-2 control-label">Phone Number</label>
-                          <div class="col-lg-10">
-                              <input type="text" class="form-control" id="phonenumber" placeholder="phonenumber" th:field="*{phonenumber}"/>
-                              <span class="help-block" th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}">Incorrect Number</span>
-                          </div>
-                      </div>
-                    <div class="form-group">
-                        <label for="rider" class="col-lg-2 control-label">Rider</label>
-                        <div class="col-lg-2">
-                            <input type="checkbox" class="form-control" id="rider" placeholder="rider" th:field="*{rider}"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="profilePic" class="col-lg-2 control-label">Profile Pic</label>
-                        <div class="col-lg-10">
-                            <input type="file" class="form-control-file" id="profilePic" name ="profilePic"
-                                   th:field="*{profilePic}" accept="image/*"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <button type="submit" class="btn btn-default">Sign up</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <p>Already have an account? <a href="signin" th:href="@{/signin}">Sign In</a></p>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-</div>
-<div th:replace="fragments/layout :: footer"></div>
+<body
+	style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+	<div th:replace="fragments/layout :: header"></div>
+	<div class="py-0" style="margin-top: -15px; margin-bottom: 10px;">
+		<div class="container">
+			<div class="col-md-12">
+				<form class="form-narrow form-horizontal" method="post"
+					th:action="@{/signup}" th:object="${signupForm}"
+					th:fragment="signupForm" enctype="multipart/form-data">
+					<!--/* Show general error message when form contains errors */-->
+					<th:block th:if="${#fields.hasErrors('${signupForm.*}')}">
+						<div
+							th:replace="fragments/components :: alert (type='danger', message='Form contains errors. Please try again.')">
+							Alert</div>
+					</th:block>
+					<fieldset>
+						<legend style="font-size: 18px;">Please Sign Up</legend>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+							<label for="email" class="col-lg-2 control-label"
+								style="font-size: 13px;">Email</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="email"
+									style="font-size: 13px;" placeholder="Email address"
+									th:field="*{email}" /> <span class="help-block"
+									th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect
+									email</span>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+							<label for="password" class="col-lg-2 control-label"
+								style="font-size: 13px;">Password</label>
+							<div class="col-lg-10">
+								<input type="password" class="form-control" id="password"
+									style="font-size: 13px;" placeholder="Password"
+									th:field="*{password}" /> <span class="help-block"
+									th:if="${#fields.hasErrors('password')}"
+									th:errors="*{password}">Incorrect password</span>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('firstname')}? 'has-error'">
+							<label for="firstname" class="col-lg-2 control-label"
+								style="font-size: 13px;">First Name</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="firstname"
+									style="font-size: 13px;" placeholder="First Name"
+									th:field="*{firstname}" /> <span class="help-block"
+									th:if="${#fields.hasErrors('firstname')}"
+									th:errors="*{firstname}">Incorrect Name</span>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('lastname')}? 'has-error'">
+							<label for="lastname" class="col-lg-2 control-label"
+								style="font-size: 13px;">Last Name</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="lastname"
+									style="font-size: 13px;" placeholder="Last Name"
+									th:field="*{lastname}" /> <span class="help-block"
+									th:if="${#fields.hasErrors('lastname')}"
+									th:errors="*{lastname}">Incorrect Name</span>
+							</div>
+						</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('phonenumber')}? 'has-error'">
+							<label for="phonenumber" class="col-lg-2 control-label"
+								style="font-size: 13px;">Phone Number</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="phonenumber"
+									style="font-size: 13px;" placeholder="phonenumber"
+									th:field="*{phonenumber}" /> <span class="help-block"
+									th:if="${#fields.hasErrors('phonenumber')}"
+									th:errors="*{phonenumber}">Incorrect Number</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="rider" class="col-lg-2 control-label"
+								style="font-size: 13px;">Rider</label>
+							<div class="col-lg-2">
+								<input type="checkbox" class="form-control" id="rider" style="font-size: 13px;"
+									placeholder="rider" th:field="*{rider}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="profilePic" class="col-lg-2 control-label"
+								style="font-size: 13px;">Profile Pic</label>
+							<div class="col-lg-10">
+								<input type="file" class="form-control-file" id="profilePic"
+									style="font-size: 13px;" name="profilePic"
+									th:field="*{profilePic}" accept="image/*" />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-2"></div>
+							<div class="col-lg-10">
+								<button type="submit" style="font-size: 13px;"
+									class="btn btn-primary">Sign up</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-2"></div>
+							<div class="col-lg-10">
+								<p style="font-size: 13px;">
+									Already have an account? 
+									<a style="font-size: 13px;" href="signin" th:href="@{/signin}">Sign	In</a>
+								</p>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/layout :: footer"></div>
 </body>
 </html>

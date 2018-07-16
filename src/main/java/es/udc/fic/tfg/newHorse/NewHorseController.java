@@ -110,7 +110,7 @@ class NewHorseController {
             if (amount.compareTo(BigDecimal.ZERO) == 1) {
                 Date ahora = new Date();
                 Expense expense = new Expense("", amount, ahora, owner, saved);
-                expense.setTitle("Gasto mensual asociado al caballo: " + saved.getNickname());
+                expense.setTitle("Precio asociado al caballo: " + saved.getNickname());
                 expenseService.save(expense);
             }
         }

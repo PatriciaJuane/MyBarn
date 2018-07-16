@@ -1,74 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sign In</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen"
-          th:href="@{/resources/css/bootstrap.min.css}"/>
-    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
-    <link href="../../../resources/css/theme.css" rel="stylesheet" media="screen"
-          th:href="@{/resources/css/theme.css}"/>
+<title>Sign In</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="../../../resources/css/core.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/core.css}" />
+<link href="../../../resources/css/theme.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/theme.css}" />
 </head>
-<body style="background-image: url('../../../resources/images/hipica.jpg');background-size:fit;background-position:center center;">
-<div th:replace="fragments/layout :: header"></div>
-<div class="py-5 h-25">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-white">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="display-2">MyBarn</h1>
-                        <p class="lead text-light" style="font-weight: bold;">Welcome to MyBarn! Your own webapp &nbsp;to manage your trainings, as
-                            well as the expenses of each of your horses.&nbsp;
-                            <br>&nbsp;¿What are you waiting for?</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<form class="form-narrow form-horizontal" action="#" method="post" th:action="@{/authenticate}">
-    <th:block th:if="${param.error != null}">
-        <div th:replace="fragments/components :: alert (type='danger', message='Sign in error. Please try again.')">
-            Alert
-        </div>
-    </th:block>
-    <fieldset>
-        <legend>Please Sign In</legend>
-        <div class="form-group">
-            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-            <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="username"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-            <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="_spring_security_remember_me"/> Remember me
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <button type="submit" class="btn btn-default">Sign in</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <p>New here? <a href="signup" th:href="@{/signup}">Sign Up</a></p>
-            </div>
-        </div>
-    </fieldset>
-</form>
-<div th:replace="fragments/layout :: footer"></div>
+<body
+	style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
+	<div th:replace="fragments/layout :: header"></div>
+	<div class="py-1 h-25">
+		<div class="container">
+			<div class="col-md-12 text-white">
+				<h1 class="display-2">MyBarn</h1>
+				<p class="lead text-light"
+					style="font-weight: bold; font-size: 20px;">
+					Welcome to MyBarn! Your own online agenda to manage your trainings,<br>
+					activities and expenses for each of your horses. 
+					¿What are you waiting for?
+				</p>
+			</div>
+		</div>
+	</div>
+	<form class="form-narrow form-horizontal" action="#" method="post"
+		th:action="@{/authenticate}">
+		<th:block th:if="${param.error != null}">
+			<div
+				th:replace="fragments/components :: alert (type='danger', message='Sign in error. Please try again.')">
+				Alert</div>
+		</th:block>
+		<fieldset>
+			<legend style="font-size: 20px;">Please Sign In</legend>
+			<div class="form-group">
+				<label for="inputEmail" class="col-lg-2 control-label"
+					style="font-size: 15px;">Email</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="inputEmail"
+						style="font-size: 15px;" placeholder="Email" name="username" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword" class="col-lg-2 control-label"
+					style="font-size: 15px;">Password</label>
+				<div class="col-lg-10">
+					<input type="password" class="form-control" id="inputPassword"
+						style="font-size: 15px;" placeholder="Password" name="password" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-10">
+					<div class="checkbox">
+						<label style="font-size: 15px;"> <input type="checkbox"
+							name="_spring_security_remember_me" /> Remember me
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-10">
+					<button type="submit" class="btn btn-primary"
+						style="font-size: 15px;">Sign in</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-10">
+					<p style="font-size: 13px;">
+						New here? <a href="signup" style="font-size: 13px;"
+							th:href="@{/signup}">Sign Up</a>
+					</p>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+	<div th:replace="fragments/layout :: footer"></div>
 </body>
 </html>

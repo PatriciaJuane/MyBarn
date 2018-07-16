@@ -43,20 +43,20 @@
             <form class="form-narrow form-horizontal" method="post"
                   th:action="@{/newExpense}" th:object="${newExpenseForm}"
                   th:fragment="newExpenseForm">
-                <div class="row">
+               
                     <!--/* Show general error message when form contains errors */-->
                     <th:block th:if="${#fields.hasErrors('${newExpenseForm.*}')}">
                         <div th:replace="fragments/components :: alert (type='danger', message='Form contains errors. Please try again.')">
                             Alert</div>
                     </th:block>
                     <fieldset>
-                        <legend>Please Fill Your Expense</legend>
+                        <legend style="font-size: 20px;">Please Fill Your Expense</legend>
 
                             <div class="form-group"
                                  th:classappend="${#fields.hasErrors('title')}? 'has-error'">
-                                <label for="title" class="col-lg-3 control-label">Concept</label>
+                                <label for="title" class="col-lg-3 control-label" style="font-size: 15px;">Concept</label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control" id="title"
+                                    <input type="text" class="form-control" id="title" style="font-size: 15px;"
                                            placeholder="Title" th:field="*{title}" /> <span
                                         class="help-block" th:if="${#fields.hasErrors('title')}"
                                         th:errors="*{title}">Incorrect title</span>
@@ -64,30 +64,31 @@
                             </div>
                             <div class="form-group"
                                  th:classappend="${#fields.hasErrors('amount')}? 'has-error'">
-                                <label for="amount" class="col-lg-3 control-label">Amount (xxx.xx)</label>
+                                <label for="amount" class="col-lg-3 control-label" style="font-size: 15px;">Amount (xxx.xx)</label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control" id="amount"
+                                    <input type="text" class="form-control" id="amount" style="font-size: 15px;"
                                            placeholder="Amount" th:field="*{amount}" /> <span
                                         class="help-block" th:if="${#fields.hasErrors('amount')}"
                                         th:errors="*{amount}">Incorrect name</span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="horseexpense" class="col-lg-3 control-label">Horse
+                                <label for="horseexpense" class="col-lg-3 control-label" style="font-size: 15px;">Horse
                                 </label>
                                 <div class="col-lg-9" style="width: 100%;">
-                                    <input type="text" id="horseexpense" class="form-control" placeholder="horseexpense" th:field="*{horseexpense}" />
+                                    <input type="text" id="horseexpense" class="form-control" style="font-size: 15px;"
+                                    placeholder="horseexpense" th:field="*{horseexpense}" />
                              </div>
                             </div>
                         <div class="form-group">
                             <div class="col-lg-3"></div>
                                 <div class="col-lg-9">
-                                    <button type="submit" class="btn btn-primary">Upload
+                                    <button type="submit" style="font-size: 15px;" class="btn btn-primary">Upload
                                         Expense</button>
                                 </div>
                             </div>
                     </fieldset>
-                </div>
+              
             </form>
         </div>
     </div>
