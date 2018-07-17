@@ -11,6 +11,8 @@ import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.expense.Expense;
 import es.udc.fic.tfg.horse.Horse;
 
+import java.util.List;
+
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
@@ -21,4 +23,5 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     Page <Activity> findByActivityuserAndActivityhorse(Account consumer, Horse horse, Pageable pageable);
     
     Activity findByActivityexpense(Expense expense);
+
 }

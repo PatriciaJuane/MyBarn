@@ -40,7 +40,7 @@ public class Training {
     @ManyToOne(fetch = FetchType.EAGER)
     private Horse traininghorse;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
+    @OneToOne(fetch = FetchType.EAGER)
     private Expense trainingexpense;
 
     private Instant created;

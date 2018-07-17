@@ -18,5 +18,5 @@ public interface TrainingRepository extends JpaRepository<Training, Long>{
 
     Page <Training> findByTraininguserAndTraininghorse(Account account, Horse horse, Pageable pageable);
 
-    Training findOneByTrainingexpense(Expense expense);
+    Training findByTrainingexpense(Expense expense);
 }

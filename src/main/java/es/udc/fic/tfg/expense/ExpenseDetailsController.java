@@ -57,7 +57,7 @@ public class ExpenseDetailsController {
 			activityRepository.save(a);
 		}
 		
-		Training t = trainingRepository.findOneByTrainingexpense(expense);
+		Training t = trainingRepository.findByTrainingexpense(expense);
 		if (t!=null) {
 			t.setTrainingexpense(null);
 			trainingRepository.save(t);

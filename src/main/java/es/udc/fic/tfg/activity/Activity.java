@@ -41,7 +41,7 @@ public class Activity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Horse activityhorse;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
+    @OneToOne(fetch = FetchType.EAGER)
     private Expense activityexpense;
 
     private Instant created;

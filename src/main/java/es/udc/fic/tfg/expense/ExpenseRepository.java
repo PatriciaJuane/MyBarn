@@ -21,4 +21,5 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long>{
     Page<Expense> findByConsumer(Account consumer, Pageable pageable);
 
     Page<Expense> findByConsumerAndHorseexpense(Account consumer, Horse horseexpense, Pageable pageable);
+
 }

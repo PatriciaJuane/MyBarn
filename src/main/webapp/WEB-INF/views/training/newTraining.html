@@ -102,16 +102,6 @@
                             </div>
                         </div>
                         <div class="form-group"
-                             th:classappend="${#fields.hasErrors('trainingexpense')}? 'has-error'">
-                            <label for="trainingexpense" class="col-lg-3 control-label" style="font-size: 15px;">Costs? (xxx.xx)</label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control" id="trainingexpense" style="font-size: 15px;"
-                                       placeholder="trainingexpense" th:field="*{trainingexpense}" /> <span
-                                    class="help-block" th:if="${#fields.hasErrors('trainingexpense')}"
-                                    th:errors="*{trainingexpense}">Incorrect amount</span>
-                            </div>
-                        </div>
-                         <div class="form-group"
                              th:classappend="${#fields.hasErrors('url')}? 'has-error'">
                             <label for="url" class="col-lg-3 control-label" style="font-size: 15px;">Video URL</label>
                             <div class="col-lg-9">
@@ -119,6 +109,16 @@
                                        placeholder="url" th:field="*{url}" /> <span
                                     class="help-block" th:if="${#fields.hasErrors('url')}"
                                     th:errors="*{url}">Incorrect URL</span>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             th:classappend="${#fields.hasErrors('trainingexpense')}? 'has-error'">
+                            <label for="trainingexpense" class="col-lg-3 control-label" style="font-size: 15px;">Costs? (xxx.xx)</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="trainingexpense" style="font-size: 15px;"
+                                       placeholder="trainingexpense" th:field="*{trainingexpense}" /> <span
+                                    class="help-block" th:if="${#fields.hasErrors('trainingexpense')}"
+                                    th:errors="*{trainingexpense}">Incorrect amount</span>
                             </div>
                         </div>
                         <div class="form-group">

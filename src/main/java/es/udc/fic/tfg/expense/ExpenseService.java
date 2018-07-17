@@ -24,7 +24,7 @@ public class ExpenseService {
         Expense expense = expenseRepository.findOneByExpenseid(expenseid);
         return expense;
     }
-    
+
     public void delete(Expense expense) {
     	expenseRepository.delete(expense);
     }
