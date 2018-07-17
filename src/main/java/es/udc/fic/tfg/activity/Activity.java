@@ -1,18 +1,21 @@
 package es.udc.fic.tfg.activity;
 
-import es.udc.fic.tfg.account.Account;
-import es.udc.fic.tfg.expense.Expense;
-import es.udc.fic.tfg.horse.Horse;
+import java.time.Instant;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.Instant;
-import java.util.Date;
+
+import es.udc.fic.tfg.account.Account;
+import es.udc.fic.tfg.expense.Expense;
+import es.udc.fic.tfg.horse.Horse;
 
 @SuppressWarnings("serial")
 @Entity
@@ -38,7 +41,7 @@ public class Activity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Horse activityhorse;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
     private Expense activityexpense;
 
     private Instant created;

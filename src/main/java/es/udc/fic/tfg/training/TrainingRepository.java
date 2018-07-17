@@ -1,13 +1,13 @@
 package es.udc.fic.tfg.training;
 
-import es.udc.fic.tfg.account.Account;
-import es.udc.fic.tfg.horse.Horse;
-import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import es.udc.fic.tfg.account.Account;
+import es.udc.fic.tfg.expense.Expense;
+import es.udc.fic.tfg.horse.Horse;
 
 @Repository
 public interface TrainingRepository extends JpaRepository<Training, Long>{
@@ -18,4 +18,5 @@ public interface TrainingRepository extends JpaRepository<Training, Long>{
 
     Page <Training> findByTraininguserAndTraininghorse(Account account, Horse horse, Pageable pageable);
 
+    Training findOneByTrainingexpense(Expense expense);
 }

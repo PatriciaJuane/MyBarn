@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -39,7 +40,7 @@ public class Training {
     @ManyToOne(fetch = FetchType.EAGER)
     private Horse traininghorse;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
     private Expense trainingexpense;
 
     private Instant created;
