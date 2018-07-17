@@ -68,7 +68,8 @@
 					<div class="form-group">
 						<div class="col-lg-3"></div>
 						<div class="col-lg-9">
-							<button style="font-size: 15px;" class="btn btn-danger">Delete Expense</button>
+							<a style="font-size: 15px;" class="btn btn-danger" 
+							th:href="@{/expense/expenseDetails/delete/} + ${expense.expenseid}"> Delete Expense</a>
 						</div>
 					</div>
 				</div>

@@ -17,85 +17,92 @@
 <body
 	style="background-image: url('../../../resources/images/hipica.jpg'); background-size: fit; background-position: center center;">
 	<div th:replace="fragments/layout :: header"></div>
-	<div class="container">
-		<div class="col-md-10">
-			<form class="form-narrow form-horizontal" th:object="${training}">
-				<fieldset>
-					<legend style="font-size: 20px;">Training Details</legend>
-					<div class="col-md-12">
-						<div class="form-group">
-							<label for="type" class="col-lg-3 control-label"
-								style="font-size: 15px;">Type</label>
-							<div class="col-lg-9">
-								<a class="form-control" id="type" style="font-size: 15px;"
-									th:text="${training.type}" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="trainingdate" class="col-lg-3 control-label"
-								style="font-size: 15px;">Date</label>
-							<div class="col-lg-9">
-								<a class="form-control" id="trainingdate"
-									style="font-size: 15px;"
-									th:text="${#dates.format(training.trainingdate,'dd-MM-yyyy hh:mm')}" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="description" class="col-lg-3 control-label"
-								style="font-size: 15px;">Description</label>
-							<div class="col-lg-9">
-								<a class="form-control" id="description"
-									style="font-size: 15px;" th:text="${training.description}" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="duration" class="col-lg-3 control-label"
-								style="font-size: 15px;">Duration</label>
-							<div class="col-lg-9">
-								<a class="form-control" id="duration" style="font-size: 15px;"
-									th:text="${training.duration}" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="trainingexpense" class="col-lg-3 control-label"
-								style="font-size: 15px;">Costs</label>
-							<div class="col-lg-9">
-								<a class="form-control" id="trainingexpense"
-									style="font-size: 15px;"
-									th:text="${training.trainingexpense?.amount+'€'}" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="traininguser" class="col-lg-3 control-label"
-								style="font-size: 15px;">User</label>
-							<div class="col-lg-9">
-								<a class="form-control" id="traininguser"
-									style="font-size: 15px;"
-									th:text="${training.traininguser.firstname + ' ' +training.traininguser.lastname}" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="traininghorse" class="col-lg-3 control-label"
-								style="font-size: 15px;">Horse</label>
-							<div class="col-lg-9">
-								<a class="form-control" id="traininghorse"
-									style="font-size: 15px;"
-									th:text="${training.traininghorse.nickname}" />
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-lg-3"></div>
-							<div class="col-lg-9">
-								<button style="font-size: 15px;" class="btn btn-danger">Delete
-									Training</button>
-							</div>
+	<div class="container col-md-7" style="margin-right: -30px;">
+		<form class="form-narrow form-horizontal" th:object="${training}">
+			<fieldset>
+				<legend style="font-size: 20px;">Training Details</legend>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="type" class="col-lg-3 control-label"
+							style="font-size: 15px;">Type</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="type" style="font-size: 15px;"
+								th:text="${training.type}" />
 						</div>
 					</div>
-				</fieldset>
-			</form>
-		</div>
+					<div class="form-group">
+						<label for="trainingdate" class="col-lg-3 control-label"
+							style="font-size: 15px;">Date</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="trainingdate"
+								style="font-size: 15px;"
+								th:text="${#dates.format(training.trainingdate,'dd-MM-yyyy hh:mm')}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description" class="col-lg-3 control-label"
+							style="font-size: 15px;">Description</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="description" style="font-size: 15px;"
+								th:text="${training.description}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="duration" class="col-lg-3 control-label"
+							style="font-size: 15px;">Duration</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="duration" style="font-size: 15px;"
+								th:text="${training.duration}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="trainingexpense" class="col-lg-3 control-label"
+							style="font-size: 15px;">Costs</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="trainingexpense"
+								style="font-size: 15px;"
+								th:text="${training.trainingexpense?.amount+'€'}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="traininguser" class="col-lg-3 control-label"
+							style="font-size: 15px;">User</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="traininguser"
+								style="font-size: 15px;"
+								th:text="${training.traininguser.firstname + ' ' +training.traininguser.lastname}" />
+						</div>
+					</div>
 
+					<div class="form-group">
+						<label for="traininghorse" class="col-lg-3 control-label"
+							style="font-size: 15px;">Horse</label>
+						<div class="col-lg-9">
+							<a class="form-control" id="traininghorse"
+								style="font-size: 15px;"
+								th:text="${training.traininghorse.nickname}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3"></div>
+						<div class="col-lg-9">
+							<button style="font-size: 15px;" class="btn btn-danger">Delete
+								Training</button>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="container col-md-5 form-narrow" style="background-color: white;">
+	<legend style="font-size: 20px;">Video</legend>
+		<div>
+			<center>
+				<iframe width="500" height="300"
+					th:src="@{https://www.youtube.com/embed/{url}(url=${training.url})}"
+					frameborder="1" alt="no video attached" allowfullscreen="0"></iframe>
+			</center>
+		</div>
 	</div>
 </body>
 <div th:replace="fragments/layout :: footer"></div>

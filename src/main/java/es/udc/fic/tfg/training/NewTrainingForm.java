@@ -5,12 +5,14 @@ import es.udc.fic.tfg.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 import java.util.Date;
 
 public class NewTrainingForm {
 
     private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
+    private static final String URL_MESSAGE = "{url.message}";
 
     @Autowired
     private AccountRepository accountRepository;
@@ -31,8 +33,11 @@ public class NewTrainingForm {
     private String traininghorse;
 
     private String trainingexpense;
+    
+    @URL(message = NewTrainingForm.URL_MESSAGE)
+    private String url;
 
-    public String getDescription() {
+	public String getDescription() {
         return description;
     }
 
@@ -87,10 +92,22 @@ public class NewTrainingForm {
     public void setTrainingexpense(String trainingexpense) {
         this.trainingexpense = trainingexpense;
     }
+    
+    public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 
     public Training createTraining(){
+    	String string = getUrl();
+        String[] parts = string.split("=");
+        
         return new Training(getDescription(),getDuration(), getTrainingdate(), getType(),
-                getTraininguser(), null, null);
+                getTraininguser(), null, null, parts[1]);
     }
 
 }

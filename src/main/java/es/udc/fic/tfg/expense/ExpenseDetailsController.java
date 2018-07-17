@@ -34,4 +34,12 @@ public class ExpenseDetailsController {
 
        return EXPENSEDETAILS_VIEW_NAME;
     }
+    
+    @GetMapping("expense/expenseDetails/delete/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String expense(@PathVariable("id") Long id, Model model, @RequestHeader(value = "X-Requested-With", required = false) String requestedWith){
+    	Expense expense = expenseService.findOneById(id);
+    	expenseService.delete(expense);
+    	return "/home/homeSignedIn";
+    }
 }

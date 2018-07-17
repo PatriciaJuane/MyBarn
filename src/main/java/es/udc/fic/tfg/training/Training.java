@@ -43,8 +43,10 @@ public class Training {
     private Expense trainingexpense;
 
     private Instant created;
+    
+    private String url;
 
-    public Long getTrainingid() {
+	public Long getTrainingid() {
         return trainingid;
     }
 
@@ -108,12 +110,21 @@ public class Training {
         this.trainingexpense = trainingexpense;
     }
 
+    public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+    
     public Training(){
 
     }
 
     public Training(String description, String duration, Date trainingdate, String type,
-                    Account traininguser, Horse traininghorse, Expense trainingexpense){
+                    Account traininguser, Horse traininghorse, Expense trainingexpense,
+                    String url){
 
         this.description = description;
         this.duration = duration;
@@ -123,6 +134,7 @@ public class Training {
         this.traininghorse = traininghorse;
         this.trainingexpense = trainingexpense;
         this.created = Instant.now();
+        this.url = url;
     }
 
 }
