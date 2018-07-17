@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import es.udc.fic.tfg.activity.Activity;
+
 import java.security.Principal;
 
 @Controller
@@ -29,4 +31,14 @@ public class TrainingDetailsController {
 
         return TRAININGDETAILS_VIEW_NAME;
     }
+    
+	@GetMapping("training/trainingDetails/delete/{id}")
+	@ResponseStatus(value = HttpStatus.OK)
+	public String expense(@PathVariable("id") Long id, Model model,
+			@RequestHeader(value = "X-Requested-With", required = false) String requestedWith) {
+		Training training = trainingService.findOneById(id);
+	
+		trainingService.delete(training);
+		return "/home/homeSignedIn";
+	}
 }

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.fic.tfg.expense.Expense;
+
 @Service
 public class TrainingService {
 
@@ -19,5 +21,9 @@ public class TrainingService {
     public Training findOneById(Long trainingid) {
         Training training = trainingRepository.findOneByTrainingid(trainingid);
         return training;
+    }
+    
+    public void delete(Training training) {
+    	trainingRepository.delete(training);
     }
 }
