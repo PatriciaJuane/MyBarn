@@ -19,6 +19,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long>{
 
     Expense findOneByExpenseid(Long expenseid);
 
+    List<Expense> findByConsumer(Account consumer);
+
     Page<Expense> findByConsumer(Account consumer, Pageable pageable);
 
     Page<Expense> findByConsumerAndHorseexpense(Account consumer, Horse horseexpense, Pageable pageable);
