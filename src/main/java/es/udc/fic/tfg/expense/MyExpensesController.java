@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -35,8 +36,11 @@ public class MyExpensesController {
     @Autowired
     private HorseRepository horseRepository;
 
+
+
     @GetMapping("myExpenses")
-    public String myExpenses(Model m, Principal principal,  @RequestParam(name = "horsename", required = false) String horsename) {
+    public String myExpenses(Model m, Principal principal,  @RequestParam(name = "horsename", required = false) String horsename,
+                             @RequestParam(name="expensedate", required = false) Date expensedate) {
 
         m.addAttribute(new MyExpensesForm());
 
@@ -45,13 +49,22 @@ public class MyExpensesController {
         Pageable pageable = new PageRequest(0,5,Sort.Direction.DESC,"expensedate");
         /*Para filtrar por caballo*/
         this.horse=null;
-        if (horsename!=null){
+        if (horsename!=null) {
             Horse h = horseRepository.findOneByNickname(horsename);
             this.horse = h;
-            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpense(consumer,this.horse,pageable));
+        }
 
-        } else
-            m.addAttribute("expenses", expenseRepository.findByConsumer(consumer,pageable));
+
+        if((expensedate==null) &&(horsename==null)) {
+            m.addAttribute("expenses",expenseRepository.findByConsumer(consumer,pageable));
+        }else if(horsename==null) {
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndExpensedate(consumer, expensedate, pageable));
+        }
+        else if(expensedate == null){
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpense(consumer, this.horse, pageable));
+        }
+        else
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpenseAndExpensedate(consumer, this.horse,expensedate,pageable));
 
 
         /*Autocompletado nombres de Caballos*/
@@ -67,17 +80,25 @@ public class MyExpensesController {
 
     @GetMapping("myExpenses/{page}")
     public String myExpenses(Model m, Principal principal, @PathVariable("page") int pageNum,
-                               @RequestParam(name = "horsename", required = false) String horsename) {
+                               @RequestParam(name = "horsename", required = false) String horsename,
+                             @RequestParam(name="expensedate", required = false) Date expensedate) {
         m.addAttribute(new MyExpensesForm());
 
         Account consumer = accountService.findByEmail(principal.getName());
 
         Pageable pageable = new PageRequest(pageNum,5,Sort.Direction.DESC,"expensedate");
 
-        if(horsename!=null) {
-            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpense(consumer, this.horse, pageable));
-        }else
+        if((expensedate==null) &&(horsename==null)) {
             m.addAttribute("expenses",expenseRepository.findByConsumer(consumer,pageable));
+        }else if(horsename==null) {
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndExpensedate(consumer, expensedate, pageable));
+        }
+        else if(expensedate == null){
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpense(consumer, this.horse, pageable));
+        }
+        else
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpenseAndExpensedate(consumer, this.horse,expensedate,pageable));
+
 
         /*Autocompletado nombres de Caballos*/
         List<String> names = new ArrayList<>();
@@ -96,6 +117,8 @@ public class MyExpensesController {
                                @Valid @ModelAttribute MyExpensesForm myExpensesForm) {
 
         String horsename = myExpensesForm.getHorsename();
+        Date expensedate = myExpensesForm.getExpensedate();
+
         Horse h = null;
         if (horsename!=null){
             h = horseRepository.findOneByNickname(horsename);
@@ -104,7 +127,17 @@ public class MyExpensesController {
 
         Pageable pageable = new PageRequest(0,5,Sort.Direction.DESC,"expensedate");
 
-        m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpense(consumer,h,pageable));
+        if((expensedate==null) &&(h==null)) {
+            m.addAttribute("expenses", expenseRepository.findByConsumer(consumer, pageable));
+        }
+        else if(expensedate==null) {
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpense(consumer, h, pageable));
+        }else if(h==null) {
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndExpensedate(consumer, expensedate, pageable));
+        }
+        else{
+            m.addAttribute("expenses", expenseRepository.findByConsumerAndHorseexpenseAndExpensedate(consumer, h, expensedate, pageable));
+        }
 
         /*Autocompletado nombres de Caballos*/
         List<String> names = new ArrayList<>();

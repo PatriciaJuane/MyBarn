@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -108,8 +109,11 @@ class NewHorseController {
             String amountText = newhorseForm.getExpenseAmount();
             BigDecimal amount = new BigDecimal(amountText);
             if (amount.compareTo(BigDecimal.ZERO) == 1) {
-                Date ahora = new Date();
-                Expense expense = new Expense("", amount, ahora, owner, saved);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date dateWithoutTime = sdf.parse(sdf.format(new Date()));
+
+                Expense expense = new Expense("", amount, dateWithoutTime, owner, saved);
                 expense.setTitle("Precio asociado al caballo: " + saved.getNickname());
                 expenseService.save(expense);
             }

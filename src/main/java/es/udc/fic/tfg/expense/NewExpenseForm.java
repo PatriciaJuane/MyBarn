@@ -5,6 +5,8 @@ import es.udc.fic.tfg.account.AccountRepository;
 import es.udc.fic.tfg.horse.Horse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -31,6 +33,7 @@ public class NewExpenseForm {
 
     private String horseexpense;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date expensedate;
 
     public String getTitle() {
@@ -78,8 +81,7 @@ public class NewExpenseForm {
         String amountText = getAmount();
         BigDecimal amount = new BigDecimal(amountText);
         if (amount.compareTo(BigDecimal.ZERO) == 1) {
-            Date ahora = new Date();
-            return new Expense(getTitle(), amount, ahora, getConsumer(),null);
+            return new Expense(getTitle(), amount, getExpensedate(), getConsumer(),null);
         }
         else return null;
     }
