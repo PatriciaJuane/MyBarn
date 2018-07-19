@@ -5,6 +5,7 @@ import es.udc.fic.tfg.account.AccountRepository;
 import es.udc.fic.tfg.account.AccountService;
 import es.udc.fic.tfg.expense.Expense;
 import es.udc.fic.tfg.expense.ExpenseService;
+import es.udc.fic.tfg.expense.SpringMailSender;
 import es.udc.fic.tfg.horse.Horse;
 import es.udc.fic.tfg.horse.HorseRepository;
 import es.udc.fic.tfg.horse.HorseService;
@@ -51,6 +52,9 @@ public class NewTrainingController {
     private Errors errors;
 
     private RedirectAttributes ra;
+
+    @Autowired
+    private SpringMailSender springMailSender;
 
     @GetMapping("newTraining")
     String newTraining(Model model, @RequestHeader(value = "X-Requested-With", required = false) String requestedWith,
@@ -103,6 +107,11 @@ public class NewTrainingController {
                 expense.setTitle("Gasto Entrenamiento: "+training.getType()+" asociado al caballo: " + training.getTraininghorse().getNickname());
                 Expense e = expenseService.save(expense);
                 training.setTrainingexpense(e);
+
+                String message = "Ha registrado correctamente el pago: "+e.getTitle()+"\n"+"Coste del pago: "+e.getAmount()+" eur\n"+
+                        "Caballo:" + e.getHorseexpense().getNickname();
+                springMailSender.sendMail("patriciatfg1@gmail.com", user.getEmail(),"MyBarnAPP: Pago Registrado",message);
+
             }
 
             Training t = trainingService.save(training);
