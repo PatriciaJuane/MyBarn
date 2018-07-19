@@ -94,9 +94,9 @@ public class NewExpenseController {
 
             Expense e = expenseService.save(expense);
 
-            String message = "Has registrado correctamente el pago: "+expense.getTitle()+"\n"+"Coste del pago: "+expense.getAmount()+" eur\n"+
+            String message = "Ha registrado correctamente el pago: "+expense.getTitle()+"\n"+"Coste del pago: "+expense.getAmount()+" eur\n"+
                     "Caballo:" + expense.getHorseexpense().getNickname();
-            springMailSender.sendMail("patriciatfg1@gmail.com", owner.getEmail(),"Pago Registrado",message);
+            springMailSender.sendMail("patriciatfg1@gmail.com", owner.getEmail(),"MyBarnAPP: Pago Registrado",message);
 
         }
         return "redirect:/";

@@ -54,8 +54,8 @@ public class CreatePDF {
     private static void addMetaData(Document document) {
         document.addTitle("Generate PDF report");
         document.addSubject("Generate PDF report");
-        document.addAuthor("FutbolerosSD");
-        document.addCreator("FutbolerosSd");
+        document.addAuthor("MyBarnApp");
+        document.addCreator("MyBarnApp");
     }
 
     private static void addTitlePage(Document document)
@@ -63,11 +63,11 @@ public class CreatePDF {
 
         Paragraph preface = new Paragraph();
         creteEmptyLine(preface, 1);
-        preface.add(new Paragraph("Factura", TIME_ROMAN));
+        preface.add(new Paragraph("INFORME DE GASTOS - MyBarnAPP©", TIME_ROMAN));
 
         creteEmptyLine(preface, 1);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        preface.add(new Paragraph("Pdf creado el  "
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        preface.add(new Paragraph("Fecha de creación:  "
                 + simpleDateFormat.format(new Date()), TIME_ROMAN_SMALL));
         document.add(preface);
 
@@ -83,17 +83,17 @@ public class CreatePDF {
         Paragraph paragraph = new Paragraph();
         creteEmptyLine(paragraph, 2);
         document.add(paragraph);
-        PdfPTable table = new PdfPTable(4);
+        PdfPTable table = new PdfPTable(5);
 
-        PdfPCell c1 = new PdfPCell(new Phrase("Evento"));
+        PdfPCell c1 = new PdfPCell(new Phrase("Concepto"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Precio"));
+        c1 = new PdfPCell(new Phrase("Cantidad"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Cuenta"));
+        c1 = new PdfPCell(new Phrase("Usuario"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
         Date sdf = Date.from(expense.getExpensedate().toInstant());
@@ -103,15 +103,21 @@ public class CreatePDF {
         c1 = new PdfPCell(new Phrase("Fecha"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Caballo Asociado"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
         table.setHeaderRows(1);
 
         table.setWidthPercentage(100);
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
         table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-        table.addCell(expense.getConsumer().getFirstname());
+        table.addCell(expense.getTitle());
         table.addCell(String.valueOf(expense.getAmount()));
-        table.addCell(expense.getHorseexpense().getNickname());
+        table.addCell(expense.getConsumer().getFirstname());
         table.addCell(formattedDate);
+        table.addCell(expense.getHorseexpense().getNickname());
 
         document.add(table);
     }
