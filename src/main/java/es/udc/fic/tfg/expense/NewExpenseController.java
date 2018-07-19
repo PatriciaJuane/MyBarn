@@ -41,6 +41,10 @@ public class NewExpenseController {
 
     private RedirectAttributes ra;
 
+    @Autowired
+    private SpringMailSender springMailSender;
+
+
     @GetMapping("newExpense")
     String newExpense(Model model, @RequestHeader(value = "X-Requested-With", required = false) String requestedWith,
                       Principal principal) {
@@ -89,6 +93,11 @@ public class NewExpenseController {
             }
 
             Expense e = expenseService.save(expense);
+
+            String message = "Has registrado correctamente el pago: "+expense.getTitle()+"\n"+"Coste del pago: "+expense.getAmount()+" eur\n"+
+                    "Caballo:" + expense.getHorseexpense().getNickname();
+            springMailSender.sendMail("patriciatfg1@gmail.com", owner.getEmail(),"Pago Registrado",message);
+
         }
         return "redirect:/";
     }
