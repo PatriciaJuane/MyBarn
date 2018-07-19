@@ -1,5 +1,5 @@
 package es.udc.fic.tfg.pdf;
-/*
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.ParseException;
@@ -96,7 +96,7 @@ public class CreatePDF {
         c1 = new PdfPCell(new Phrase("Cuenta"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
-        Date sdf = Date.from(expense.getExpensedate());
+        Date sdf = Date.from(expense.getExpensedate().toInstant());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = formatter.format(sdf);
 
@@ -117,4 +117,3 @@ public class CreatePDF {
     }
 
 }
-*/
