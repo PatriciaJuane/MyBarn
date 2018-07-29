@@ -42,11 +42,15 @@
       th:action="@{/myTrainings}" th:object="${myTrainingsForm}"
       th:fragment="myTrainingsForm">
     <div class="form-group">
-        <label for="horsename" class="col-lg-3 control-label" style="font-size: 15px;">Horse</label>
-        <div class="col-lg-6">
+        <div class="col-lg-3">
+            <input type="date" class="form-control" id="trainingdate" style="font-size: 14px;"
+                   placeholder="trainingdate" th:field="*{trainingdate}" />
+        </div>
+        <label for="horsename" class="col-lg-2 control-label" style="font-size: 15px;">Horse</label>
+        <div class="col-lg-5">
             <input id="horsename" style="font-size: 15px;" class="form-control" placeholder="horsename" th:field="*{horsename}"/>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <button type="submit" style="align-self: right; font-size: 15px;" class="btn btn-primary">Search</button>
         </div>
     </div>

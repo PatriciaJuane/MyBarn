@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,7 +37,8 @@ public class MyActivitiesController {
     private HorseRepository horseRepository;
 
     @GetMapping("myActivities")
-    public String myActivities(Model m, Principal principal,  @RequestParam(name = "horsename", required = false) String horsename) {
+    public String myActivities(Model m, Principal principal,  @RequestParam(name = "horsename", required = false) String horsename,
+                               @RequestParam(name="activitydate", required = false) Date activitydate) {
 
         m.addAttribute(new MyActivitiesForm());
 
@@ -45,12 +47,28 @@ public class MyActivitiesController {
         Pageable pageable = new PageRequest(0,5,Sort.Direction.DESC,"activitydate");
         /*Para filtrar por caballo*/
         this.horse=null;
-        if (horsename!=null){
-           Horse h = horseRepository.findOneByNickname(horsename);
-           this.horse = h;
-            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorse(user,this.horse,pageable));
+        this.horse=null;
+        if (horsename!=null) {
+            Horse h = horseRepository.findOneByNickname(horsename);
+            this.horse = h;
+        }
 
-        } else
+
+        if((activitydate==null) &&(horsename==null)) {
+            m.addAttribute("activities",activityRepository.findByActivityuser(user,pageable));
+        }
+        else if(horsename==null) {
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivitydate(user, activitydate, pageable));
+        }
+        else if(activitydate == null){
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorse(user, this.horse, pageable));
+        }
+        else
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorseAndActivitydate(user, this.horse, activitydate,pageable));
+
+
+        m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorse(user,this.horse,pageable));
+
             m.addAttribute("activities", activityRepository.findByActivityuser(user,pageable));
 
 
@@ -67,17 +85,24 @@ public class MyActivitiesController {
 
     @GetMapping("myActivities/{page}")
     public String myActivities(Model m, Principal principal, @PathVariable("page") int pageNum,
-                               @RequestParam(name = "horsename", required = false) String horsename) {
+                               @RequestParam(name = "horsename", required = false) String horsename,
+                               @RequestParam(name="activitydate", required = false) Date activitydate) {
         m.addAttribute(new MyActivitiesForm());
 
         Account user = accountService.findByEmail(principal.getName());
 
         Pageable pageable = new PageRequest(pageNum,5,Sort.Direction.DESC,"activitydate");
 
-        if(horsename!=null) {
-            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorse(user, this.horse, pageable));
-        }else
+        if((activitydate==null) &&(horsename==null)) {
             m.addAttribute("activities",activityRepository.findByActivityuser(user,pageable));
+        }else if(horsename==null) {
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivitydate(user, activitydate, pageable));
+        }
+        else if(activitydate == null){
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorse(user, this.horse, pageable));
+        }
+        else
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorseAndActivitydate(user, this.horse, activitydate,pageable));
 
         /*Autocompletado nombres de Caballos*/
         List<String> names = new ArrayList<>();
@@ -95,6 +120,7 @@ public class MyActivitiesController {
                                @Valid @ModelAttribute MyActivitiesForm myActivitiesForm) {
 
         String horsename = myActivitiesForm.getHorsename();
+        Date activitydate = myActivitiesForm.getActivitydate();
         Horse h = null;
         if (horsename!=null){
              h = horseRepository.findOneByNickname(horsename);
@@ -103,7 +129,16 @@ public class MyActivitiesController {
 
         Pageable pageable = new PageRequest(0,5,Sort.Direction.DESC,"activitydate");
 
-        m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorse(user,h,pageable));
+        if((activitydate==null) &&(h==null)) {
+            m.addAttribute("activities",activityRepository.findByActivityuser(user,pageable));
+        }else if(h==null) {
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivitydate(user, activitydate, pageable));
+        }
+        else if(activitydate == null){
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorse(user, h, pageable));
+        }
+        else
+            m.addAttribute("activities", activityRepository.findByActivityuserAndActivityhorseAndActivitydate(user, h, activitydate, pageable));
 
         /*Autocompletado nombres de Caballos*/
         List<String> names = new ArrayList<>();

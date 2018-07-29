@@ -9,6 +9,7 @@ import es.udc.fic.tfg.account.Account;
 import es.udc.fic.tfg.expense.Expense;
 import es.udc.fic.tfg.horse.Horse;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -21,6 +22,10 @@ public interface TrainingRepository extends JpaRepository<Training, Long>{
     List<Training> findByTraininguser(Account account);
 
     Page <Training> findByTraininguserAndTraininghorse(Account account, Horse horse, Pageable pageable);
+
+    Page<Training> findByTraininguserAndTrainingdate(Account account, Date trainingdate, Pageable pageable);
+
+    Page<Training> findByTraininguserAndTraininghorseAndTrainingdate(Account account, Horse horse, Date trainingdate, Pageable pageable);
 
     Training findByTrainingexpense(Expense expense);
 }
