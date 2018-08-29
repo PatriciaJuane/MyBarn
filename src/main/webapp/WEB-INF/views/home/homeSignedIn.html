@@ -23,24 +23,25 @@
 			<div th:replace="fragments/components :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">
 				&nbsp;</div>
 		</th:block>
-		<div class="row">
+		<div class="row" style="margin-bottom: 0px;">
 			<a class="col-md-5 list-group-item list-group-item-action flex-column align-items-start active my-3"
-			th:href="@{/myHorses}" style="margin: 10px;">
-				<h1>HORSES</h1>
+			th:href="@{/myHorses}" style="margin: 10px; height:100px;">
+				<h1 style="text-align: center; margin-top: 25px;">
+					HORSES</h1>
 			</a>
 			<a class="col-md-5 list-group-item list-group-item-action flex-column align-items-start active my-3"
-			style="margin: 10px;" th:href="@{/myExpenses}">
-				<h1>EXPENSES</h1>
+			style="margin: 10px; height:100px;" th:href="@{/myExpenses}">
+				<h1  style="text-align: center; margin-top: 25px;">EXPENSES</h1>
 			</a>
 		</div>
 		<div class="row">
 			<a class="col-md-5 list-group-item list-group-item-action flex-column align-items-start active my-3"
-			style="margin: 10px;" th:href="@{/myActivities}">
-				<h1>ACTIVITIES AND GROOMING</h1>
+			style="margin: 10px; height:100px;" th:href="@{/myActivities}">
+				<h1 style="text-align: center; margin-top: 25px;">ACTIVITIES AND GROOMING</h1>
 			</a>
 			<a class="col-md-5 list-group-item list-group-item-action flex-column align-items-start active my-3"
-			style="margin: 10px;" th:href="@{/myTrainings}">
-				<h1>TRAININGS</h1>
+			style="margin: 10px; height:100px;" th:href="@{/myTrainings}">
+				<h1  style="text-align: center; margin-top: 25px;">TRAININGS</h1>
 			</a>
 		</div>
 	</div>
