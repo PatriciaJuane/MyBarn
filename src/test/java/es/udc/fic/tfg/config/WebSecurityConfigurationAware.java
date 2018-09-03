@@ -9,12 +9,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 public abstract class WebSecurityConfigurationAware extends WebAppConfigurationAware {
 
-    @Inject
+    /*@Inject
     private FilterChainProxy springSecurityFilterChain;
 
     @Before
     public void before() {
         this.mockMvc = webAppContextSetup(this.wac)
                 .addFilters(this.springSecurityFilterChain).build();
-    }
+    } */
 }

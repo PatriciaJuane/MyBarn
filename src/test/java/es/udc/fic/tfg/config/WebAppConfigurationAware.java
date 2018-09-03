@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 })
 public abstract class WebAppConfigurationAware {
 
-    @Inject
+    /* @Inject
     protected WebApplicationContext wac;
     protected MockMvc mockMvc;
 
@@ -29,5 +29,5 @@ public abstract class WebAppConfigurationAware {
     public void before() {
         this.mockMvc = webAppContextSetup(this.wac).build();
     }
-
+    */
 }

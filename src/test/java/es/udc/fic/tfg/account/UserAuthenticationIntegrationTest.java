@@ -1,4 +1,5 @@
-package es.udc.fic.tfg.account;
+
+/*package es.udc.fic.tfg.account;
 
 import es.udc.fic.tfg.config.WebSecurityConfigurationAware;
 import org.junit.Assert;
@@ -9,7 +10,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-
+/*
 public class UserAuthenticationIntegrationTest extends WebSecurityConfigurationAware {
 
     private static String SEC_CONTEXT_ATTR = HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
@@ -20,7 +21,8 @@ public class UserAuthenticationIntegrationTest extends WebSecurityConfigurationA
                 .andExpect(redirectedUrl("http://localhost/signin"));
     }
 
-   /* @Test
+
+    @Test
     public void userAuthenticates() throws Exception {
         final String username = "user";
 
@@ -28,7 +30,7 @@ public class UserAuthenticationIntegrationTest extends WebSecurityConfigurationA
                 .andExpect(redirectedUrl("/"))
                 .andExpect(r -> Assert.assertEquals(((SecurityContext) r.getRequest().getSession().getAttribute(SEC_CONTEXT_ATTR)).getAuthentication().getName(), username));
 
-    }*/
+    }
 
     @Test
     public void userAuthenticationFails() throws Exception {
@@ -38,3 +40,4 @@ public class UserAuthenticationIntegrationTest extends WebSecurityConfigurationA
                 .andExpect(r -> Assert.assertNull(r.getRequest().getSession().getAttribute(SEC_CONTEXT_ATTR)));
     }
 }
+ */
